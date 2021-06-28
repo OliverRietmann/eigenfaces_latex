@@ -1,0 +1,14 @@
+*.pdf
+*.aux
+*.log
+*.out
+*.toc
+*.gz
+
+# bibtex
+*.bbl
+*.blg
+
+# directories
+images/*
+references/*

@@ -1,0 +1,130 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[a4paper,total={160mm,250mm}]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{dirtree}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{ngerman}
+\usepackage{subcaption}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+\definecolor{shade}{gray}{.5}
+
+\renewcommand{\thesubfigure}{\roman{subfigure}}
+
+\theoremstyle{definition}
+\newtheorem{aufgabe}{Aufgabe}
+
+\theoremstyle{definition}
+\newtheorem*{losung*}{Lösung}
+
+\theoremstyle{definition}
+\newtheorem*{beispiel*}{Beispiel}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{lightgray}{rgb}{0.9,0.9,0.9}
+
+\lstset{inputpath=../raytracer}
+\lstdefinestyle{python}{
+	backgroundcolor=\color{lightgray},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+	basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{mygreen},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\\[}{\\]},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	firstnumber=1,                   % start line enumeration with line 1000
+	frame=single,	                 % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	language=Python,                 % the language of the code
+	literate=%
+	    {ä}{{\"a}}1%
+		{ö}{{\"o}}1%
+		{ü}{{\"u}}1%
+		{ß}{{\ss}}1%
+		{Ä}{{\"A}}1%
+		{Ö}{{\"O}}1%
+		{Ü}{{\"U}}1,%
+	morekeywords={*,...},            % if you want to add more keywords to the set
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{mymauve},     % string literal style
+	tabsize=4,	                     % sets default tabsize to 2 spaces
+	title=\lstname,                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+	rangeprefix=\#---,
+	rangesuffix=---,
+	includerangemarker=false
+}
+
+%\pagestyle{empty}
+
+\title{Eigengesichter}
+\author{Oliver Rietmann}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+	{\hspace{-1cm}\includegraphics[width=0.3\textwidth]{images/ETHlogo}\par}
+	\vspace{1cm}
+	\begin{center}
+	{\scshape Mentorierte Arbeit in Fachdidaktik Mathematik\par}
+	\vspace{1cm}
+	{\large\bfseries Eigengesichter\par}
+	\vspace{1cm}
+	{Oliver Rietmann\par}
+	\vfill
+	\end{center}
+	{\bfseries Inhalt\par}
+	{In dieser Arbeit wird die Technik der \textit{Eigengesichter} (engl. \textit{eigenfaces}) erklärt. Hierbei handelt es sich um eine eine rudimentäre Methode zur Gesichtserkennung, welche durch Computer automatisiert werden kann. Unter Gesichtserkennung versteht man klassischerweise das (automatisierte) identifizieren einer Person auf einem Foto. Aber auch damit verwandte Aufgaben werden hier besprochen.
+	Diese Arbeit führt die Leser durch eine Anleitung zur Implementierung eines solchen Programms in Python. Der Fokus liegt dabei auf der zugrundeliegenden Mathematik dieses Verfahrens. Die dazu verwendeten Unterrichtsmethoden sollen zudem aus didaktischer Sicht beleuchtet werden.\par}
+	\vspace{0.5cm}
+	{\bfseries Zielpublikum\par}
+	{Fortgeschrittene gymnasiale Mittelschüler mit Schwerpunkt Mathematik und Studenten einer mathematischen/technischer Fachrichtung.\par}
+	\vspace{0.5cm}
+	{\bfseries Voraussetzungen\par}
+	{Vertrautheit mit den Grundbegriffen der linearen Algebra (Vektoren, Matrizen, Basis, Linearkombination, Unterräume von $\mathbb R^n$).
+	Zudem werden grundlegende Programmierkenntnisse vorausgesetzt.\par}
+	\vspace{0.5cm}
+	{\bfseries Form\par}
+	{Text mit Aufgaben, Lösungen und Lernzielen. Die Python-Codes befinden sich im Anhang. Alternativ können sie online heruntergeladen werden. (Der Link befindet sich in der Arbeit.)\par}
+	\vspace{0.5cm}
+	{\bfseries Betreuung\par}
+	{Christian Rüede\par}
+	\vspace{0.5cm}
+	{\bfseries Datum\par}
+	{\today\par}
+\end{titlepage}
+%\maketitle
+%\tableofcontents
+\clearpage
+\input{chapters/introduction}
+\input{chapters/eigenfaces}
+\input{chapters/vectormatrix}
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
