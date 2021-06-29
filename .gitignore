@@ -1,4 +1,4 @@
-*.pdf
+skript.pdf
 *.aux
 *.log
 *.out
@@ -10,5 +10,4 @@
 *.blg
 
 # directories
-images/*
 references/*
