@@ -37,7 +37,7 @@ def meanface(b_list):
 		\centering\hfill Durchschnittsgesicht:
 	\end{minipage}
 	\begin{minipage}{0.2\textwidth}\vspace{-1cm}
-		\centering\includegraphics[width=0.6\textwidth]{images/meanface}
+		\centering\includegraphics[width=0.6\textwidth]{images/facespace/meanface}
 	\end{minipage}
 \end{losung*}
 Nachdem wir nun das Durchschnittsgesicht gebildet haben, berechnen wir nun die \textit{Differenzgesichter} $a_1,\ldots,a_K$.
@@ -53,13 +53,13 @@ Leider können wir das nur stark vereinfacht in für den Fall $M\cdot N=2$ und $
 Dies ist in Abbildung~\ref{fig:meandiff} gezeigt.
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.5\textwidth]{images/meandiff}
+	\includegraphics[width=0.5\textwidth]{images/facespace/meandiff}
 	\caption{Die Gesichter werden um den Ursprung zentriert indem man das Durchschnittsgesicht subtrahiert.
 	Annahme: Die entstehenden Differenzgesichter liegen dann in guter Approximation in einem Unterraum.}
 	\label{fig:meandiff}
 \end{figure}
 \begin{aufgabe}
-	Nennen Sie einen Unterschied und eine Gemeinsamtkeit der vereinfachten Darstellung in Abbildung~\ref{fig:meandiff} zu unserer tatsächlichen Situation mit Bildern von Gesichtern.
+	Nennen Sie einen Unterschied und eine Gemeinsamkeit der vereinfachten Darstellung in Abbildung~\ref{fig:meandiff} zu unserer tatsächlichen Situation mit Bildern von Gesichtern.
 	Gehen Sie davon aus, dass unsere Bilder eine Auflösung von $M=180$ und $N=144$ haben, wie im letzten Kapitel.
 \end{aufgabe}
 \begin{losung*}
