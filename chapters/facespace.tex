@@ -9,18 +9,18 @@ Wir wollen uns näher mit dieser Beobachtung befassen.
 
 Sei $K\in\mathbb N$ die Anzahl aller Bilder von allen Personen unserer Datenbank.
 Jedes Bild soll dabei die Auflösung $M\times N$ haben.
-Wir betrachten alle Bilder der Datenbank als Vektoren $b_1,\ldots,b_K\in\mathbb R^{M\cdot N}$.
-Diese Darstellung erlaubt uns, das \textit{Durchschnittsgesicht}, wir nennen es $m\in\mathbb R^{M\cdot N}$, zu definieren
+Wir betrachten alle Bilder der Datenbank als Vektoren $\vec b_1,\ldots,\vec b_K\in\mathbb R^{M\cdot N}$.
+Diese Darstellung erlaubt uns, das \textit{Durchschnittsgesicht}, wir nennen es $\vec m\in\mathbb R^{M\cdot N}$, zu definieren
 \begin{equation*}
-	m=\frac{1}{K}\sum\limits_{k=1}^Kb_k.
+	\vec m=\frac{1}{K}\left(\vec b_1+\ldots+\vec b_K\right).
 \end{equation*}
-Dies Durchschnittsgesicht lässt sich wieder als Bild ausgeben.
+Das Durchschnittsgesicht lässt sich wieder als Bild ausgeben.
 Aber wie sieht so ein Durchschnittsgesicht aus?
 Das werden wir in folgender Übung herausfinden.
 \begin{aufgabe}
 	Ergänzen Sie im File \texttt{eigenfaces.py} die Funktion \texttt{meanface(b\_list)}.
-	Dabei ist \texttt{b\_list} die Liste der Länge $K$ der Vektoren $b_1,\ldots,b_K$.
-	Der Rückgabewert soll das Durchschnittsgesicht $m$ sein.
+	Dabei ist \texttt{b\_list} die Liste der Länge $K$ der Vektoren $\vec b_1,\ldots,\vec b_K$.
+	Der Rückgabewert soll das Durchschnittsgesicht $\vec m$ sein.
 	Sie können die ihre Lösung überprüfen indem Sie das Skript \texttt{meanface\_test.py} laufen lassen.
 	\textit{Hinweis:} Die Python Funktionen \texttt{len(...) und sum(...)} können nützlich sein.
 \end{aufgabe}
@@ -40,10 +40,10 @@ def meanface(b_list):
 		\centering\includegraphics[width=0.6\textwidth]{images/facespace/meanface}
 	\end{minipage}
 \end{losung*}
-Nachdem wir nun das Durchschnittsgesicht gebildet haben, berechnen wir nun die \textit{Differenzgesichter} $a_1,\ldots,a_K$.
+Nachdem wir nun das Durchschnittsgesicht gebildet haben, berechnen wir nun die \textit{Differenzgesichter} $\vec a_1,\ldots,\vec a_K$.
 Diese sind definiert als
 \begin{equation*}
-	a_k=b_k-m,\quad k\in\left\{1,\ldots,K\right\}.
+	\vec a_k=\vec b_k-\vec m,\quad k\in\left\{1,\ldots,K\right\}.
 \end{equation*}
 Die Methode der Eigengesichter trifft nun folgende Annahme:
 Die Differenzgesichter sind in guter Approximation in einem niedrig-dimensionalen Unterraum von $\mathbb R^{M\cdot N}$ enthalten.
@@ -65,8 +65,8 @@ Dies ist in Abbildung~\ref{fig:meandiff} gezeigt.
 \begin{losung*}
 	Als Vektoren aufgefasst sind die Gesichter Punkte im $\mathbb R^{M\cdot N}$.
 	Für $M=180$ und $N=144$ wären das Punkte im $\mathbb R^{25'920}$ und nicht im $\mathbb R^2$ wie in der Abbildung.
-	Der Unterraum der Differenzgesichter ist zudem als Gerade durch Null, also als 1-dimensionaler Raum dargestellt.
-	Wegen der Vielfalt menschlicher Gesichter wir die Dimension tatsächlich viel grösser sein.
+	Der Unterraum der Differenzgesichter ist zudem dargestellt als Gerade durch Null, also als 1-dimensionaler Raum.
+	Wegen der Vielfalt menschlicher Gesichter wird die Dimension tatsächlich viel grösser sein.
 	Andererseits wird in der Abbildung korrekt gezeigt, dass das der Durchschnitt der Differenzgesichter der Nullvektor ist.
 	Die Differenzgesichter sind also \glqq{}um Null verteilt\grqq{}.
 \end{losung*}
