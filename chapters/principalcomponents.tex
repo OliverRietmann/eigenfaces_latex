@@ -1,17 +1,14 @@
-\subsection{Berechnung der Eigengesichter}
-Im letzten Unterkapitel haben wir den Raum der Differenzgesichter eingeführt.
-In diesem Unterkapitel wollen wir eine geeignete orthonormale Basis dieses Unterraumes finden.
-Die Bilder $a_1,\ldots,a_K$ aus unserer Datenbank sind im Allgemeinen linear abhängig, nicht paarweise orthogonal und nicht auf Länge 1 normiert.
-Doch aus genau diesen Vektoren werden wir nun eine geeignete orthonormale Basis konstruieren. Wir betrachten dazu die Matrix, deren Spalten aus den Bildern der Datenbank bestehen, also
+\subsection{Berechnung der Eigengesichter: Singulärwertzerlegung}
+Wir betrachten die Matrix, deren Spalten aus den Bildern der Datenbank bestehen, also
 \begin{equation*}
-	A=\left(a_1,\ldots,a_K\right).
+	A=\left(\vec a_1,\ldots,\vec a_K\right).
 \end{equation*}
-Wenn wir diese Matrix auf einen Vektor $c\in\mathbb R^K$ anwenden, dann berechnet diese gerade die Linearkombination der Bilder $a_1,\ldots,a_K$ und die Komponenten von $c$ sind gerade die Koeffizienten dieser Linearkombination
+Wenn wir diese Matrix auf einen Vektor $\vec c\in\mathbb R^K$ anwenden, dann berechnet diese gerade die Linearkombination der Bilder $\vec a_1,\ldots,\vec a_K$ und die Komponenten von $\vec c$ sind gerade die Koeffizienten dieser Linearkombination
 \begin{equation*}
-	Ac=c_1a_1+\ldots+c_Ka_K.
+	Ac=c_1\vec a_1+\ldots+c_K\vec a_K.
 \end{equation*}
-Der Vektor $Ac$ liegt wieder in $\mathbb R^{M\cdot N}$ und kann als Bild interpretiert werden, falls dessen Einträge in $\left[0,1\right]$ liegen.
-In diesem Sinne ist $Ac$ eine gewichtete Überlagerung der Bilder/Gesichter der Datenbank und liegt $Ac$ im Raum der Differenzgesichter.
+Der Vektor $A\vec c$ liegt wieder in $\mathbb R^{M\cdot N}$ und kann als Bild interpretiert werden, falls dessen Einträge in $\left[0,1\right]$ liegen.
+In diesem Sinne ist $A\vec c$ eine gewichtete Überlagerung der Bilder/Gesichter der Datenbank und liegt $A\vec c$ im Raum der Differenzgesichter.
 \begin{aufgabe}
 	Welches Format hat die Matrix $A$, d.h. wie viele Zeilen und Spalten hat sie?
 	Geben sie dies durch die Variablen $K,M$ und $N$ an. 
