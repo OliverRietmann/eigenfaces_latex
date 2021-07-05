@@ -1,5 +1,151 @@
 \subsection{Berechnung der Eigengesichter}
-\textcolor{green}{TODO: Eigengesichter berechnen mit Singulärwertzerlegung}\\
+Im letzten Unterkapitel haben wir den Raum der Differenzgesichter eingeführt.
+In diesem Unterkapitel wollen wir eine geeignete orthonormale Basis dieses Unterraumes finden.
+Die Bilder $a_1,\ldots,a_K$ aus unserer Datenbank sind im Allgemeinen linear abhängig, nicht paarweise orthogonal und nicht auf Länge 1 normiert.
+Doch aus genau diesen Vektoren werden wir nun eine geeignete orthonormale Basis konstruieren. Wir betrachten dazu die Matrix, deren Spalten aus den Bildern der Datenbank bestehen, also
+\begin{equation*}
+	A=\left(a_1,\ldots,a_K\right).
+\end{equation*}
+Wenn wir diese Matrix auf einen Vektor $c\in\mathbb R^K$ anwenden, dann berechnet diese gerade die Linearkombination der Bilder $a_1,\ldots,a_K$ und die Komponenten von $c$ sind gerade die Koeffizienten dieser Linearkombination
+\begin{equation*}
+	Ac=c_1a_1+\ldots+c_Ka_K.
+\end{equation*}
+Der Vektor $Ac$ liegt wieder in $\mathbb R^{M\cdot N}$ und kann als Bild interpretiert werden, falls dessen Einträge in $\left[0,1\right]$ liegen.
+In diesem Sinne ist $Ac$ eine gewichtete Überlagerung der Bilder/Gesichter der Datenbank und liegt $Ac$ im Raum der Differenzgesichter.
+\begin{aufgabe}
+	Welches Format hat die Matrix $A$, d.h. wie viele Zeilen und Spalten hat sie?
+	Geben sie dies durch die Variablen $K,M$ und $N$ an. 
+\end{aufgabe}
+\begin{losung*}
+	Sie hat das Format $\left(M\cdot N\right)\times K$.
+	Das heisst sie hat $M\cdot N$ Zeilen (eine für jedes Pixel) und $K$ Spalten (eine für jedes Bild in der Datenbank).
+\end{losung*}
+Nun verwenden wir (ohne Herleitung) ein klassisches Resultat aus der linearen Algebra, die \textit{Singulärwertzerlegung}.
+Zudem nehmen wir an, dass $K\leq M\cdot N$, also dass die Anzahl der Bilder der Datenbank kleiner oder gleicher der Anzahl Pixel eines Bildes ist.
+In diesem Fall besitzt die Matrix $A$ besitzt eine Zerlegung der Form
+\begin{equation*}
+	A=U\Sigma V^T,
+\end{equation*}
+wobei $U\in\mathbb R^{\left(M\cdot N\right)\times K},V\in\mathbb R^{\left(M\cdot N\right)\times K}$ und $\Sigma\in\mathbb R^{K\times K}$ Matrizen sind, mit folgenden Eigenschaften:
+\begin{itemize}
+	\item Die Spalten $u_1,\ldots,u_K\in\mathbb R^{M\cdot N}$ der Matrix $U$ sind orthonormal.
+	\item Die Spalten $v_1,\ldots,v_K\in\mathbb R^{M\cdot N}$ der Matrix $V$ sind orthonormal.
+	\item Die Matrix $\Sigma$ ist diagonal mit den Einträgen $\sigma_1\geq\ldots\geq\sigma_K\geq 0$.
+	Diese Diagonal-Einträge heissen \textit{Singulärwerte} von $A$.
+\end{itemize}
+Eine Zerlegung dieser Form heisst Singulärwertzerlegung.
+Schematisch kann man das auch folgendermassen darstellen
+\begin{equation}\label{eq:svd}
+A=
+\begin{pmatrix}
+	\vert & \vert & \cdots & \vert \\
+	u_1   & u_2   & \cdots & u_K \\
+	\vert & \vert & \cdots & \vert
+\end{pmatrix}
+\,
+\begin{pmatrix}
+	\sigma_1 & & & \\
+	& \sigma_2 & & \\
+	& & \ddots & \\
+	& & & \sigma_K
+\end{pmatrix}
+\,
+\begin{pmatrix}
+	\text{---} & v_1^T & \text{---} \\
+	\text{---} & v_2^T & \text{---} \\
+	\vdots & \vdots & \vdots \\
+	\text{---} & v_K^T & \text{---}
+\end{pmatrix}.
+\end{equation}
+Wir haben vorher gesehen, dass die Matrix-Vektor Multiplikation $Ac$ eigentlich eine Linearkombination der Spaltenvektoren von $A$ bildet und diese Spalten sind genau die Bilder aus der Datenbank.
+Doch über die Singulärwertzerlegung können wir den Vektor $Ac$ auch als Linearkombination der Spaltenvektoren $u_1,\ldots,u_K$ von $U$ interpretieren.
+Dazu ersetzen wir im Term $Ac$ die Matrix $A$ durch ihre Singulärwertzerlegung in Gleichung~\ref{eq:svd}.
+Dann berechnen wir die Matrix-Vektor Multiplikationen von rechts nach links.
+Das heisst wir beginnen mit $V^Tc$, also
+\begin{equation*}
+	V^Tc=
+	\begin{pmatrix}
+		\text{---} & v_1^T & \text{---} \\
+		\text{---} & v_2^T & \text{---} \\
+		\vdots & \vdots & \vdots \\
+		\text{---} & v_K^T & \text{---}
+	\end{pmatrix}
+	\begin{pmatrix}
+		c_1 \\
+		c_2 \\
+		\vdots \\
+		c_{M\cdot N}
+	\end{pmatrix}=
+	\begin{pmatrix}
+		v_1^T c \\
+		v_2^T c \\
+		\vdots \\
+		v_K^T c
+	\end{pmatrix}.
+\end{equation*}
+Die Komponenten des Vektors $V^Tc$ sind also die Skalarprodukte der $v_k$ mit $c$.
+Folglich gilt
+\begin{equation*}
+	\Sigma V^Tc=
+	\begin{pmatrix}
+		\sigma_1 & & & \\
+		& \sigma_2 & & \\
+		& & \ddots & \\
+		& & & \sigma_K
+	\end{pmatrix}\,
+	\begin{pmatrix}
+		v_1^T c \\
+		v_2^T c \\
+		\vdots \\
+		v_K^T c
+	\end{pmatrix}=
+	\begin{pmatrix}
+		\sigma_1 v_1^T c \\
+		\sigma_2 v_2^T c \\
+		\vdots \\
+		\sigma_K v_K^T c
+	\end{pmatrix}.
+\end{equation*}
+Wenn wir den Vektor auf der rechten Seite mit $\tilde c$ bezeichnen, also $\tilde c_k=\sigma_k v_k^T c$, dann erhalten wir schliesslich
+\begin{equation*}
+	Ac = U\Sigma V^Tc=U\tilde c
+	=\tilde c_1 u_1+\ldots+\tilde c_K u_K.
+\end{equation*}
+Hier sehen wir bereits, dass das $Ac$ eine Linearkombination der Vektoren $u_1,\ldots,u_K$ ist.
+Wenn wir für $\tilde c_k$ wieder $\sigma_k v_k^T c$ ersetzen, können wir das noch ausschreiben als
+\begin{equation}\label{eq:span_uk}
+	Ac =\left(\sigma_1 v_1^Tc\right) u_1+\ldots+\left(\sigma_K v_K^Tc\right) u_K.
+\end{equation}
+\begin{aufgabe}
+	Gleichung~\eqref{eq:span_uk} sagt, dass jede Linearkombination von Bildern aus der Datenbank $a_1,\ldots,a_K$ auch als Linearkombination der Spalten $u_1,\ldots,u_K$ von $U$ geschrieben werden kann.
+	Erklären Sie, warum das so ist.
+\end{aufgabe}
+\begin{losung*}
+	Wir haben gesehen, dass für jeden Vektor $c\in\mathbb R^K$ die Matrix-Vektor Multiplikation $Ac$ gerade die Linearkombination
+	\begin{equation*}
+		c_1u_1+\ldots+c_Ku_K
+	\end{equation*}
+	der Spalten von $A$ bildet.
+	Durch Variation von $c$ kann so jede mögliche Linearkombination der Bilder aus der Datenbank generiert werden.
+	Doch zu jeder solcher Linearkombination liefert Gleichung~\eqref{eq:span_uk} eine entsprechende Linearkombination der $u_1,\ldots,u_K$ die den gleichen Vektor darstellt.
+\end{losung*}
+\begin{aufgabe}
+	Sei $k\in\left\{1,\ldots,K\right\}$ beliebig.
+	Schreiben Sie das $k$-te Bild aus der Datenbank, also $a_k$, also Linearkombination der $u_1,\ldots,u_K$.
+	Das heisst, geben Sie die Koeffizienten dieser Linearkombination an in Termen von $\sigma_1,\ldots,\sigma_K$ und $v_1,\dots,v_K$.
+\end{aufgabe}
+\begin{losung*}
+	Wir wählen in Gleichung~\ref{eq:span_uk} den Vektor $c$ so, dass $Ac$ genau das Gesicht $a_k$ ausliest.
+	Dazu müssen alle Komponenten von $c$ Null sein, ausser die $k$-te Komponente ist Eins, also
+	\begin{equation*}
+		c^T=\left(0\ \ldots\ 0\ \smash{\overbrace{1}^{k\textrm{-te Komponente}}}\ 0\ \ldots\ 0\right).
+	\end{equation*}
+	Nun gilt $a_k=Ac$.
+	Mit dieser Wahl von $c$ liefert Gleichung~\eqref{eq:span_uk} die gewünschte Linearkombination
+	\begin{equation*}
+		a_k=\left(\sigma_1 v_1^Tc\right) u_1+\ldots+\left(\sigma_K v_K^Tc\right) u_K.
+	\end{equation*}
+\end{losung*}
 
 \begin{tcolorbox}
 	\centerline{\textbf{Lernzielkontrolle Kapitel 1}}
