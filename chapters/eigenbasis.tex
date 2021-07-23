@@ -65,12 +65,8 @@ Diese bilden dann die Basis eines $K$-dimensionalen Unterraums von $\mathbb R^{M
 Nun betrachten wir eine weitere Basis dieses Unterraumes, die \textit{Eigengesichter}.
 Die Eigengesichter sind eine orthonormale Basis dieses Raumes, wir bezeichnen diese mit $\vec u_1,\dots,\vec u_K\in\mathbb R^{M\cdot N}$.
 Diese Basis ist in vielerlei Hinsicht speziell, wie wir sehen werden.
-Sie wird aus den Bildern der Datenbank berechnet.
-Wenn wir eine andere Datenbank verweden, dann würden die Eigengesichter auch anders aussehen.
-Wie diese Berechnung genau geht, werden wir später sehen.
 Diese Vektoren können wir wieder als Bilder darstellen.
 Das ist in Abbildung~\ref{fig:eigenfaces} gezeigt.
-
 \begin{figure}[ht]
 	\centering
 	\begin{tabular}{cccccccc}
@@ -89,48 +85,73 @@ Das ist in Abbildung~\ref{fig:eigenfaces} gezeigt.
 \end{figure}
 
 Wir betrachten nun die Mona Lisa von Leonardo da Vinci, ein Bild das nicht in unserer Datenbank ist.
-Auch hier können wir durch Subtraktion von $\vec m$ das Differenzgesicht bilden.
-Nun ist es möglich, dieses Differenzgesicht näherungsweise als Linearkombination der Basis $a_1,\ldots,a_K$ oder auch der Basis der Eigengesichter $u_1,\ldots,u_K$ zu schreiben.
+Um dieses Bild in den Raum der Differenzgesichter zu verschieben, müssen wir noch das Durchschnittsgesicht $\vec m$ subtrahieren.
+Das entstehende Differenzgesicht kann dann näherungsweise als Linearkombination der Basis $\vec a_1,\ldots,\vec a_K$ oder auch der Basis der Eigengesichter $\vec u_1,\ldots,\vec u_K$ dargestellt werden.
 Letzteres ist in Abbildung~\ref{fig:eigen_basis} dargestellt.
 \begin{figure}[ht]
 	\centering
 	\begin{tabular}{m{1.8cm} c c c c c m{2cm} c c c m{2cm} c c}
 		\includegraphics[width=0.1\textwidth]{images/eigenfaces/mona_lisa_original} &
-		$-$ & $\vec m$ & $\approx$ & $c_1$ & $\cdot$ & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface00}
+		$-$ & $\vec m$ & $=$ & $c_1$ & $\cdot$ & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface00}
 		& $+$ & $c_2$ & $\cdot$ & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface01} & $+$ & $\cdots$
 	\end{tabular}
-	\caption{Differenzgesicht der Mona Lisa als Linearkombination der Eigenfaces.}
+	\caption{Differenzgesicht der Mona Lisa als Linearkombination der Eigengesichter.}
 	\label{fig:eigen_basis}
 \end{figure}
-Wir gehen hier nicht näher darauf ein, wie man die Koeffizienten $c_1,\ldots,c_K$ dieser Linearkombination findet (das kommt später).
-Wenn mab aber als Basis nicht die Eigengesichter, sondern die Gesichter der Datenbank verwendet hätte, so würden die Koeffizienten anders aussehen, was in Abbildung~\ref{fig:coef} gezeigt ist.
-\begin{figure}[ht]
-	\centering
-	\begin{tabular}{lr}
-		\includegraphics[width=0.45\textwidth]{images/eigenfaces/naive_coef} & \includegraphics[width=0.45\textwidth]{images/eigenfaces/eigen_coef} \\
-	\end{tabular}
-	\caption{Der Absolutbetrag der Koeffizienten der Linearkombination des Differenzgesichts der Mona Lisa. Links wurden als Basis die Differenzgesichter der Datenbank und rechts die Eigengesichter genommen.}
-	\label{fig:coef}
-\end{figure}
 \begin{aufgabe}
-	Betrachten Sie die Abbildung~\ref{fig:coef}, welche die Koeffizienten der Linearkombinationen bezüglich der beiden Basen zeigt.
-	Beschreiben Sie die Unterschiede der Bilder.
-	Welche Rückschlüsse kann man dadurch auf die entsprechenden Basen ziehen?
+	Sei $\vec p\in\mathbb R^{M\cdot N}$ das Bild der Mona Lisa und $\vec u_1,\ldots,\vec u_K\in\mathbb R^{M\cdot N}$ die Eigengesichter.
+	Berechnen Sie die Koeffizienten $c_1,\ldots,c_K$ der Linearkombination der Eigengesichter, also
+	\begin{equation*}
+		\vec p-\vec m=c_1\vec u_1+c_2\vec u_2+\ldots+c_K\vec u_K
+	\end{equation*}
+	wie in Abbildung~\ref{fig:eigen_basis} gezeigt.
+	Das heisst, geben Sie die Koeffizienten in Termen von $\vec p, \vec m$ und den Eigengesichtern an.
 \end{aufgabe}
 \begin{losung*}
-	Die Koeffizienten der Eigengesichter fallen schnell ab.
-	Folglich leisten die ersten $\approx 1000$ Eigengesichter den grössten Beitrag zur Linearkombination.
-	Bei der Basis der Differenzgesichter ist keine Solche Struktur zu erkennen.
-	In diesem Sinn sind alle diese Differenzgesichter etwa gleich wichtig um das Bild der Mona Lisa darstellen zu können.
+	Wie in der letzten Aufgabe verwenden wir, das die Eigengesichter orthonormal sind.
+	Wir bilden das Skalarprodukt beider Seiten der obigen Gleichung mit $u_1$, also
+	\begin{equation*}
+		\vec u_1\cdot\left(\vec p-\vec m\right)=c_1\underbrace{\vec u_1\cdot\vec u_1}_{=1}+c_2\underbrace{\vec u_1\cdot\vec u_2}_{=0}+\ldots+c_K\underbrace{\vec u_1\cdot\vec u_K}_{=0}.
+	\end{equation*}
+	Wenn wir das auch noch mit $\vec u_2,\ldots,\vec u_K$ machen erhalten wir
+	\begin{equation*}
+		\vec u_k\cdot\left(\vec p-\vec m\right)=c_k,
+	\end{equation*}
+	für alle $k\in\{1,\ldots,K\}$.
 \end{losung*}
-Was wir hier in Abbildung~\ref{fig:coef} beobachtet haben ist kein Einzelfall.
-Obwohl wir nur das Beispiel der Mona Lisa betrachtet haben, würden andere Gesichter ähnlich verteilte Koeffizienten liefern.
-Im nächsten Unterkapitel werden wir die Eigengesichter berechnen.
-%\begin{figure}[ht]
-%	\centering
-%	\begin{tabular}{lr}
-%		\includegraphics[width=0.2\textwidth]{images/eigenfaces/mona_lisa_original} & \includegraphics[width=0.2\textwidth]{images/eigenfaces/mona_lisa_2000} \\
-%	\end{tabular}
-%	\caption{Mona Lisa von Leonardo da Vinci. Links ist das original, rechts ist die Approximation als Linearkombination der ersten 2000 Eigengesichter.}
-%	\label{fig:mona_lisa}
-%\end{figure}
+Hat man die Koeffizienten der Linearkombination berechnet, so kann das Bild $\vec p$ der Mona Lisa wieder als Linearkombination der Eigengesichter darstellen
+\begin{equation*}
+	\vec p=\vec m+c_1\vec u_1+c_2\vec u_2+\ldots+c_Ku_K.
+\end{equation*}
+Das werden wir in der nächsten Aufgabe implementieren.
+\begin{aufgabe} \label{aufg:compute_coefficients}
+	Seien \texttt{p} und \texttt{m} Vektoren der Länge $M\cdot N$, wobei \texttt{p} ein Gesicht zeigt (z.B. das der Mona Lisa) und \texttt{m} das Durchschnittsgesicht ist.
+	Sei zudem \texttt{u\_list} die Liste der Eigengesichter als Vektoren.
+	Ergänzen Sie die Funktion \texttt{compute\_coefficients(p, m, u\_list)}, welche die Liste der Koeffizienten der Linearkombination aus Abbildung~\ref{fig:eigen_basis} zurück gibt.
+	Um Ihre Lösung zu testen können Sie das Python Skript \texttt{basis\_expansion.py} laufen lassen, welches das Bild der Mona Lisa mit ihren Koeffizienten rekonstruiert.
+	\textit{Hinweis:} Mit \texttt{np.dot(v,w)} lässt sich das Skalarprodukt zweier Vektoren \texttt{v} und \texttt{w} berechnen.
+\end{aufgabe}
+\begin{losung*}
+	Die Lösung könnte zum Beispiel so aussehen.\\[0.5cm]
+	\begin{minipage}{0.65\textwidth}
+\begin{lstlisting}[style=python]
+import numpy as np
+
+def compute_coefficients(p, m, u_list):
+	K = len(u_list)
+	c_list = np.empty((K,))
+	for c, u in zip(c_list, u_list):
+		c = np.dot(u, p - m)
+	return c_list
+\end{lstlisting}
+	\end{minipage}\hfill
+	\begin{minipage}{0.35\textwidth}\vspace{-1cm}
+		\centering Rekonstruktion:\\[0.5cm]
+		\includegraphics[width=0.4\textwidth]{images/eigenfaces/mona_lisa_original}
+	\end{minipage}
+\end{losung*}
+Wir haben die Eigengesichter einfach als eine spezielle orthonormale Basis des Raumes der Differenzgesichter eingeführt.
+Tatsächlich sind sie aber nicht etwa eine fixe Basis, sonder sie werden aus den Bilder der Datenbank berechnet.
+Insbesondere erhält man mit einer anderen Datenbank auch andere Eigengesichter.
+Aber wie diese Berechnung das genau geht, sehen wir später.
+Zuerst wollen wir einige Eigenschaften dieser Basis untersuchen.
