@@ -54,28 +54,53 @@ Diese sind definiert als
 \begin{equation*}
 	\vec a_k=\vec b_k-\vec m,\quad k\in\left\{1,\ldots,K\right\}.
 \end{equation*}
-Die Methode der Eigengesichter trifft nun folgende Annahme:
-Die Differenzgesichter sind in guter Approximation in einem niedrig-dimensionalen Unterraum von $\mathbb R^{M\cdot N}$ enthalten.
-Wir nennen diesen Unterraum den \textit{Raum der Differenzgesichter} (engl. \textit{facespace}).
-Sagen wir, dieser Unterraum habe die Dimension $D\ll M\cdot N$ (\glqq{}viel kleiner als\grqq{}).
-Leider können wir das nur stark vereinfacht in für den Fall $M\cdot N=2$ und $D=1$ darstellen.
-Dies ist in Abbildung~\ref{fig:meandiff} gezeigt.
+Die eben eingeführten Begriffe sind links in Abbildung~\ref{fig:meandiff} stark vereinfacht visualisiert.
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.5\textwidth]{images/facespace/meandiff}
-	\caption{Die Gesichter werden um den Ursprung zentriert indem man das Durchschnittsgesicht subtrahiert.
-	Annahme: Die entstehenden Differenzgesichter liegen dann in guter Approximation in einem Unterraum.}
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{images/facespace/meandiff}
+	\end{minipage}\hfill
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{images/facespace/principal_components}
+	\end{minipage}
+	\caption{Die Gesichter werden um den Ursprung zentriert indem man das Durchschnittsgesicht subtrahiert (links).
+	Die Eigengesichter sind die orthonormalen Vektoren entlang den Hauptachsen (rechts).}
 	\label{fig:meandiff}
 \end{figure}
 \begin{aufgabe}
-	Nennen Sie einen Unterschied und eine Gemeinsamkeit der vereinfachten Darstellung in Abbildung~\ref{fig:meandiff} zu unserer tatsächlichen Situation mit Bildern von Gesichtern.
+	Nennen Sie einen Unterschied und eine Gemeinsamkeit der vereinfachten Darstellung links in Abbildung~\ref{fig:meandiff} zu unserer tatsächlichen Situation mit Bildern von Gesichtern.
 	Gehen Sie davon aus, dass unsere Bilder eine Auflösung von $M=180$ und $N=144$ haben, wie im letzten Kapitel.
 \end{aufgabe}
 \begin{losung*}
 	Als Vektoren aufgefasst sind die Gesichter Punkte im $\mathbb R^{M\cdot N}$.
 	Für $M=180$ und $N=144$ wären das Punkte im $\mathbb R^{25'920}$ und nicht im $\mathbb R^2$ wie in der Abbildung.
-	Der Unterraum der Differenzgesichter ist zudem dargestellt als Gerade durch Null, also als 1-dimensionaler Raum.
-	Wegen der Vielfalt menschlicher Gesichter wird die Dimension tatsächlich viel grösser sein.
+	Anders ausgedrückt zeigt die Abbildung den Spezialfall $M\cdot N=2$.
+	Das entspricht Bilder die nur aus zwei Pixeln bestehen.
 	Andererseits wird in der Abbildung korrekt gezeigt, dass die Komponenten der Gesichts-Vektoren $\vec b_k$ nur Werte zwischen 0 und 1 annehmen.
 	Zudem sind die Differenzgesichter richtigerweise genau als Verschiebung der Gesichts-Vektoren um $-\vec m$ dargestellt.
 \end{losung*}
+
+Die Eigengesichter werden nun aus den Differenzgesichtern konstruiert.
+Wie das genau geht, ist im letzten Kapitel beschrieben.
+Hier werden wir nur eine bildliche Konstruktion angeben.
+Dazu stelle man sich die Differenzgesichter als eine \glqq{}Wolke\grqq{} von Punkten vor, wie rechts in Abbildung~\ref{fig:meandiff}.
+\begin{enumerate}[leftmargin=3cm, label=Schritt \arabic*:]
+	\item Entlang einer gewissen Richtung weist diese Wolke die grösste Streuung auf.
+	Entlang dieser grössten Streuung wählen wir einen Vektor $\vec u_1$ der Länge 1.
+	\item Unter allen Vektoren die orthogonal zu $\vec u_1$ sind, wählen wir wieder einen, der in Richtung der grössten Streuung der Wolke zeigt.
+	Diesen nennen wir $\vec u_2$ und er soll wieder Länge 1 haben.
+	\item Unter allen Vektoren die orthogonal zu $\vec u_1$ und $\vec u_2$ sind, wählen wir wieder einen, der in Richtung der grössten Streuung der Wolke zeigt.
+	Diesen nennen wir $\vec u_3$ und er soll wieder Länge 1 haben.
+	\item Analog konstruieren wir $\vec u_4,\vec u_5,\ldots,\vec u_K$.
+\end{enumerate}
+Die Vektoren $\vec u_1,\ldots,\vec u_K$ heissen \textit{Eigengesichter}.
+Sie bilden eine orthonormale Basis des Unterraumes, der von den $K$ Differenzgesichtern aufgespannt wird.
+Insbesondere lässt sich jedes der $K$
+Wenn man die Komponenten der Eigengesichter geeignet in das Intervall $\left[0,1\right]$ abbildet, lassen sich diese wieder als Bilder darstellen.
+%Die Methode der Eigengesichter trifft nun folgende Annahme:
+%Die Differenzgesichter sind in guter Approximation in einem niedrig-dimensionalen Unterraum von $\mathbb R^{M\cdot N}$ enthalten.
+%Die Dimension dieses Raumes sei $\tilde K$.
+%Die obige Annahme bedeutet genauer gesagt, dass $\tilde K\ll K$ und $\tilde K\ll M\cdot N$ (\glqq{}viel kleiner als\grqq{}).
+%Wir nennen diesen Unterraum den \textit{Gesichtsraum} (engl. \textit{facespace}).
