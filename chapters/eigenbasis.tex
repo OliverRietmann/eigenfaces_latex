@@ -6,8 +6,7 @@
 		\item Die Projektion eines Vektors auf einen Unterraum berechnen können, wenn eine orthonormale Basis dieses Unterraumes gegeben ist.
 	\end{enumerate}
 \end{tcolorbox}
-Im letzten Unterkapitel haben wir den Raum der Differenzgesichter eingeführt.
-In diesem Unterkapitel wollen wir eine geeignete Basis dieses Unterraumes finden, nämlich die \textit{Eigengesichter}.
+In diesem Unterkapitel wollen wir allgemeine Bilder als Linearkombination der Eigengesichter darstellen.
 Um uns einige grundlegende Begriffe aus der linearen Algebra in Erinnerung zu rufen, betrachten wir folgende Aufgabe.
 \begin{aufgabe}
 	Betrachten Sie die Vektoren
@@ -66,30 +65,12 @@ Um uns einige grundlegende Begriffe aus der linearen Algebra in Erinnerung zu ru
 \end{losung*}
 
 %Die Bilder $\vec a_1,\ldots,\vec a_K$ aus unserer Datenbank sind im Allgemeinen nicht paarweise orthogonal und nicht auf Länge 1 normiert.
+Die Eigengesichter bilden eine orthonormale Basis der Raumes, der von den Differenzgesichtern $\vec a_1,\ldots,\vec a_K$ der Bilder aus der Datenbank aufgespannt wird.
 Wir werden im Folgenden annehmen, dass die Anzahl der Bilder $K$ viel kleiner ist als die Anzahl der Pixel $M\cdot N$ der einzelnen Bilder.
 Der Einfachheit halber nehmen wir zudem an, dass die Vektoren $\vec a_1,\ldots,\vec a_K$ linear unabhängig sind.
 Diese bilden dann die Basis eines $K$-dimensionalen Unterraums von $\mathbb R^{M\cdot N}$.
-Nun betrachten wir eine weitere Basis dieses Unterraumes, die \textit{Eigengesichter}.
-Die Eigengesichter sind eine orthonormale Basis dieses Raumes, wir bezeichnen diese mit $\vec u_1,\dots,\vec u_K\in\mathbb R^{M\cdot N}$.
+Die Eigengesichter sind ebenfalls eine Basis dieses Raumes, wir bezeichnen diese mit $\vec u_1,\dots,\vec u_K\in\mathbb R^{M\cdot N}$.
 Diese Basis ist in vielerlei Hinsicht speziell, wie wir sehen werden.
-Diese Vektoren können wir wieder als Bilder darstellen.
-Das ist in Abbildung~\ref{fig:eigenfaces} gezeigt.
-\begin{figure}[ht]
-	\centering
-	\begin{tabular}{cccccccc}
-		\includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface00} & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface01} &
-		\includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface02} & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface03} &
-		\includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface04} &
-		\includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface05} & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface06} &
-		\includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface07} \\ \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface08} &
-		\includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface09} & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface10} &
-		\includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface11} & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface12} &
-		\includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface13} & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface14} &
-		\includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface15} \\
-	\end{tabular}
-	\caption{Die ersten 16 Eigengesichter wurden wieder als Bild dargestellt.}
-	\label{fig:eigenfaces}
-\end{figure}
 
 Wir betrachten nun die Mona Lisa von Leonardo da Vinci, ein Bild das nicht in unserer Datenbank ist.
 Um dieses Bild in den Raum der Differenzgesichter zu verschieben, müssen wir noch das Durchschnittsgesicht $\vec m$ subtrahieren.
