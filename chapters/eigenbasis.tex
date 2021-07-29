@@ -8,93 +8,135 @@
 	\end{enumerate}
 \end{tcolorbox}
 In diesem Unterkapitel wollen wir allgemeine Bilder als Linearkombination der Eigengesichter darstellen.
-Um uns einige grundlegende Begriffe aus der linearen Algebra in Erinnerung zu rufen, betrachten wir folgende Aufgabe.
+Man kann zeigen, dass alle Bilder der Datenbank exakt als Linearkombination der Eigengesichter geschrieben werden können.
+Neue Bilder können im Allgemeinen mit so einer Linearkombination nur angenähert werden.
+Die Beste Annäherung ist gerade die Projektion des neuen Bildes auf den Raum, der durch die Eigengesichter aufgespannt wird.
+Was das genau bedeutet, wollen wir zuerst im $\mathbb R^3$ veranschaulichen.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/projection}
+	\caption{Projektion $\vec a$ von $\vec p$ auf die Ebene durch Null, die von $\vec v_1$ und $\vec v_2$ aufgespannt wird. Der Vektor $\vec n$ steht normal auf die Ebene und es gilt $\vec p=\vec a+\vec n$.}
+	\label{fig:projection}
+\end{figure}
 \begin{aufgabe}
 	Betrachten Sie die Vektoren
 	\begin{equation*}
-		\vec v_1=\begin{pmatrix}
-			\tfrac{3}{5} \\ \tfrac{4}{5} \\ 0
+		\vec v_1=\frac{1}{\sqrt{3}}\begin{pmatrix}
+			1 \\ 1 \\ 1
 		\end{pmatrix},\quad
-		\vec v_2=\begin{pmatrix}
-			-\tfrac{4}{5} \\ \tfrac{3}{5} \\  0
+		\vec v_2=\frac{1}{\sqrt{2}}\begin{pmatrix}
+			-1 \\ 1 \\  0
 		\end{pmatrix},\quad
-		\vec v_3=\begin{pmatrix}
-			0 \\ 0 \\  1
-		\end{pmatrix},\quad
-		\vec a=\begin{pmatrix}
-			7 \\ 1 \\  4
+		\vec p=\begin{pmatrix}
+			3 \\ 1 \\  2
 		\end{pmatrix}.
 	\end{equation*}
 	\begin{enumerate}[label=(\alph*)]
-		\item Die Vektoren $\vec v_1,\vec v_2,\vec v_3$ bilden eine orthonormale Basis von $\mathbb R^3$.
-		Begründen Sie warum.
-		\item Folglich gibt es genau eine Linearkombination
+		\item Sind die Vektoren $\vec v_1$ und $\vec v_2$ sind orthonormal? Begründen Sie.
+		\item Die Vektoren $\vec v_1$ und $\vec v_2$ spannen eine Ebene durch den Nullpunkt auf.
+		Berechnen Sie den Punkt $\vec a$, welcher der orthogonalen Projektion von $\vec p$ auf diese Ebene entspricht.
+		Dazu können Sie zum Beispiel eine Zerlegung $\vec p=\vec a+\vec n$ wie in Abbildung~\ref{fig:projection} machen.
+		\item Dann kann man $\vec a$ als Linearkombination vom $\vec v_1$ und $\vec v_2$ darstellen, also
 		\begin{equation*}
-			\vec a=c_1\vec v_1+c_2\vec v_2+c_3\vec v_3.
+			\vec a=c_1\vec v_1+c_2\vec v_2.
 		\end{equation*}
-		Berechnen Sie die Koeffizienten $c_1,c_2,c_3$ dieser Linearkombination.
+		Berechnen Sie die Koeffizienten $c_1$ und $c_2$ in Termen von $\vec v_1,\vec v_2$ und $\vec p$.
 	\end{enumerate}
 \end{aufgabe}
 \begin{losung*}
 	\phantom{text}
 	\begin{enumerate}[label=(\alph*)]
-		\item Die Vektoren $\vec v_1,\vec v_2,\vec v_3$ sind paarweise orthogonal, also
+		\item Die Vektoren sind orthonormal. Wir berechnen das Skalarprodukt
 		\begin{equation*}
-			\vec v_1\cdot\vec v_2= \tfrac{3}{5}\cdot\left(-\tfrac{4}{5}\right)+\tfrac{4}{5}\cdot\tfrac{3}{5}+0\cdot 0=0
+			\vec v_1\cdot\vec v_2= \frac{1}{\sqrt{3}}\cdot\frac{1}{\sqrt{2}}\cdot\left(1\cdot\left(-1\right)+1\cdot 1+1\cdot 0\right)=0.
 		\end{equation*}
-		und analog findet man $\vec v_1\cdot\vec v_3=0$ und $\vec v_2\cdot\vec v_3=0$.
-		Insbesondere sind die Vektoren linear unabhängig.
-		Da es drei an der Zahl sind, müssen Sie eine Basis von $\mathbb R^3$ sein.
-		Zudem haben die Vektoren Länge Eins, das heisst
+		Die beiden Vektoren sind also orthogonal.
+		Es bleibt zu zeigen, dass sie beide Länge 1 haben. In der Tat gilt
 		\begin{equation*}
-			\vec v_1\cdot\vec v_1= \left(\tfrac{3}{5}\right)^2+\left(\tfrac{4}{5}\right)^2+0^2=1.
+			\vec v_1\cdot\vec v_1=\frac{1}{3}\left(1^2+1^2+1^2\right)=1
 		\end{equation*}
-		Analog findet man $\vec v_2\cdot\vec v_2=1$ und $\vec v_3\cdot\vec v_3=1$.
-		Damit ist diese Basis nicht nur orthogonal, sondern sogar orthonormal.
-		\item Da unsere Basis orthonormal ist, kann man die Koeffizienten mit einem Skalarprodukt berechnen.
-		Zum Beispiel findet man den Koeffizienten $c_1$ indem man auf beiden Seiten der Gleichung aus der Teilaufgabe das Skalarprodukt mit $v_1$ bildet
+		und
 		\begin{equation*}
-			\vec v_1\cdot\vec a=c_1\underbrace{\vec v_1\cdot\vec v_1}_{=1}+c_2\underbrace{\vec v_1\cdot\vec v_2}_{=0}+c_3\underbrace{\vec v_1\cdot\vec v_3}_{=0},
+			\vec v_2\cdot\vec v_2=\frac{1}{2}\left(\left(-1\right)^2+1^2+0^2\right)=1.
 		\end{equation*}
-		also $\vec v_1\cdot\vec a=c_1$.
-		Analog erhält man $\vec v_2\cdot\vec a=c_2$ und $\vec v_3\cdot\vec a=c_3$.
-		Diese Skalarprodukte berechnen sich zu
+		\item Wir zerlegen $\vec p=\vec a+\vec n$ wie in Abbildung~\ref{fig:projection} in einen Vektor $\vec a$ der in der Ebene liegt und einen Vektor $\vec n$ der orthogonal zur Ebene steht.
+		Gesucht ist der Vektor $\vec a$.
+		Da er in der Ebene liegt, gibt es eindeutige Koeffizienten $c_1$ und $c_2$, so dass
 		\begin{equation*}
-			c_1=5,\quad\quad c_2=-5,\quad\quad c_3=4.
+			\vec a=c_1\vec v_1+c_2\vec v_2.
+		\end{equation*}
+		Wir addieren $\vec n$ auf beiden Seiten und erhalten
+		\begin{equation*}
+			\vec p=c_1\vec v_1+c_2\vec v_2+\vec n.
+		\end{equation*}
+		Nun bilden wir auf beiden Seiten das Skalarprodukt mit $\vec v_1$, also
+		\begin{equation*}
+			\vec v_1\cdot\vec p=c_1\underbrace{\vec v_1\cdot\vec v_1}_{=1}+c_2\underbrace{\vec v_1\cdot\vec v_2}_{=0}+\underbrace{\vec v_1\cdot\vec n}_{=0}.
+		\end{equation*}
+		Hier haben wir verwendet, dass $\vec v_1$ orthogonal ist zu $\vec v_2$ und $\vec n$.
+		Wir erhalten
+		\begin{equation*}
+			c_1=\vec v_1\cdot\vec p=\frac{6}{\sqrt{3}}.
+		\end{equation*}
+		In dem man stattdessen auf beiden Seiten das Skalarprodukt mit $\vec v_2$ bildet, erhält man analog
+		\begin{equation*}
+			c_2=\vec v_2\cdot\vec p=-\frac{2}{\sqrt{2}}.
+		\end{equation*}
+		Damit berechnen wir die Projektion
+		\begin{equation*}
+			\vec a
+			=c_1\vec v_1+c_2\vec v_2
+			=2\begin{pmatrix}
+				1 \\ 1 \\ 1
+			\end{pmatrix}
+			-2\begin{pmatrix}
+				-1 \\ 1 \\ 0
+			\end{pmatrix}
+			=\begin{pmatrix}
+				4 \\ 0 \\ 2
+			\end{pmatrix}.
+		\end{equation*}
+		\item In der Lösung der vorherigen Teilaufgabe haben wir die Koeffizienten schon berechnet zu
+		\begin{equation*}
+			c_1=\frac{6}{\sqrt{3}}
+			\quad\quad\text{und}\quad\quad
+			c_2=-\frac{2}{\sqrt{2}}.
 		\end{equation*}
 	\end{enumerate}
 \end{losung*}
 
-%Die Bilder $\vec a_1,\ldots,\vec a_K$ aus unserer Datenbank sind im Allgemeinen nicht paarweise orthogonal und nicht auf Länge 1 normiert.
-Die Eigengesichter bilden eine orthonormale Basis der Raumes, der von den Differenzgesichtern $\vec a_1,\ldots,\vec a_K$ der Bilder aus der Datenbank aufgespannt wird.
-Wir werden im Folgenden annehmen, dass die Anzahl der Bilder $K$ viel kleiner ist als die Anzahl der Pixel $M\cdot N$ der einzelnen Bilder.
-Der Einfachheit halber nehmen wir zudem an, dass die Vektoren $\vec a_1,\ldots,\vec a_K$ linear unabhängig sind.
-Diese bilden dann die Basis eines $K$-dimensionalen Unterraums von $\mathbb R^{M\cdot N}$.
-Die Eigengesichter sind ebenfalls eine Basis dieses Raumes, wir bezeichnen diese mit $\vec u_1,\dots,\vec u_K\in\mathbb R^{M\cdot N}$.
-Diese Basis ist in vielerlei Hinsicht speziell, wie wir sehen werden.
+Was wir in der vorherigen Teilaufgabe berechnet haben, funktioniert auch in höheren Dimensionen.
+Seien $\vec u,\vec v\in\mathbb R^n$, wobei möglicherweise $n>3$.
+Das Skalarprodukt dieser Vektoren ist dann definiert als
+\begin{equation*}
+	\vec u\cdot\vec v=u_1v_1+\ldots+u_nv_n,
+\end{equation*}
+wobei $u_1,\ldots,u_n$ die Komponenten von $\vec u$ und $v_1,\ldots,v_n$ die Komponenten von $\vec v$ sind.
+Wir sagen, die beiden Vektoren sind orthogonal, wenn $\vec u\cdot\vec v=0$.
+Falls sie zusätzlich Länge 1 haben, also $\vec u\cdot\vec u=1$ und $\vec v\cdot\vec v=1$, dann heissen sie orthonormal.
+Eine Familie $\vec v_1,\ldots,\vec v_K\in\mathbb R^n$ heisst orthonormal, wenn die Vektoren alle paarweise orthonormal sind.
+Sie spannen dann einen $K$-dimensionalen Raum auf.
+Wir können wie in der Aufgabe die Projektion eines Vektors $\vec p\in\mathbb n$ auf diesen Raum berechnen, nämlich
+\begin{equation*}
+	\vec a=c_1\vec v_1+\ldots+c_n\vec v_n,
+\end{equation*}
+wobei die Koeffizienten gegeben sind durch
+\begin{equation*}
+	c_i=\vec v_i\cdot p
+\end{equation*}
+für alle $i\in\left\{1,\ldots,n\right\}$.
 
-Wir betrachten nun die Mona Lisa von Leonardo da Vinci, ein Bild das nicht in unserer Datenbank ist.
+Nun betrachten wir wieder die Eigengesichter $\vec u_1,\ldots,\vec u_K$.
+Gemäss der Konstruktion aus dem letzten Kapitel sind diese orthonormal.
+Wir betrachten zudem die Mona Lisa von Leonardo da Vinci, ein Bild das nicht in unserer Datenbank ist.
+Den entsprechenden Vektor nennen wir $\vec p\in\mathbb R^{M\cdot N}$.
 Um dieses Bild in den Raum der Differenzgesichter zu verschieben, müssen wir noch das Durchschnittsgesicht $\vec m$ subtrahieren.
 Das entstehende Differenzgesicht kann dann näherungsweise als Linearkombination der Basis $\vec a_1,\ldots,\vec a_K$ oder auch der Basis der Eigengesichter $\vec u_1,\ldots,\vec u_K$ dargestellt werden.
-Letzteres ist in Abbildung~\ref{fig:eigen_basis} dargestellt.
-\begin{figure}[ht]
-	\centering
-	\begin{tabular}{m{1.8cm} c c c c c m{2cm} c c c m{2cm} c c}
-		\includegraphics[width=0.1\textwidth]{images/eigenfaces/mona_lisa_original} &
-		$-$ & $\vec m$ & $=$ & $c_1$ & $\cdot$ & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface00}
-		& $+$ & $c_2$ & $\cdot$ & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface01} & $+$ & $\cdots$
-	\end{tabular}
-	\caption{Differenzgesicht der Mona Lisa als Linearkombination der Eigengesichter.}
-	\label{fig:eigen_basis}
-\end{figure}
+Letzteres geht mit einer Projektion wie oben beschrieben.
 \begin{aufgabe}
 	Sei $\vec p\in\mathbb R^{M\cdot N}$ das Bild der Mona Lisa und $\vec u_1,\ldots,\vec u_K\in\mathbb R^{M\cdot N}$ die Eigengesichter.
-	Berechnen Sie die Koeffizienten $c_1,\ldots,c_K$ der Linearkombination der Eigengesichter, also
-	\begin{equation*}
-		\vec p-\vec m=c_1\vec u_1+c_2\vec u_2+\ldots+c_K\vec u_K
-	\end{equation*}
-	wie in Abbildung~\ref{fig:eigen_basis} gezeigt.
-	Das heisst, geben Sie die Koeffizienten in Termen von $\vec p, \vec m$ und den Eigengesichtern an.
+	Berechnen Sie die Koeffizienten $c_1,\ldots,c_K$ der Projektion von $\vec p-\vec m$ auf die Eigengesichter.
+	Geben Sie die Koeffizienten in Termen von $\vec p, \vec m$ und den Eigengesichtern an.
 \end{aufgabe}
 \begin{losung*}
 	Wie in der letzten Aufgabe verwenden wir, das die Eigengesichter orthonormal sind.
@@ -108,16 +150,16 @@ Letzteres ist in Abbildung~\ref{fig:eigen_basis} dargestellt.
 	\end{equation*}
 	für alle $k\in\{1,\ldots,K\}$.
 \end{losung*}
-Hat man die Koeffizienten der Linearkombination berechnet, so kann das Bild $\vec p$ der Mona Lisa wieder als Linearkombination der Eigengesichter darstellen
+
+Hat man die Koeffizienten der Linearkombination berechnet, so kann die Projektion der Mona Lisa wieder als Linearkombination der Eigengesichter darstellen
 \begin{equation*}
-	\vec p=\vec m+c_1\vec u_1+c_2\vec u_2+\ldots+c_Ku_K.
+	\vec m+c_1\vec u_1+c_2\vec u_2+\ldots+c_Ku_K.
 \end{equation*}
-Das werden wir in der nächsten Aufgabe implementieren.
 \begin{aufgabe} \label{aufg:compute_coefficients}
 	Seien \texttt{p} und \texttt{m} Vektoren der Länge $M\cdot N$, wobei \texttt{p} ein Gesicht zeigt (z.B. das der Mona Lisa) und \texttt{m} das Durchschnittsgesicht ist.
-	Sei zudem \texttt{u\_list} die Liste der Eigengesichter als Vektoren.
+	Sei zudem \texttt{u\_list} die Liste der Eigengesichter.
 	Ergänzen Sie die Funktion \texttt{compute\_coefficients(p, m, u\_list)}, welche die Liste der Koeffizienten der Linearkombination aus Abbildung~\ref{fig:eigen_basis} zurück gibt.
-	Um Ihre Lösung zu testen können Sie das Python Skript \texttt{basis\_expansion.py} laufen lassen, welches das Bild der Mona Lisa mit ihren Koeffizienten rekonstruiert.
+	Um Ihre Lösung zu testen können Sie das Python Skript \texttt{basis\_expansion.py} laufen lassen, welches die Projektion der Mona Lisa mit den von Ihnen berechneten Koeffizienten darstellt.
 	\textit{Hinweis:} Mit \texttt{np.dot(v,w)} lässt sich das Skalarprodukt zweier Vektoren \texttt{v} und \texttt{w} berechnen.
 \end{aufgabe}
 \begin{losung*}
@@ -139,8 +181,19 @@ def compute_coefficients(p, m, u_list):
 		\includegraphics[width=0.4\textwidth]{images/eigenfaces/mona_lisa_original}
 	\end{minipage}
 \end{losung*}
-Wir haben die Eigengesichter einfach als eine spezielle orthonormale Basis des Raumes der Differenzgesichter eingeführt.
-Tatsächlich sind sie aber nicht etwa eine fixe Basis, sonder sie werden aus den Bilder der Datenbank berechnet.
-Insbesondere erhält man mit einer anderen Datenbank auch andere Eigengesichter.
-Aber wie diese Berechnung das genau geht, sehen wir später.
-Zuerst wollen wir einige Eigenschaften dieser Basis untersuchen.
+
+Anscheinend sieht die Projektion fast gleich aus wie das Bild selber.
+Etwas informell ist das in in Abbildung~\ref{fig:eigen_basis} dargestellt.
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{m{1.8cm} c c c c c m{2cm} c c c m{2cm} c c}
+		\includegraphics[width=0.1\textwidth]{images/eigenfaces/mona_lisa_original} &
+		$\approx$ & $\vec m$ & $+$ & $c_1$ & $\cdot$ & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface00}
+		& $+$ & $c_2$ & $\cdot$ & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface01} & $+$ & $\cdots$
+	\end{tabular}
+	\caption{Projektion der Mona Lisa auf die Eigengesichter.}
+	\label{fig:eigen_basis}
+\end{figure}
+Dieses Phänomen bedeutet, dass die Mona Lisa ganz oder in sehr guter Näherung im Raum liegt, er durch die Eigengesichter aufgespannt wird.
+In Abbildung~\ref{fig:projection} würde das einem $\vec p$ entsprechen, dass mit der Ebene einen verschwindend kleinen Winkel einschliesst, also fast in der Ebene liegt.
+Mit dieser Beobachtung wollen wir und im nächsten Kapitel genauer auseinandersetzen.
