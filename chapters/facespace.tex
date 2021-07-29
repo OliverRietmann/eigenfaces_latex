@@ -83,9 +83,9 @@ Die eben eingeführten Begriffe sind links in Abbildung~\ref{fig:meandiff} stark
 \end{losung*}
 
 Die Eigengesichter werden nun aus den Differenzgesichtern konstruiert.
-Wie das genau geht, ist im letzten Kapitel beschrieben.
-Hier werden wir nur eine bildliche Konstruktion angeben.
-Dazu stelle man sich die Differenzgesichter als eine \glqq{}Wolke\grqq{} von Punkten vor, wie rechts in Abbildung~\ref{fig:meandiff}.
+Wir werden nur eine bildliche Konstruktion angeben.
+Dazu treffen wir folgende Annahme: Die Anzahl der Bilder $K$ sei kleiner ist als die Anzahl der Pixel $M\cdot N$ der einzelnen Bilder.
+Nun stelle man sich die Differenzgesichter als eine \glqq{}Wolke\grqq{} von Punkten vor, wie rechts in Abbildung~\ref{fig:meandiff}.
 \begin{enumerate}[leftmargin=3cm, label=Schritt \arabic*:]
 	\item Entlang einer gewissen Richtung weist diese Wolke die grösste Streuung auf.
 	Entlang dieser grössten Streuung wählen wir einen Vektor $\vec u_1$ der Länge 1.
@@ -96,9 +96,10 @@ Dazu stelle man sich die Differenzgesichter als eine \glqq{}Wolke\grqq{} von Pun
 	\item Analog konstruieren wir $\vec u_4,\vec u_5,\ldots,\vec u_K$.
 \end{enumerate}
 Die Vektoren $\vec u_1,\ldots,\vec u_K$ heissen \textit{Eigengesichter}.
-Sie bilden eine orthonormale Basis des Unterraumes, der von den $K$ Differenzgesichtern aufgespannt wird.
-Eine wichtige Konsequenz davon ist, dass sich jedes der Differenzgesichter als Linearkombination der Eigengesichter schreiben lässt.
-Aber was das genau bedeutet, sehen wir im nächsten Kapitel.
+Die genaue Berechnung dieser Vektoren ist nicht so einfach und ist darum schon implementiert.
+Man kann das ganze so auffassen: Mit diesem Verfahren \glqq{}lernt\grqq{} man die Eigengesichter aus der Datenbank.
+Wir werden bald sehen, was diese Vektoren so speziell macht.
+Doch zuerst werden wir sie visualisieren.
 
 Die Komponenten der Eigengesichter liegen nicht notwendigerweise in $\left[0,1\right]$.
 Damit man sie als Bilder darstellen kann, müssen wir deren Komponenten zuerst auf geeignete Weise nach $\left[0,1\right]$ abbilden.
@@ -206,8 +207,10 @@ Wir ignorieren diesen Fall.
 	\caption{Die ersten 16 Eigengesichter wurden wieder als Bild dargestellt.}
 	\label{fig:eigenfaces}
 \end{figure}
-%Die Methode der Eigengesichter trifft nun folgende Annahme:
-%Die Differenzgesichter sind in guter Approximation in einem niedrig-dimensionalen Unterraum von $\mathbb R^{M\cdot N}$ enthalten.
-%Die Dimension dieses Raumes sei $\tilde K$.
-%Die obige Annahme bedeutet genauer gesagt, dass $\tilde K\ll K$ und $\tilde K\ll M\cdot N$ (\glqq{}viel kleiner als\grqq{}).
-%Wir nennen diesen Unterraum den \textit{Gesichtsraum} (engl. \textit{facespace}).
+
+Im Grunde fangen die Eigengesichter charakteristische Gesichtszüge ein.
+Mit charakteristisch ist hier gemeint, dass genau diese Gesichtszüge für die grösste Varianz\footnote{Das Wort \glqq{}Varianz\grqq{} kommt aus der Statistik und hat eine formale Definition. Für uns ist aber nur wichtig, dass sie ein Mass für die Streuung von Daten (in diesem Fall Gesichter) ist.} unter allen Bildern der Datenbank verantwortlich sind.
+Sie beschreiben die Merkmale, nach denen sich die Gesichter am meisten unterscheiden.
+Besser gesagt: Das erste Eigengesicht fängt den Gesichtszug mit der grössten Varianz ein.
+Die weiteren Eigengesichter fangen Gesichtszüge mit immer weniger Varianz ein.
+Dies spiegelt sich auch in deren Konstruktion wieder, welche die Eigengesichter ja gerade als Vektoren entlang der grössten Streuung definiert.
