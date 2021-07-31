@@ -2,7 +2,9 @@
 \begin{tcolorbox}
 	\centerline{\textbf{Lernziele Kapitel~\ref{sec:recognition}}}
 	\begin{enumerate}[leftmargin=*,label=\thesection.\arabic*]
-		\item Erklären können, wie man die Eigengesichter zur Gesichtserkennung nutzen kann.
+		\item \textit{Erklären} können, was eine Klassifizierung ist.
+		\item \textit{Erklären} können, warum eine Gesichtserkennung ein Klassifizerungsproblem ist.
+		\item \textit{Verstehen} wie die Eigengesichter das \glqq{}Ähnlich aussehen\grqq{} von Gesichtern quantifizieren können.
 	\end{enumerate}
 \end{tcolorbox}
 Nun wollen wir die Eigengesichter nutzen für eine Gesichtserkennung nutzen.
@@ -67,7 +69,35 @@ und
 \end{equation*}
 wobei nun $K=80$ und $\vec m$ das Durchschnittsgesicht der Bilder der neuen Datenbank ist.
 Entsprechend sehen die Eigengesichter auch etwas anders aus, aber deren Eigenschaften sind die selben.
-Das besagte Mass der Distanz zwischen den Gesichtern $\vec p$ und $\vec q$ ist definiert als
+Das besagte Mass der Distanz zwischen den Gesichtern $\vec p$ und $\vec q$ definieren wir als
 \begin{equation*}
 	D\left(\vec p,\vec q\right)=\left(c_1-\tilde c_1\right)^2+\left(c_2-\tilde c_2\right)^2+\ldots+\left(c_K-\tilde c_K\right)^2.
 \end{equation*}
+\begin{aufgabe}
+	Warum entspricht dieser Begriff von Distanz dem \glqq{}Ähnlich aussehen\grqq{} von Gesichtern?
+	Erklären Sie in Worten.
+	\textit{Hinweis:} Rufen Sie sich die Konstruktion der Eigengesichter und die Diskussion am Ende von Kapitel~\ref{sec:facespace} in Erinnerung.
+\end{aufgabe}
+\begin{losung*}
+	Die Eigengesichter fangen gewisse Gesichtszüge ein.
+	Die Funktion $D\left(\vec p,\vec q\right)$ vergleicht, wie fest sich $\vec p$ und $\vec q$ in eben diesen Gesichtszügen unterscheiden.
+	Dabei werden die ersten Eigengesichter am stärksten gewichtet, da ihre Koeffizienten typischerweise am grössten sind (Abbildung~\ref{fig:coef}).
+	Das macht auch Sinn, denn es sind genau die ersten Eigengesichter (Gesichtszüge), in denen sich die Gesichter der Datenbank am meisten unterscheiden.
+	Die Bilder nur Pixel für Pixel zu vergleichen macht keinen Sinn, denn kein Pixel kann alleine eine Information über ein Gesicht tragen.
+	Anders gesagt können sich zwei Bilder in jedem Pixel stark unterscheiden und dennoch die selbe Person zeigen.
+	Mit Gesichtszügen ist dies kaum möglich.
+\end{losung*}
+Sei nun ein Bild $\vec p\in\mathbb R^{M\cdot N}$ gegeben.
+Wir wissen über das Bild, dass es eine der 8 Personen aus Tabelle~\ref{tab:classes} zeigt.
+Jedoch wissen wir nicht welche.
+Doch wir werden versuchen das mit folgendem Verfahren zu erraten.
+\begin{enumerate}[leftmargin=3cm, label=Schritt \arabic*:]
+	\item Seien $\vec q_1,\ldots,\vec q_{80}\in\mathbb R^{M\cdot N}$ die Bilder der Datenbank.
+	Wir berechnen die Distanz $D\left(\vec p,\vec q_i\right)$ für alle $i\in\left\{1,\ldots,80\right\}$.
+	\item Eines dieser Bilder wird die kleinste Distanz zu $\vec p$ haben, sagen wir das ist $\vec q_j$ für ein bestimmtes $j\in\left\{1,\ldots,80\right\}$.
+	\item Wir schauen in der Datenbank nach, welche Person auf dem Bild $\vec q_j$ gezeigt ist. Da $\vec p$ ähnlich aussieht, zeigt es wohl die selbe Person und wir klassifizieren $\vec p$ entsprechend.
+\end{enumerate}
+\begin{aufgabe}
+	Ergänzen sie die Funktion \texttt{D(p,q)} welche die Distanz $D\left(\vec p,\vec q\right)$ zweier Bilder zurück gibt.
+	Dabei entsprechen \texttt{p} und \texttt{q} den Vektoren $\vec p$ und $\vec q$.
+\end{aufgabe}

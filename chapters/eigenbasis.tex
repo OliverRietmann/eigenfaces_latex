@@ -1,16 +1,15 @@
-\section{Eigengesichter als Basis} \label{sec:eigenbasis}
+\section{Projektion auf die Eigengesichter} \label{sec:eigenbasis}
 \begin{tcolorbox}
 	\centerline{\textbf{Lernziele Kapitel~\ref{sec:eigenbasis}}}
 	\begin{enumerate}[leftmargin=*,label=\thesection.\arabic*]
-		\item \textit{Verstehen}, was ein Unterraum von $\mathbb R^n$ ist.
-		\item Die Eigenschaften \glqq{}orthogonal\grqq{} und \glqq{}orthonormal\grqq{} in $\mathbb R^n$ \textit{verwenden} können.
+		\item Die Eigenschaften \glqq{}orthogonal\grqq{} und \glqq{}orthonormal\grqq{} in $\mathbb R^n$ \textit{anwenden} können.
 		\item Die Projektion eines Vektors auf einen Unterraum \textit{ausführen} können, wenn eine orthonormale Basis dieses Unterraumes gegeben ist.
 	\end{enumerate}
 \end{tcolorbox}
 In diesem Unterkapitel wollen wir allgemeine Bilder als Linearkombination der Eigengesichter darstellen.
 Man kann zeigen, dass alle Bilder der Datenbank exakt als Linearkombination der Eigengesichter geschrieben werden können.
 Neue Bilder können im Allgemeinen mit so einer Linearkombination nur angenähert werden.
-Die Beste Annäherung ist gerade die Projektion des neuen Bildes auf den Raum, der durch die Eigengesichter aufgespannt wird.
+Die beste Näherung ist gerade die Projektion des neuen Bildes auf den Raum, der durch die Eigengesichter aufgespannt wird.
 Was das genau bedeutet, wollen wir zuerst im $\mathbb R^3$ veranschaulichen.
 \begin{figure}[ht]
 	\centering
@@ -116,9 +115,9 @@ Wir sagen, die beiden Vektoren sind orthogonal, wenn $\vec u\cdot\vec v=0$.
 Falls sie zusätzlich Länge 1 haben, also $\vec u\cdot\vec u=1$ und $\vec v\cdot\vec v=1$, dann heissen sie orthonormal.
 Eine Familie $\vec v_1,\ldots,\vec v_K\in\mathbb R^n$ heisst orthonormal, wenn die Vektoren alle paarweise orthonormal sind.
 Sie spannen dann einen $K$-dimensionalen Raum auf.
-Wir können wie in der Aufgabe die Projektion eines Vektors $\vec p\in\mathbb n$ auf diesen Raum berechnen, nämlich
+Wir können wie in der Aufgabe die Projektion eines Vektors $\vec p\in\mathbb R^n$ auf diesen Raum berechnen, nämlich
 \begin{equation*}
-	\vec a=c_1\vec v_1+\ldots+c_n\vec v_n,
+	c_1\vec v_1+\ldots+c_n\vec v_n,
 \end{equation*}
 wobei die Koeffizienten gegeben sind durch
 \begin{equation*}
@@ -151,7 +150,7 @@ Letzteres geht mit einer Projektion wie oben beschrieben.
 	für alle $k\in\{1,\ldots,K\}$.
 \end{losung*}
 
-Hat man die Koeffizienten der Linearkombination berechnet, so kann die Projektion der Mona Lisa wieder als Linearkombination der Eigengesichter darstellen
+Hat man die Koeffizienten der Linearkombination berechnet, so kann die Projektion der Mona Lisa wieder als Linearkombination der Eigengesichter und des Durchschnittsgesichtes darstellen
 \begin{equation*}
 	\vec m+c_1\vec u_1+c_2\vec u_2+\ldots+c_Ku_K.
 \end{equation*}
@@ -178,7 +177,7 @@ def compute_coefficients(p, m, u_list):
 	\end{minipage}\hfill
 	\begin{minipage}{0.35\textwidth}\vspace{-1cm}
 		\centering Rekonstruktion:\\[0.5cm]
-		\includegraphics[width=0.4\textwidth]{images/eigenfaces/mona_lisa_original}
+		\includegraphics[width=0.4\textwidth]{images/eigenfaces/mona_lisa_eigen_approx}
 	\end{minipage}
 \end{losung*}
 
@@ -187,8 +186,8 @@ Etwas informell ist das in in Abbildung~\ref{fig:eigen_basis} dargestellt.
 \begin{figure}[ht]
 	\centering
 	\begin{tabular}{m{1.8cm} c c c c c m{2cm} c c c m{2cm} c c}
-		\includegraphics[width=0.1\textwidth]{images/eigenfaces/mona_lisa_original} &
-		$\approx$ & $\vec m$ & $+$ & $c_1$ & $\cdot$ & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface00}
+		\includegraphics[width=0.1\textwidth]{images/eigenfaces/mona_lisa_eigen_approx} &
+		$=$ & $\vec m$ & $+$ & $c_1$ & $\cdot$ & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface00}
 		& $+$ & $c_2$ & $\cdot$ & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface01} & $+$ & $\cdots$
 	\end{tabular}
 	\caption{Projektion der Mona Lisa auf die Eigengesichter.}

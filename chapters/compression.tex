@@ -2,8 +2,8 @@
 \begin{tcolorbox}
 	\centerline{\textbf{Lernziele Kapitel~\ref{sec:compression}}}
 	\begin{enumerate}[leftmargin=*,label=\thesection.\arabic*]
-		\item Wissen, was die Eigengesichter im Vergleich zu anderen Basen des Gesichtsraumes auszeichnet.
-		\item Den Begriff Bildkompression erklären können.
+		\item \textit{Verstehen}, was die Eigengesichter im Vergleich zu anderen Basen des Gesichtsraumes auszeichnet.
+		\item \textit{Erklären} können, wie man die Eigengesichter zur Bildkompression verwenden kann.
 		\item Mit gegebenen Eigengesichtern eine Bildkompression in Python implementieren können, falls alle Bilder als Vektoren gegeben sind.
 	\end{enumerate}
 \end{tcolorbox}
@@ -14,33 +14,35 @@ Die Datenmenge kann durch Kompression stark verringert werden, was zu viel kürz
 Mit den Eigengesichtern lassen sich Bilder von Gesichtern komprimieren.
 Grund dafür ist eine spezielle Eigenschaft, welche die Eigengesichter auszeichnet, und dir wir nun untersuchen werden.
 
-Im letzten Kapitel haben wir das Gemälde der Mona Lisa als Linearkombination der Eigengesichter geschrieben.
+Im letzten Kapitel haben wir das Gemälde der Mona Lisa durch eine Projektion als Linearkombination der Eigengesichter und es Durchschnittsgesichtes angenähert.
 Dazu mussten wir mit geeigneten Skalarprodukten die Koeffizienten $c_1,\ldots,c_K$ dieser Linearkombination berechnen.
-Allerdings bilden (gemäss unserer Annahme aus dem letzten Kapitel) die Differenzbilder der Bilder aus der Datenbank, also $\vec a_1,\ldots,\vec a_K$, auch eine Basis des Raumes der Differenzgesichter.
-Wir hätten also das Bilder der Mona Lisa auch als Linearkombination dieser Basis darstellen können, was in Abbildung~\ref{fig:mona_lisa_reconstruction} gezeigt ist.
+Allerdings hätte man anstatt der Eigengesichter auch direkt die Differenzgesichter $\vec a_1,\ldots,\vec a_K$ der Bilder aus der Datenbank nehmen können.
+In diesem Fall würde man einfach andere Koeffizienten erhalten.
+Allerdings lassen sich diese nicht so einfach berechnen, da diese Differenzgesichter nicht orthonormal sind.
+Man betrachte Abbildung~\ref{fig:mona_lisa_reconstruction} für einen Vergleich der beiden Varianten.
 \begin{figure}[ht]
 	\centering
 	\begin{tabular}{lcr}
 		\includegraphics[width=0.2\textwidth]{images/eigenfaces/mona_lisa_naive_approx} &
 		\includegraphics[width=0.2\textwidth]{images/eigenfaces/mona_lisa_original} & \includegraphics[width=0.2\textwidth]{images/eigenfaces/mona_lisa_eigen_approx}
 	\end{tabular}
-	\caption{Rekonstruktion der Mona Lisa als Linearkombination der $\vec a_1,\ldots,\vec a_K$ (links) und der Eigengesichter $\vec u_1,\ldots,\vec u_K$ (rechts). In der Mitte ist das Original.}
+	\caption{Rekonstruktion der Mona Lisa. Links wurden die Differenzbilder der Testgesichter $\vec a_1,\ldots,\vec a_K$ verwendet. Rechts wurden die Eigengesichter $\vec u_1,\ldots,\vec u_K$ verwendet. In der Mitte ist das Original.}
 	\label{fig:mona_lisa_reconstruction}
 \end{figure}
-Ein wesentlicher Unterschied zwischen diesen beiden Basen ist die Verteilung der Beträge der Koeffizienten, also $\lvert c_1\rvert,\ldots,\lvert c_K\rvert$.
+Ein weiterer Unterschied zwischen diesen beiden Ansätzen ist die Verteilung der Beträge der Koeffizienten, also $\lvert c_1\rvert,\ldots,\lvert c_K\rvert$.
 Diese sind in Abbildung~\ref{fig:coef} gezeigt.
 \begin{figure}[ht]
 	\centering
 	\begin{tabular}{lr}
 		\includegraphics[width=0.45\textwidth]{images/eigenfaces/naive_coef} & \includegraphics[width=0.45\textwidth]{images/eigenfaces/eigen_coef} \\
 	\end{tabular}
-	\caption{Der Absolutbetrag der Koeffizienten der Linearkombination des Differenzgesichtes der Mona Lisa. Links wurden als Basis die Differenzgesichter der Datenbank und rechts die Eigengesichter genommen.}
+	\caption{Der Absolutbetrag der Koeffizienten der Linearkombination des Differenzgesichtes der Mona Lisa, die in Abbildung~\ref{fig:mona_lisa_reconstruction} verwendet wurden. Links die Differenzgesichter der Datenbank und rechts die Eigengesichter verwendet.}
 	\label{fig:coef}
 \end{figure}
 \begin{aufgabe}
-	Betrachten Sie die Abbildung~\ref{fig:coef}, welche die Koeffizienten der Linearkombinationen bezüglich der beiden Basen zeigt.
-	Beschreiben Sie die Unterschiede der Bilder.
-	Welche Rückschlüsse kann man dadurch auf die entsprechenden Basen ziehen?
+	Betrachten Sie die Abbildung~\ref{fig:coef}, welche die Koeffizienten der Linearkombinationen zeigt, die für die Bilder links bzw. rechts in Abbildung~\ref{fig:mona_lisa_reconstruction} verwendet wurden.
+	Beschreiben Sie die Unterschiede in der Verteilung der Koeffizienten.
+	Welche Rückschlüsse kann man dadurch ziehen?
 \end{aufgabe}
 \begin{losung*}
 	Die Koeffizienten der Eigengesichter fallen schnell ab.
@@ -51,18 +53,18 @@ Diese sind in Abbildung~\ref{fig:coef} gezeigt.
 Was wir hier in Abbildung~\ref{fig:coef} beobachtet haben ist kein Einzelfall.
 Obwohl wir nur das Beispiel der Mona Lisa betrachtet haben, würden andere Gesichter ähnlich verteilte Koeffizienten liefern.
 Die Lösung der vorherigen Aufgabe ist zugleich die Grundidee der Bildkompression mittels Eigengesichter.
-Anstatt alle der $K$ Eigengesichter, verwenedt man nur die ersten $\tilde K$ Eigengesichter um ein Bild darzustellen.
-Die Abbildung~\ref{fig:coef} lässt vermuten, dass wenn $\tilde K$ gross genug gewählt ist, aber immer noch viel kleiner als $K$, dann sollte das nicht viel an der Bildqualität ändern.
+Anstatt alle der $K$ Eigengesichter, verwendet man nur die ersten $\tilde K$ Eigengesichter um ein Bild darzustellen.
+Die Abbildung~\ref{fig:coef} lässt vermuten, dass wenn $\tilde K$ gross genug gewählt ist, aber immer noch viel kleiner als $K$, sich die Bildqualität nicht wesentlich verschlechtert.
 Genauer gesagt, können wir ablesen, dass wohl die ersten $\tilde K=2000$ Eigengesichter ausreichend sein sollten.
 Nun wollen ein Bild $\vec p$ rekonstruieren, indem wir nur die ersten $\tilde K$ Eigengesichter verwenden.
-Das rekonstruierte Gesicht bezeichnen wir mit $\vec p_{\tilde K}$, also
+Das rekonstruierte Gesicht bezeichnen wir mit $\vec a$, also
 \begin{equation*}
-	\vec p_{\tilde K}=\vec m+c_1\vec u_1+c_2\vec u_2+\ldots+c_{\tilde K}\vec u_{\tilde K},
+	\vec a=\vec m+c_1\vec u_1+c_2\vec u_2+\ldots+c_{\tilde K}\vec u_{\tilde K},
 \end{equation*}
 wobei $\tilde K\leq K$ und $\vec u_1,\ldots,\vec u_{\tilde K}$ sind die ersten $\tilde K$ Eigengesichter.
 Wie man die Koeffizienten $c_1,\ldots,c_{\tilde K}$ berechnet, haben wir im letzten Kapitel gesehen.
 \begin{aufgabe}
-	Ergänzen Sie die Funktion \texttt{compress(p, m, u\_list, K\_tilde)}, welche einen Vektor der Länge $M\cdot N$ zurück gibt, der dem Bild $\vec p_{\tilde K}$ entspricht.
+	Ergänzen Sie die Funktion \texttt{compress(p, m, u\_list, K\_tilde)}, welche einen Vektor der Länge $M\cdot N$ zurück gibt, der dem Bild $\vec a$ entspricht.
 	Hier bezeichnen \texttt{p} das ursprüngliche Bild $\vec p$ und \texttt{m} das Durchschnittsgesicht $\vec m$.
 	Die Liste \texttt{u\_list} enthält die Eigengesichter und \texttt{K\_tilde} entspricht der Anzahl $\tilde K$ der Eigengesichter, die verwendet werden sollen.
 	Testen Sie ihre Lösung indem Sie das Skript \texttt{compress.py} laufen lassen, welches die rekonstruierten Bilder ausgibt.
@@ -76,9 +78,9 @@ import numpy as np
 def compress(p, m, u_list, K_tilde):
 	# Reduzierte Liste der ersten K_tilde Eigengesichter
 	u_list_reduced = u_list[:K_tilde]
-	c_list_reduced = compute_coefficients(p, m, u_list_tilde)
-	p_tilde = np.dot(u_list_reduced, c_list_reduced)
-	return p_tilde
+	c_list_reduced = compute_coefficients(p, m, u_list_reduced)
+	a = np.dot(u_list_reduced, c_list_reduced)
+	return a
 \end{lstlisting}
 Die durch \texttt{compress.py} generierten Bilder sind in Abbildung~\ref{fig:compression} gezeigt.
 \end{losung*}
