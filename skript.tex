@@ -23,6 +23,7 @@
 
 \definecolor{shade}{gray}{.5}
 
+\renewcommand*{\thesection}{\arabic{section}}
 \renewcommand{\thesubfigure}{\roman{subfigure}}
 
 \theoremstyle{definition}
@@ -120,7 +121,13 @@
 \end{titlepage}
 %\maketitle
 %\tableofcontents
+\input{methods/introduction}
+\input{methods/interleaved}
 \clearpage
+
+\setcounter{section}{0}
+\renewcommand*{\theHsection}{\the\value{section}}
+
 \input{skript/introduction}
 %\input{skript/eigenfaces}
 \input{skript/vectormatrix}
