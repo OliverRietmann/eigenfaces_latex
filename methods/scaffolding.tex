@@ -1,0 +1,18 @@
+\section{Scaffolding}
+Selbstständiges Entdecken ist gerade in der Mathematik wünschenswert und wichtig.
+Gerade bei komplexen Themen ist das aber schwierig umzusetzen.
+In diesem Fall können gewisse Hilfestellungen gegeben werden, die es den Lernenden erlauben, Hindernisse zu überwinden, an denen sie sonst gescheitert wären.
+Diese Hilfestellungen bilden sinnbildlich ein \glqq{}Gerüst\grqq{}.
+Der Einsatz so eines Gerüstes wird entsprechend als \textit{Scaffolding} bezeichnet \cite{Schnotz2006}.
+So eine Hilfestellung ist im Lernskript einerseits durch die Anleitung selbst gegeben, andererseits aber auch durch den zur Verfügung gestellten Python Code.
+Dieser nimmt den Lernenden insbesondere folgende Hindernisse aus dem Weg, da die entsprechenden Operationen schon implementiert sind.
+\begin{itemize}
+	\item Das einlesen der Bilder aus der Datenbank, d.h. die Konvertierung einer Bilddatei in eine Matrix aus Zahlen, wie in Abbildung~\ref{fig:image_to_vector} dargestellt.
+	\item Das erstellen von Bildern, d.h. die Konvertierung einer Matrix aus Zahlen in eine Bilddatei.
+	\item Die numerisch stabile Berechnung der Eigengesichter mittel Singulärwertzerlegung.
+	\item Das einlesen und abspeichern der Metadaten, das heisst der Information, welches Bild der Datenbank zu welcher Person gehört.
+\end{itemize}
+Ohne diese Hilfestellungen wäre das Thema der Eigengesichter nur schwer zugänglich, denn die Implementierung dieser Operationen kann sehr frustrierend sein.
+Andererseits sind sie notwendig um einen graphischen Output zu generieren. 
+Zudem haben sie (bis auf die Singulärwertzerlegung) nicht viel mit Mathematik zu tun.
+Indem sie als Blackbox zur Verfügung gestellt werden, könne die Lernenden sich auf die wesentliche Mathematik konzentrieren.
