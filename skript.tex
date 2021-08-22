@@ -121,14 +121,9 @@
 \end{titlepage}
 %\maketitle
 %\tableofcontents
-\input{methods/introduction}
-\input{methods/interleaved}
-\clearpage
-
-\setcounter{section}{0}
-\renewcommand*{\theHsection}{\the\value{section}}
 
 \input{skript/introduction}
+\input{skript/database}
 %\input{skript/eigenfaces}
 \input{skript/vectormatrix}
 \input{skript/facespace}
@@ -136,6 +131,18 @@
 \input{skript/compression}
 \input{skript/recognition}
 %\input{skript/principalcomponents}
+\clearpage
+
+\setcounter{section}{0}
+\renewcommand*{\theHsection}{\the\value{section}}
+
+\input{methods/introduction}
+\input{methods/scaffolding}
+\input{methods/interleaved}
+\input{methods/group}
+\input{methods/problembased}
+\input{methods/holistic}
+
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{references}
