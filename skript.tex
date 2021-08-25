@@ -28,12 +28,13 @@
 
 \theoremstyle{definition}
 \newtheorem{aufgabe}{Aufgabe}
+\numberwithin{aufgabe}{section}
 
 \theoremstyle{definition}
 \newtheorem*{losung*}{Lösung}
 
-\theoremstyle{definition}
-\newtheorem*{beispiel*}{Beispiel}
+%\theoremstyle{definition}
+%\newtheorem*{beispiel*}{Beispiel}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -138,6 +139,7 @@
 %\renewcommand*{\theHsection}{\the\value{section}}
 \part{Didaktische Methoden}
 \input{methods/introduction}
+\input{methods/lernziele}
 \input{methods/scaffolding}
 \input{methods/interleaved}
 \input{methods/group}
