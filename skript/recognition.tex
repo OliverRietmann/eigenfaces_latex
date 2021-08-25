@@ -87,10 +87,10 @@ Das besagte Mass der Distanz zwischen den Gesichtern $\vec p$ und $\vec q$ defin
 	Anders gesagt können sich zwei Bilder in jedem Pixel stark unterscheiden und dennoch die selbe Person zeigen.
 	Mit Gesichtszügen ist dies kaum möglich.
 \end{losung*}
-Sei nun ein Bild $\vec p\in\mathbb R^{M\cdot N}$ gegeben.
-Wir wissen über das Bild, dass es eine der 8 Personen aus Tabelle~\ref{tab:classes} zeigt.
+Sei nun ein Bild $\vec p\in\mathbb R^{M\cdot N}$ gegeben, das nicht notwendigerweise in der Datenbank enthalten ist.
+Das Bild soll zudem eine der 8 Personen aus Tabelle~\ref{tab:classes} zeigen.
 Jedoch wissen wir nicht welche.
-Doch wir werden versuchen das mit folgendem Verfahren zu erraten.
+Wir werden versuchen das mit folgendem Verfahren zu erraten.
 \begin{enumerate}[leftmargin=3cm, label=Schritt \arabic*:]
 	\item Seien $\vec q_1,\ldots,\vec q_{80}\in\mathbb R^{M\cdot N}$ die Bilder der Datenbank.
 	Wir berechnen die Distanz $D\left(\vec p,\vec q_i\right)$ für alle $i\in\left\{1,\ldots,80\right\}$.
@@ -98,7 +98,40 @@ Doch wir werden versuchen das mit folgendem Verfahren zu erraten.
 	\item Wir schauen in der Datenbank nach, welche Person auf dem Bild $\vec q_j$ gezeigt ist. Da $\vec p$ ähnlich aussieht, zeigt es wohl die selbe Person und wir klassifizieren $\vec p$ entsprechend.
 \end{enumerate}
 \begin{aufgabe}
-	Ergänzen sie die Funktion \texttt{D(p,q)} welche die Distanz $D\left(\vec p,\vec q\right)$ zweier Bilder zurück gibt.
-	Dabei entsprechen \texttt{p} und \texttt{q} den Vektoren $\vec p$ und $\vec q$.
+	Ergänzen sie die Funktion \texttt{distance(p, q, m, u\_list)} welche die Distanz $D\left(\vec p,\vec q\right)$ zweier Bilder zurück gibt.
+	Dabei ist \texttt{m} das Durchschnittsgesicht und \texttt{u\_list} enthält die Liste der Eigengesichter.
+	Die Variablen \texttt{p} und \texttt{q} enthalten die Vektoren $\vec p$ und $\vec q$.
+	Testen Sie ihre Implementation indem Sie das Skript \texttt{recognition.py} ausführen.
+	\textit{Hinweis:} Verwenden sie die Funktion \texttt{compute\_coefficients(...)} aus Aufgabe~\ref{aufg:compute_coefficients}.
 \end{aufgabe}
-\textcolor{green}{Lösung und Tabelle mit der \glqq{}Erfolgsquote\grqq{} der Klassifizerung folgt.}
+\begin{losung*}
+	Die Lösung könnte zum Beispiel so aussehen.
+\begin{lstlisting}[style=python]
+def distance(p, q, m, u_list):
+	cp = compute_coefficients(p, m, u_list)
+	cq = compute_coefficients(q, m, u_list)
+	d = (cp - cq)
+	return np.dot(d, d)
+\end{lstlisting}
+Der Output von \texttt{recognition.py} ist in Tabelle~\ref{tab:recognition} gelistet.
+\end{losung*}
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{|l|c|c|}
+		\hline
+		\textbf{Klasse} & \textbf{Anzahl Testbilder} & \textbf{davon richtig klassifiziert} \\ \hline
+		Daniel Radcliffe & 3 & 1 \\ \hline
+		Emma Stone & 3 & 3 \\ \hline
+		Emma Watson & 3 & 1 \\ \hline
+		Eva Green & 3 & 2 \\ \hline
+		Jennifer Lawrence & 3 & 3 \\ \hline
+		Orlando Bloom & 3 & 1 \\ \hline
+		Pierce Brosnan & 3 & 1 \\ \hline
+		Tom Cruise & 3 & 2 \\ \hline
+	\end{tabular}
+	\caption{Resultate der Gesichtserkennung.}
+	\label{tab:recognition}
+\end{table}
+Aus Tabelle~\ref{tab:recognition} ist zu entnehmen, dass von den insgesamt $3\cdot8=24$ Testbildern $14$ richtig klassifiziert wurden.
+Dies entspricht einer Erfolgsquote von $\frac{14}{24}=0.58333\ldots$, also knapp $60\%$.
+Zum Vergleich: Würde man die Testbilder einfach zufällig den Klassen zuordnen, so wäre die erwartete Erfolgsquote $\frac{1}{8}=0.125$, also $12.5\%$.
