@@ -12,7 +12,7 @@
 \usepackage{dirtree}
 \usepackage{enumitem}
 \usepackage{graphicx}
-\usepackage{hyperref}
+\usepackage[colorlinks=true,linkcolor=blue]{hyperref}
 \usepackage{listings}
 \usepackage{mathtools}
 \usepackage{ngerman}
@@ -82,6 +82,7 @@
 }
 
 %\pagestyle{empty}
+\makeatletter\@addtoreset{section}{part}\makeatother%
 
 \title{Eigengesichter}
 \author{Oliver Rietmann}
@@ -120,8 +121,9 @@
 	{\today\par}
 \end{titlepage}
 %\maketitle
-%\tableofcontents
-
+\tableofcontents
+\clearpage
+\part{Lernskript: Eigengesichter}
 \input{skript/introduction}
 \input{skript/database}
 %\input{skript/eigenfaces}
@@ -132,17 +134,17 @@
 \input{skript/recognition}
 %\input{skript/principalcomponents}
 \clearpage
-
-\setcounter{section}{0}
-\renewcommand*{\theHsection}{\the\value{section}}
-
+%\setcounter{section}{0}
+%\renewcommand*{\theHsection}{\the\value{section}}
+\part{Didaktische Methoden}
 \input{methods/introduction}
 \input{methods/scaffolding}
 \input{methods/interleaved}
 \input{methods/group}
 \input{methods/problembased}
+\input{methods/knowledge}
 \input{methods/holistic}
-
+\clearpage
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{references}
