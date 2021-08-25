@@ -22,6 +22,90 @@ Diese Darstellung erlaubt uns, das \textit{Durchschnittsgesicht}, wir nennen es 
 \begin{equation*}
 	\vec m=\frac{1}{K}\left(\vec b_1+\ldots+\vec b_K\right).
 \end{equation*}
+Um diesen Durchschnitt von Vektoren geometrisch besser zu verstehen, schauen wir das im $\mathbb R^2$ an.
+\begin{aufgabe} \label{aufg:meandiff_simple}
+	Betrachten Sie die folgenden drei Vektoren
+	\begin{equation*}
+		\vec{b}_1=
+		\begin{pmatrix}
+			-4 \\
+			-5
+		\end{pmatrix},\quad
+		\vec{b}_2=
+		\begin{pmatrix}
+			9 \\
+			-5
+		\end{pmatrix},\quad
+		\vec{b}_3=
+		\begin{pmatrix}
+			1 \\
+			7
+		\end{pmatrix}.
+	\end{equation*}
+	\begin{enumerate}[label=(\alph*)]
+		\item Berechnen Sie den Durchschnitt $\vec{m}$ der Vektoren $\vec{b}_1,\vec{b}_1,\vec{b}_1$.
+		\item Berechnen Sie die um $-\vec{m}$ verschobenen Vektoren
+		\begin{equation*}
+			\vec{a}_1=\vec{b}_1-\vec{m},\quad
+			\vec{a}_2=\vec{b}_2-\vec{m},\quad
+			\vec{a}_3=\vec{b}_3-\vec{m}.
+		\end{equation*}
+		\item Zeichnen Sie alle Vektoren $\vec{a}_1,\vec{a}_2,\vec{a}_3$ und $\vec{b}_1,\vec{b}_2,\vec{b}_3$, sowie $\vec{m}$ in ein Koordinatensystem.
+	\end{enumerate}
+\end{aufgabe}
+\begin{losung*}
+	\phantom{text}
+	\begin{enumerate}[label=(\alph*)]
+		\item Wie im skalaren Fall ist der Durchschnitt definiert als die Summe geteilt durch dir Anzahl der Summanden, also
+		\begin{equation*}
+			\vec{m}=\frac{1}{3}\left(\vec{b}_1+\vec{b}_2+\vec{b}_3\right)
+			=\frac{1}{3}\left(
+			\begin{pmatrix}
+				-4 \\
+				-5
+			\end{pmatrix}+
+			\begin{pmatrix}
+				9 \\
+				-5
+			\end{pmatrix}+
+			\begin{pmatrix}
+				1 \\
+				7
+			\end{pmatrix}
+			\right)
+			=
+			\begin{pmatrix}
+				2 \\
+				-1
+			\end{pmatrix}.
+		\end{equation*}
+		\item Für die um $-\vec{m}$ verschobenen Vektoren erhalten wir folglich
+		\begin{equation*}
+			\vec{a}_1=
+			\begin{pmatrix}
+				-6 \\
+				-4
+			\end{pmatrix},\quad
+			\vec{a}_2=
+			\begin{pmatrix}
+				7 \\
+				-4
+			\end{pmatrix},\quad
+			\vec{a}_3=
+			\begin{pmatrix}
+				-1 \\
+				8
+			\end{pmatrix}.
+		\end{equation*}
+		\item Die Skizze ist in Abbildung~\ref{fig:meanddiff_simple} dargestellt.
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=0.5\textwidth]{images/facespace/meandiff_simple}
+			\caption{Durchschnitt $\vec{m}$ der Vektoren $\vec{b}_1,\vec{b}_2,\vec{b}_3$ sowie deren Translationen $\vec{a}_1,\vec{a}_2,\vec{a}_3$ um $-\vec{m}$.}
+			\label{fig:meanddiff_simple}
+		\end{figure}
+	\end{enumerate}
+\end{losung*}
 Das Durchschnittsgesicht lässt sich wieder als Bild ausgeben.
 Aber wie sieht so ein Durchschnittsgesicht aus?
 Das werden wir in folgender Übung herausfinden.
@@ -123,7 +207,7 @@ für alle $i\in\left\{1,\ldots,M\cdot N\right\}$.
 Die Komponenten des Vektors $\vec w$ liegen dann alle in $\left[0,1\right]$.
 Falls alle Komponenten von $\vec v$ gleich sind, ist $\min\left(\vec v\right)=\max\left(\vec v\right)$ und wir haben eine Division durch Null.
 Wir ignorieren diesen Fall.
-\begin{aufgabe}
+\begin{aufgabe} \label{aufg:scaling}
 	\phantom{text}
 	\begin{enumerate}[label=(\alph*)]
 		\item Betrachten Sie den Vektor
