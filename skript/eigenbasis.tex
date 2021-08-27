@@ -2,8 +2,12 @@
 \begin{tcolorbox}
 	\centerline{\textbf{Lernziele Kapitel~\ref{sec:eigenbasis}}}
 	\begin{enumerate}[leftmargin=*,label=\thesection.\arabic*]
-		\item Die Eigenschaften \glqq{}orthogonal\grqq{} und \glqq{}orthonormal\grqq{} in $\mathbb R^n$ \textit{anwenden} können.
-		\item Die Projektion eines Vektors auf einen Unterraum \textit{ausführen} können, wenn eine orthonormale Basis dieses Unterraumes gegeben ist.
+		\item \label{item:projection_3d} Die Lernenden können die Eigenschaften \glqq{}orthogonal\grqq{} und \glqq{}orthonormal\grqq{} in $\mathbb R^n$ anwenden.\\
+		(Aufgaben~\ref{aufg:projection_3d} und~\ref{aufg:projection})
+		\item \label{item:projection} Die Lernenden können die Projektion eines Vektors auf einen Unterraum berechnen, wenn eine orthonormale Basis dieses Unterraumes gegeben ist.\\
+		(Aufgabe~\ref{aufg:projection})
+		\item \label{item:compute_coefficients} Die Lernenden können das Skalarprodukt von Vektoren in Python berechnen.\\
+		(Aufgabe~\ref{aufg:compute_coefficients})
 	\end{enumerate}
 \end{tcolorbox}
 In diesem Unterkapitel wollen wir allgemeine Bilder als Linearkombination der Eigengesichter darstellen.
@@ -105,12 +109,7 @@ Was das genau bedeutet, wollen wir zuerst im $\mathbb R^3$ veranschaulichen.
 \end{losung*}
 
 Was wir in der vorherigen Teilaufgabe berechnet haben, funktioniert auch in höheren Dimensionen.
-Seien $\vec u,\vec v\in\mathbb R^n$, wobei möglicherweise $n>3$.
-Das Skalarprodukt dieser Vektoren ist dann definiert als
-\begin{equation*}
-	\vec u\cdot\vec v=u_1v_1+\ldots+u_nv_n,
-\end{equation*}
-wobei $u_1,\ldots,u_n$ die Komponenten von $\vec u$ und $v_1,\ldots,v_n$ die Komponenten von $\vec v$ sind.
+Seien $\vec v,\vec w\in\mathbb R^n$, wobei möglicherweise $n>3$.
 Wir sagen, die beiden Vektoren sind orthogonal, wenn $\vec u\cdot\vec v=0$.
 Falls sie zusätzlich Länge 1 haben, also $\vec u\cdot\vec u=1$ und $\vec v\cdot\vec v=1$, dann heissen sie orthonormal.
 Eine Familie $\vec v_1,\ldots,\vec v_K\in\mathbb R^n$ heisst orthonormal, wenn die Vektoren alle paarweise orthonormal sind.
