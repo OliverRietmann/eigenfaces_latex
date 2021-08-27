@@ -110,8 +110,8 @@ Was das genau bedeutet, wollen wir zuerst im $\mathbb R^3$ veranschaulichen.
 
 Was wir in der vorherigen Teilaufgabe berechnet haben, funktioniert auch in höheren Dimensionen.
 Seien $\vec v,\vec w\in\mathbb R^n$, wobei möglicherweise $n>3$.
-Wir sagen, die beiden Vektoren sind orthogonal, wenn $\vec u\cdot\vec v=0$.
-Falls sie zusätzlich Länge 1 haben, also $\vec u\cdot\vec u=1$ und $\vec v\cdot\vec v=1$, dann heissen sie orthonormal.
+Wir sagen, die beiden Vektoren sind orthogonal, wenn $\vec v\cdot\vec w=0$.
+Falls sie zusätzlich Länge 1 haben, also $\vec v\cdot\vec v=1$ und $\vec w\cdot\vec w=1$, dann heissen sie orthonormal.
 Eine Familie $\vec v_1,\ldots,\vec v_K\in\mathbb R^n$ heisst orthonormal, wenn die Vektoren alle paarweise orthonormal sind.
 Sie spannen dann einen $K$-dimensionalen Raum auf.
 Wir können wie in der Aufgabe die Projektion eines Vektors $\vec p\in\mathbb R^n$ auf diesen Raum berechnen, nämlich
@@ -137,10 +137,18 @@ Letzteres geht mit einer Projektion wie oben beschrieben.
 	Geben Sie die Koeffizienten in Termen von $\vec p, \vec m$ und den Eigengesichtern an.
 \end{aufgabe}
 \begin{losung*}
-	Wie in der letzten Aufgabe verwenden wir, das die Eigengesichter orthonormal sind.
+	Wir verfahren analog zu Aufgabe~\ref{aufg:projection_3d}, nur das wir jetzt nicht $\vec{p}$, sondern $\vec p-\vec m$ projizieren müssen.
+	Das heisst, wir teilen diesen Vektor auf in eine noch unbekannte Linearkombination der Eigengesichter und einen dazu orthogonalen Teil $\vec{n}$, also
+	\begin{equation*}
+		\vec p-\vec m=c_1\vec u_1+c_2\vec u_2+\ldots+c_K\vec u_K+\vec{n}.
+	\end{equation*}
 	Wir bilden das Skalarprodukt beider Seiten der obigen Gleichung mit $u_1$, also
 	\begin{equation*}
 		\vec u_1\cdot\left(\vec p-\vec m\right)=c_1\underbrace{\vec u_1\cdot\vec u_1}_{=1}+c_2\underbrace{\vec u_1\cdot\vec u_2}_{=0}+\ldots+c_K\underbrace{\vec u_1\cdot\vec u_K}_{=0}.
+	\end{equation*}
+	Weil die Eigengesichter orthonormal sind, vereinfacht sich das zu
+	\begin{equation*}
+		\vec u_1\cdot\left(\vec p-\vec m\right)=c_1.
 	\end{equation*}
 	Wenn wir das auch noch mit $\vec u_2,\ldots,\vec u_K$ machen erhalten wir
 	\begin{equation*}

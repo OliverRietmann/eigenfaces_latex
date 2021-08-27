@@ -4,7 +4,7 @@
 	\begin{enumerate}[leftmargin=*,label=\thesection.\arabic*]
 		\item \label{item:compression_theory} Die Lernenden können erklären, was die Eigengesichter im Vergleich zu anderen Basen auszeichnet und warum sie sich zur Bildkompression eignen.\\
 		(Aufgaben~\ref{aufg:coef} und~\ref{aufg:compression_theory})
-		\item \label{item:compression_code} Mit gegebenen Eigengesichtern eine Bildkompression in Python implementieren können, falls alle Bilder als Vektoren gegeben sind.\\
+		\item \label{item:compression_code} Die Lernenden können mit gegebenen Eigengesichtern eine Bildkompression in Python durchführen, falls alle Bilder als Vektoren gegeben sind.\\
 		(Aufgabe~\ref{aufg:compression})
 	\end{enumerate}
 \end{tcolorbox}
@@ -48,8 +48,9 @@ Diese sind in Abbildung~\ref{fig:coef} gezeigt.
 \begin{losung*}
 	Die Koeffizienten der Eigengesichter fallen schnell ab.
 	Dem rechten Bild kann man entnehmen, dass ungefähr die ersten 2000 Eigengesichter fast den ganzen Beitrag zur Linearkombination leisten.
+	Die Koeffizienten der restlichen Eigengesichter ist fast Null.
 	Bei der Basis der Differenzgesichter ist keine solche Struktur zu erkennen.
-	In diesem Sinn sind alle diese Differenzgesichter etwa gleich wichtig um das Bild der Mona Lisa darstellen zu können.
+	Es ist nicht auszumachen, ob und welche Differenzgesichter besonders stark vertreten sind.
 \end{losung*}
 Was wir hier in Abbildung~\ref{fig:coef} beobachtet haben ist kein Einzelfall.
 Obwohl wir nur das Beispiel der Mona Lisa betrachtet haben, würden andere Gesichter ähnlich verteilte Koeffizienten liefern.

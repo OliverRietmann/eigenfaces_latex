@@ -11,30 +11,29 @@
 Der erste Schritt besteht darin, Bilder als Vektoren aufzufassen.
 Das hat zwei Gründe: Erstens können wir diese nur so geeignet in Python darstellen und manipulieren.
 Zweitens erlaubt uns das, Bilder in den Kontext der linearen Algebra zu bringen um deren mächtige Methoden anzuwenden.
-Als Beispiel betrachten wir ein Bild der Auflösung $N=144$ Pixel (Breite) mal $M=180$ Pixel (Höhe), wie in Abbildung~\ref{fig:image_to_vector}.
-Jedem Pixel wird nun eine reelle Zahl zwischen Null und Eins zugeordnet.
-Nehmen wir das Pixel an der Stelle $\left(i,j\right)\in\mathbb N^M\times\mathbb N^N$.
+Als Beispiel betrachten wir ein Bild der Auflösung $M=180$ Pixel (Höhe) mal $N=144$ Pixel (Breite), wie in Abbildung~\ref{fig:image_to_vector}.
+Jedem Pixel wird nun eine reelle Zahl zwischen 0 und 1 zugeordnet.
+Dabei bedeutet 0, dass das Pixel schwarz ist und 1 bedeutet, dass es weiss ist.
+Die reellen Zahlen dazwischen beschreiben die Graustufen.
+Wir Nummerieren diese Pixel mit zwei Indices $\left(m,n\right)$, wobei $1\leq m\leq M$ und $1\leq n\leq N$.
 Zum Beispiel entspricht $\left(1,N\right)$ dem Pixel in der oberen rechten Ecke des Bildes.
-Diesem Pixel wird also eine Zahl $p_{ij}\in\left[0,1\right]$ zugeordnet.
-Dabei bedeutet $p_{ij}=0$, dass das Pixel schwarz ist und $p_{ij}=1$, dass es weiss ist.
-Die Zahlen dazwischen entsprechen den Graustufen.
-Das gibt uns eine $N\times M$-Matrix deren Einträge gerade die $p_{ij}$ sind.
+Diesem Pixel wird also eine Zahl $p_{mn}$ zugeordnet, wobei $0\leq p_{mn}\leq 1$.
+Das gibt uns eine $M\times N$-Matrix deren Einträge gerade die $p_{mn}$ sind.
 So können wir also ein schwarz-weiss Bild als Matrix auffassen.
 Nun schreiben wir die Spalten dieser Matrix in einen Vektor wie in Abbildung~\ref{fig:image_to_vector} gezeigt.
-Mit dieser Abbildungsvorschrift können wir jedem schwarz-weiss Bild der Auflösung $N\times M$ auf eindeutige Weise einen Vektor in $\left[0,1\right]^{N\cdot M}$ zuordnen.
-Jeder solche Vektor lässt sich auch wieder als Bild darstellen.
+Damit erhalten wir eine eindeutige Korrespondenz zwischen schwarz-weiss Bilder der Auflösung $M\times N$ und Vektoren der Länge $M\cdot N$ mit Einträgen zwischen 0 und 1.
 Für diesen Schritt ist es egal ob das Bild ein Gesicht zeigt oder etwas anderes.
 \begin{figure}[ht]
 	\centering
 	\begin{tabular}{m{3.5cm} m{1cm} c m{1cm} c}
 		\includegraphics[width=0.2\textwidth]{images/vectormatrix/ImageToVector} &
-		$\longrightarrow$ &
+		$\longleftrightarrow$ &
 		$\begin{pmatrix}
 			\textcolor{violet}{p_{11}} & \textcolor{orange}{p_{12}} & \cdots & \textcolor{olive}{p_{1N}} \\
 			\textcolor{violet}{\vdots} & \textcolor{orange}{\vdots} & \ddots & \textcolor{olive}{\vdots} \\
 			\textcolor{violet}{p_{M1}} & \textcolor{orange}{p_{M2}} & \cdots &  \textcolor{olive}{p_{MN}} \\
 		\end{pmatrix}$ &
-		$\longrightarrow$ &
+		$\longleftrightarrow$ &
 		$\begin{pmatrix}
 			\textcolor{violet}{p_{11}} \\
 			\textcolor{violet}{\vdots} \\
@@ -62,7 +61,7 @@ Für diesen Schritt ist es egal ob das Bild ein Gesicht zeigt oder etwas anderes
 		\end{pmatrix}
 	\end{equation*}
 	\begin{enumerate}[label=(\alph*)]
-		\item Welche Werte für $N$ und $M$ beschreiben die Auflösung dieses Bildes?
+		\item Welche Werte für $M$ und $N$ beschreiben die Auflösung dieses Bildes?
 		\item Wie sieht der Vektor aus, der dieses Bild beschreibt?
 		\item Welches der folgenden drei Bilder entspricht dieser Matrix?
 		
@@ -104,9 +103,9 @@ Für diesen Schritt ist es egal ob das Bild ein Gesicht zeigt oder etwas anderes
 \end{aufgabe}
 \begin{losung*}
 	Die Lösung der ersten beiden Teilaufgaben kann von Abbildung~\ref{fig:image_to_vector} abgelesen werden.
-	Für die letzte Teilaufgabe erinnern wir uns, dass die Zahlen in $\left[0,1\right]$ fliessend den Graustufen von Schwarz (Null) bis Weiss (Eins) entsprechen.
+	Für die letzte Teilaufgabe erinnern wir uns, dass die Zahlen zwischen 0 und 1 fliessend den Graustufen von Schwarz (Null) bis Weiss (Eins) entsprechen.
 	\begin{enumerate}[label=(\alph*)]
-		\item Die Auflösung ist $N=3$ mal $M=2$ Pixel.
+		\item Die Auflösung ist $M=3$ mal $N=2$ Pixel.
 		\item Der Vektor ist gegeben durch
 		\begin{equation*}
 			\begin{pmatrix}
@@ -121,7 +120,7 @@ Für diesen Schritt ist es egal ob das Bild ein Gesicht zeigt oder etwas anderes
 		\item Das mittlere Bild entspricht der Matrix.
 	\end{enumerate}
 \end{losung*}
-In unserem Python Code ist die Funktion, welche eine $N\times M$ Matrix auf diese Weise in einen Vektor der Länge $N\cdot M$ überführt, bereits implementiert.
+In unserem Python Code ist die Funktion, welche eine $M\times N$ Matrix auf diese Weise in einen Vektor der Länge $M\cdot N$ überführt, bereits implementiert.
 Sie befindet sich im File \texttt{eigenfaces.py} und heisst \texttt{matrix\_to\_vector}.
 Wir betrachten diese nun etwas genauer, um die Manipulation von Matrizen und Vektoren in Python zu lernen.
 \begin{lstlisting}[style=python]
@@ -129,13 +128,13 @@ import numpy as np
 
 def matrix_to_vector(P, M, N):
 	v = np.zeros(M * N)
-	for i in range(M):
-		for j in range(N):
-			v[j + N * i] = P[i, j]
+	for m in range(M):
+		for n in range(N):
+			v[n + N * n] = P[m, n]
 	return v
 \end{lstlisting}
-Das Argument \texttt{P} ist eine  \texttt{M} mal \texttt{N} Matrix und besteht aus den Einträgen $p_{ij}\in\left[0,1\right]$ wie oben.
-Auf die Einträge von Vektoren und Matrizen kann über die eckigen Klammern $[$ und $]$ zugegriffen werden.
+Das Argument \texttt{P} ist eine \texttt{M} mal \texttt{N} Matrix und besteht aus den Einträgen $p_{mn}$ wie oben.
+Auf die Einträge von Vektoren und Matrizen kann über die eckigen Klammern $[\ldots]$ zugegriffen werden.
 Wir brauchen aber auch die Umkehrung dieser Operation.
 Das ist der Zweck folgender Übung.
 \begin{aufgabe} \label{aufg:vectormatrix_code}
@@ -152,9 +151,9 @@ import numpy as np
 
 def vector_to_matrix(v, M, N):
 	P = np.zeros(M, N)
-	for i in range(M):
-		for j in range(N):
-			P[i, j] = v[j + N * i]
+	for m in range(M):
+		for n in range(N):
+			P[m, n] = v[n + N * m]
 	return P
 \end{lstlisting}
 \end{losung*}
