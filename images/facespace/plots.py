@@ -67,10 +67,11 @@ d = 2.0
 D = np.array([[d, 0.0], [0.0, 1.0 / d]])
 
 sigma = 0.2 / d
+N = 50
 #x = np.random.uniform(d_inv, 1.0 - d_inv, 50)
 #y = np.random.uniform(d_inv, 1.0 - d_inv, 50)
-x = np.random.normal(0.55, sigma, 50)
-y = np.random.normal(0.4, sigma, 50)
+x = np.random.normal(0.55, sigma, N)
+y = np.random.normal(0.4, sigma, N)
 m = np.array([np.mean(x), np.mean(y)])
 
 
@@ -121,7 +122,7 @@ ax = fig.axes[0]
 confidence_ellipse(x_tilde - m[0], y_tilde - m[1], ax, 0.235 * np.pi, edgecolor='red', zorder=4)
 plt.plot(x_tilde - m[0], y_tilde - m[1], 'b.', label=r"Differenzgesichter $\vec{a}_k$", zorder=5)
 plt.arrow(0, 0, 0.04 * w[0], 0.04 * w[1], linewidth=3.0, head_width=0.01, head_length=0.02, fc='c', ec='c', label=r"$\vec{u}_1$ (Hätte eigentlich Länge 1)", zorder=6)
-plt.arrow(0, 0, -0.04 * w[1], 0.04 * w[0], linewidth=3.0, head_width=0.01, head_length=0.02, fc='g', ec='g', label=r"$\vec{u}_2$ (Hätte eigentlich Länge 1)", zorder=7)
+plt.arrow(0, 0, -0.04 * w[1], 0.04 * w[0], linewidth=3.0, head_width=0.01, head_length=0.02, fc='m', ec='m', label=r"$\vec{u}_2$ (Hätte eigentlich Länge 1)", zorder=7)
 plt.xlim(-0.4, 0.4)
 plt.ylim(-0.4, 0.4)
 plt.legend(loc='lower left')
@@ -129,4 +130,31 @@ plt.gca().set_aspect('equal', adjustable='box')
 plt.grid('True')
 plt.tight_layout()
 plt.savefig('principal_components.pdf', bbox_inches='tight')
+plt.close()
+
+
+I = list(range(N)) #np.random.choice(N, N // 5, replace=False)
+x_reduced = np.array([x_tilde[i] - m[0] for i in I])
+y_reduced = np.array([y_tilde[i] - m[1] for i in I])
+z_reduced = np.vstack([x_reduced, y_reduced])
+v = w / np.linalg.norm(w)
+projection = np.dot(v, z_reduced)
+x_projection = projection * v[0]
+y_projection = projection * v[1]
+
+fig = plt.figure()
+plt.axhline(y=0, color='k', zorder=0)
+plt.axvline(x=0, color='k', zorder=1)
+plt.plot([-0.38 * w[0], 0.38 * w[0]], [-0.38 * w[1], 0.38 * w[1]], 'k--', zorder=2, label="1. Hauptachse")
+ax = fig.axes[0]
+for ax, ay, px, py in zip(x_reduced, y_reduced, x_projection, y_projection):
+    plt.plot([ax,  px], [ay, py], 'b--', linewidth=0.5, zorder=3)
+plt.plot(x_reduced, y_reduced, 'b.', label=r"Differenzgesichter $\vec{a}_k$", zorder=4)
+plt.xlim(-0.4, 0.4)
+plt.ylim(-0.4, 0.4)
+plt.legend(loc='lower left')
+plt.gca().set_aspect('equal', adjustable='box')
+plt.grid('True')
+plt.tight_layout()
+plt.savefig('distance_complicated.pdf', bbox_inches='tight')
 plt.close()
