@@ -2,8 +2,10 @@
 \begin{tcolorbox}
 	\centerline{\textbf{Lernziele Kapitel~\ref{sec:vectormatrix}}}
 	\begin{enumerate}[leftmargin=*,label=\thesection.\arabic*]
-		\item Darstellung eines schwarz-weiss Bildes als Vektor \textit{verstehen}.
-		\item Die grundlegenden Matrix und Vektor Operation in Python \textit{anwenden} können (Addition, Multiplikation, Einträge auslesen oder verändern).
+		\item \label{item:vectormatrix_theory} Die Lernenden verstehen die Darstellung eines schwarz-weiss Bildes als Vektor.\\
+		(Aufgabe~\ref{aufg:vectormatrix_theory})
+		\item \label{item:vectormatrix_code} Die Lernenden können in Python die Einträge von Vektoren und Matrizen auslesen und verändern.\\
+		(Aufgabe~\ref{aufg:vectormatrix_code})
 	\end{enumerate}
 \end{tcolorbox}
 Der erste Schritt besteht darin, Bilder als Vektoren aufzufassen.
@@ -50,7 +52,7 @@ Für diesen Schritt ist es egal ob das Bild ein Gesicht zeigt oder etwas anderes
 	\label{fig:image_to_vector}
 \end{figure}
 \pagebreak[4]
-\begin{aufgabe}
+\begin{aufgabe} \label{aufg:vectormatrix_theory}
 	Man betrachte das schwarz-weiss Bild, welches durch folgende Matrix beschrieben ist.
 	\begin{equation*}
 		\begin{pmatrix}
@@ -136,7 +138,7 @@ Das Argument \texttt{P} ist eine  \texttt{M} mal \texttt{N} Matrix und besteht a
 Auf die Einträge von Vektoren und Matrizen kann über die eckigen Klammern $[$ und $]$ zugegriffen werden.
 Wir brauchen aber auch die Umkehrung dieser Operation.
 Das ist der Zweck folgender Übung.
-\begin{aufgabe}
+\begin{aufgabe} \label{aufg:vectormatrix_code}
 	Ergänzen Sie im File \texttt{eigenfaces.py} die Funktion \texttt{vector\_to\_matrix(v, M, N)}.
 	Dabei ist \texttt{v} ein Vektor der Länge $\texttt{M}\cdot\texttt{N}$ wie oben.
 	Die Funktion soll die zu \texttt{v} gehörende Matrix zurück geben.

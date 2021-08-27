@@ -2,9 +2,8 @@
 \begin{tcolorbox}
 	\centerline{\textbf{Lernziele Kapitel~\ref{sec:recognition}}}
 	\begin{enumerate}[leftmargin=*,label=\thesection.\arabic*]
-		\item \textit{Erklären} können, was eine Klassifizierung ist.
-		\item \textit{Erklären} können, warum eine Gesichtserkennung ein Klassifizerungsproblem ist.
-		\item \textit{Verstehen} wie die Eigengesichter das \glqq{}Ähnlich aussehen\grqq{} von Gesichtern quantifizieren können.
+		\item \label{item:recognition} Die Lernenden können erklären, wie die Eigengesichter das \glqq{}ähnlich aussehen\grqq{} von Gesichtern quantifizieren können.\\
+		(Aufgaben~\ref{aufg:quantification} und~\ref{aufg:quantification_code})
 	\end{enumerate}
 \end{tcolorbox}
 Nun wollen wir die Eigengesichter nutzen für eine Gesichtserkennung nutzen.
@@ -73,7 +72,7 @@ Das besagte Mass der Distanz zwischen den Gesichtern $\vec p$ und $\vec q$ defin
 \begin{equation*}
 	D\left(\vec p,\vec q\right)=\left(c_1-\tilde c_1\right)^2+\left(c_2-\tilde c_2\right)^2+\ldots+\left(c_K-\tilde c_K\right)^2.
 \end{equation*}
-\begin{aufgabe}
+\begin{aufgabe} \label{aufg:quantification}
 	Warum entspricht dieser Begriff von Distanz dem \glqq{}Ähnlich aussehen\grqq{} von Gesichtern?
 	Erklären Sie in Worten.
 	\textit{Hinweis:} Rufen Sie sich die Konstruktion der Eigengesichter und die Diskussion am Ende von Kapitel~\ref{sec:facespace} in Erinnerung.
@@ -97,7 +96,7 @@ Wir werden versuchen das mit folgendem Verfahren zu erraten.
 	\item Eines dieser Bilder wird die kleinste Distanz zu $\vec p$ haben, sagen wir das ist $\vec q_j$ für ein bestimmtes $j\in\left\{1,\ldots,80\right\}$.
 	\item Wir schauen in der Datenbank nach, welche Person auf dem Bild $\vec q_j$ gezeigt ist. Da $\vec p$ ähnlich aussieht, zeigt es wohl die selbe Person und wir klassifizieren $\vec p$ entsprechend.
 \end{enumerate}
-\begin{aufgabe}
+\begin{aufgabe} \label{aufg:quantification_code}
 	Ergänzen sie die Funktion \texttt{distance(p, q, m, u\_list)} welche die Distanz $D\left(\vec p,\vec q\right)$ zweier Bilder zurück gibt.
 	Dabei ist \texttt{m} das Durchschnittsgesicht und \texttt{u\_list} enthält die Liste der Eigengesichter.
 	Die Variablen \texttt{p} und \texttt{q} enthalten die Vektoren $\vec p$ und $\vec q$.

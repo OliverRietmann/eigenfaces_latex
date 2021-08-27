@@ -2,9 +2,10 @@
 \begin{tcolorbox}
 	\centerline{\textbf{Lernziele Kapitel~\ref{sec:compression}}}
 	\begin{enumerate}[leftmargin=*,label=\thesection.\arabic*]
-		\item \textit{Verstehen}, was die Eigengesichter im Vergleich zu anderen Basen des Gesichtsraumes auszeichnet.
-		\item \textit{Erklären} können, wie man die Eigengesichter zur Bildkompression verwenden kann.
-		\item Mit gegebenen Eigengesichtern eine Bildkompression in Python implementieren können, falls alle Bilder als Vektoren gegeben sind.
+		\item \label{item:compression_theory} Die Lernenden können erklären, was die Eigengesichter im Vergleich zu anderen Basen auszeichnet und warum sie sich zur Bildkompression eignen.\\
+		(Aufgaben~\ref{aufg:coef} und~\ref{aufg:compression_theory})
+		\item \label{item:compression_code} Mit gegebenen Eigengesichtern eine Bildkompression in Python implementieren können, falls alle Bilder als Vektoren gegeben sind.\\
+		(Aufgabe~\ref{aufg:compression})
 	\end{enumerate}
 \end{tcolorbox}
 Wenn wir ein schwarz-weiss Bild mit der Auflösung $M=144$ mal $N=180$ Pixel für Pixel abspeichern, so müssen wir $M\cdot N=25920$ Zahlen abspeichern.
@@ -63,7 +64,7 @@ Das rekonstruierte Gesicht bezeichnen wir mit $\vec a$, also
 \end{equation*}
 wobei $\tilde K\leq K$ und $\vec u_1,\ldots,\vec u_{\tilde K}$ sind die ersten $\tilde K$ Eigengesichter.
 Wie man die Koeffizienten $c_1,\ldots,c_{\tilde K}$ berechnet, haben wir im letzten Kapitel gesehen.
-\begin{aufgabe}
+\begin{aufgabe} \label{aufg:compression}
 	Ergänzen Sie die Funktion \texttt{compress(p, m, u\_list, K\_tilde)}, welche einen Vektor der Länge $M\cdot N$ zurück gibt, der dem Bild $\vec a$ entspricht.
 	Hier bezeichnen \texttt{p} das ursprüngliche Bild $\vec p$ und \texttt{m} das Durchschnittsgesicht $\vec m$.
 	Die Liste \texttt{u\_list} enthält die Eigengesichter und \texttt{K\_tilde} entspricht der Anzahl $\tilde K$ der Eigengesichter, die verwendet werden sollen.
@@ -112,7 +113,16 @@ Das ist etwa ein Faktor 13 mehr als die komprimierte Variante.
 Trotzdem sieht man für $\tilde K=2000$ kaum einen Unterschied zum Original in Abbildung~\ref{fig:compression}.
 Gleichzeitig sehen wir, dass die aggressivere Komprimierung mit $\tilde K=200$ die Bildqualität doch sehr vermindert.
 Aber das konnte man aufgrund des rechten Verteilung in Abbildung~\ref{fig:coef} schon vermuten.
-Die linke Verteilung zeigt zugleich, dass dies mit der Basis der Differenzgesichter nicht möglich gewesen wäre.
 Weiter beobachten wir, dass die Komprimierung für Bilder, welche kein Gesicht zeigen, weniger gut funktioniert.
-Der Grund dafür ist, das andere Differenzbilder nicht notwendigerweise nahe am Raum der Differenzgesichter liegen.
+Der Grund dafür ist, das diese Differenzbilder nicht notwendigerweise nahe am Raum liegen, der durch die Differenz\textbf{gesichter} der Datenbank aufgespannt wird.
 Doch die Eigengesichter sind eine Basis eben dieses Unterraumes.
+\begin{aufgabe} \label{aufg:compression_theory}
+	Könnte man für die Bildkompression anstelle der Eigengesichter auch die Differenzgesichter $\vec{a}_1,\ldots,\vec{a}_K$ nehmen?
+	\textit{Hinweis}: Betrachten Sie Abbildung~\ref{fig:coef}.
+\end{aufgabe}
+\begin{losung*}
+	Nein, bei den Differenzgesichter ist nicht klar, welche Vektoren weggelassen werden können.
+	Selbst wenn für ein konkretes Bild einige wenige ausreichen würden, so gibt es keine Möglichkeit zu bestimmen, welche das sind.
+	Zudem sind diese Vektoren nicht orthonormal.
+	Daher ist die Berechnung der Koeffizienten nur mittels Skalarprodukt nicht möglich.
+\end{losung*}
