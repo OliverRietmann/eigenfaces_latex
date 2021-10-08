@@ -13,10 +13,10 @@ In diesem Sinne ist $A\vec c$ eine gewichtete Überlagerung der Bilder/Gesichter
 	Welches Format hat die Matrix $A$, d.h. wie viele Zeilen und Spalten hat sie?
 	Geben sie dies durch die Variablen $K,M$ und $N$ an. 
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Sie hat das Format $\left(M\cdot N\right)\times K$.
 	Das heisst sie hat $M\cdot N$ Zeilen (eine für jedes Pixel) und $K$ Spalten (eine für jedes Bild in der Datenbank).
-\end{losung*}
+\end{losung}
 Nun verwenden wir (ohne Herleitung) ein klassisches Resultat aus der linearen Algebra, die \textit{Singulärwertzerlegung}.
 Zudem nehmen wir an, dass $K\leq M\cdot N$, also dass die Anzahl der Bilder der Datenbank kleiner oder gleicher der Anzahl Pixel eines Bildes ist.
 In diesem Fall besitzt die Matrix $A$ besitzt eine Zerlegung der Form
@@ -117,7 +117,7 @@ Wenn wir für $\tilde c_k$ wieder $\sigma_k v_k^T c$ ersetzen, können wir das n
 	Gleichung~\eqref{eq:span_uk} sagt, dass jede Linearkombination von Bildern aus der Datenbank $a_1,\ldots,a_K$ auch als Linearkombination der Spalten $u_1,\ldots,u_K$ von $U$ geschrieben werden kann.
 	Erklären Sie, warum das so ist.
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Wir haben gesehen, dass für jeden Vektor $c\in\mathbb R^K$ die Matrix-Vektor Multiplikation $Ac$ gerade die Linearkombination
 	\begin{equation*}
 		c_1u_1+\ldots+c_Ku_K
@@ -125,13 +125,13 @@ Wenn wir für $\tilde c_k$ wieder $\sigma_k v_k^T c$ ersetzen, können wir das n
 	der Spalten von $A$ bildet.
 	Durch Variation von $c$ kann so jede mögliche Linearkombination der Bilder aus der Datenbank generiert werden.
 	Doch zu jeder solcher Linearkombination liefert Gleichung~\eqref{eq:span_uk} eine entsprechende Linearkombination der $u_1,\ldots,u_K$ die den gleichen Vektor darstellt.
-\end{losung*}
+\end{losung}
 \begin{aufgabe}
 	Sei $k\in\left\{1,\ldots,K\right\}$ beliebig.
 	Schreiben Sie das $k$-te Bild aus der Datenbank, also $a_k$, also Linearkombination der $u_1,\ldots,u_K$.
 	Das heisst, geben Sie die Koeffizienten dieser Linearkombination an in Termen von $\sigma_1,\ldots,\sigma_K$ und $v_1,\dots,v_K$.
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Wir wählen in Gleichung~\ref{eq:span_uk} den Vektor $c$ so, dass $Ac$ genau das Gesicht $a_k$ ausliest.
 	Dazu müssen alle Komponenten von $c$ Null sein, ausser die $k$-te Komponente ist Eins, also
 	\begin{equation*}
@@ -142,7 +142,7 @@ Wenn wir für $\tilde c_k$ wieder $\sigma_k v_k^T c$ ersetzen, können wir das n
 	\begin{equation*}
 		a_k=\left(\sigma_1 v_1^Tc\right) u_1+\ldots+\left(\sigma_K v_K^Tc\right) u_K.
 	\end{equation*}
-\end{losung*}
+\end{losung}
 
 \begin{tcolorbox}
 	\centerline{\textbf{Lernzielkontrolle Kapitel 1}}

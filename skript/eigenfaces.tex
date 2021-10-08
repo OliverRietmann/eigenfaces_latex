@@ -64,7 +64,7 @@ Um die Eigengesichter zu berechnen, müssen wir zuerst den Abstand eines Punktes
 		\includegraphics[width=\textwidth]{images/facespace/distance_simple}
 	\end{minipage}
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Der Abstand des Lotfusspunktes von $\vec{a}$ zum Ursprung ist $\vec{a}\cdot\vec{u}=2$.
 	Dabei haben wir verwendet, dass $\vec{u}$ Länge 1 hat.
 	Die gesuchte Distanz (blaue gestrichelte Linie im Bild) bezeichnen wir mit $d$.
@@ -77,7 +77,7 @@ Um die Eigengesichter zu berechnen, müssen wir zuerst den Abstand eines Punktes
 		d^2=\lVert\vec{a}\rVert^2-\left(\vec{a}\cdot\vec{u}\right)^2=5-4=1.
 	\end{equation*}
 	Der Abstand von $\vec{a}$ zu Geraden ist also $d=1$.
-\end{losung*}
+\end{losung}
 Was wir in Aufgabe~\ref{aufg:distance_simple} berechnet haben, funktioniert auch in höheren Dimensionen.
 Seien $\vec v,\vec w\in\mathbb R^n$, wobei möglicherweise $n>3$.
 Das Skalarprodukt dieser Vektoren ist dann definiert als
@@ -92,7 +92,7 @@ Der Abstand eines Punktes zu einer Geraden berechnet sich dann nach der selben F
 	Finden Sie eine Formel für die Summe der Abstandsquadrate aller Differenzgesichter $\vec{a}_1,\ldots,\vec{a}_K$ zu dieser Geraden.
 	Dies ist rechts in Abbildung~\ref{fig:construction} dargestellt.
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Wir konzentrieren uns zuerst auf ein beliebiges Differenzgesicht $\vec{a}_k$, wobei $k\in\left\{1,\ldots,K\right\}$.
 	Dessen Abstand zur Geraden bezeichnen wir mit $d_k$.
 	Analog zu Aufgabe~\ref{aufg:distance_simple} gilt
@@ -106,7 +106,7 @@ Der Abstand eines Punktes zu einer Geraden berechnet sich dann nach der selben F
 		+\ldots+
 		\lVert\vec{a}_{M\cdot N}\rVert^2-\left(\vec{a}_{M\cdot N}\cdot\vec{u}\right)^2.
 	\end{equation*}
-\end{losung*}
+\end{losung}
 Die Formel aus Aufgabe~\ref{aufg:distance_complex} liefert für jedes $\vec{u}$ einen positiven Wert.
 Dasjenige $\vec{u}$, welches diesen Ausdruck minimiert, ist das erste Eigengesicht $\vec{u}_1$.
 Die Eigengesichter zu berechnen, heisst also ein Minimierungsproblem zu lösen.
@@ -154,7 +154,7 @@ Wir ignorieren diesen Fall.
 		\item Begründen Sie, warum dieses Verfahren immer einen Vektor mit Komponenten in $\left[0,1\right]$ liefert, auch für einen allgemeinen Vektor $\vec v$ (dessen Komponenten nicht alle gleich sind).
 	\end{enumerate}
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	\phantom{text}
 	\begin{enumerate}[label=(\alph*)]
 		\item In obigem Beispiel ist $\min\left(\vec v\right)=-2$ und $\max\left(\vec v\right)=4$.
@@ -182,13 +182,13 @@ Wir ignorieren diesen Fall.
 		der Nenner immer grösser oder Gleich dem Zähler ist, und dass beide nicht negativ werden können.
 		Folglich muss $w_i\in\left[0,1\right]$ gelten.
 	\end{enumerate}
-\end{losung*}
+\end{losung}
 \begin{aufgabe} \label{aufg:scaling_code}
 	Ergänzen Sie die Funktion \texttt{interpolate(v)}, welche den Vektor mit Komponenten in $\left[0,1\right]$ zurück gibt, der aus dem Vektor \texttt{v} durch obiges Verfahren entsteht.
 	Testen Sie ihre Lösung mit dem Python Skript \texttt{plot\_eigenfaces.py}, welches ihre Funktion \texttt{interpolate(v)} auf die Eigengesichter $\vec u_1,\ldots,\vec u_K$ anwendet und diese als Bilder abspeichert.
 	\textit{Hinweis:} Die Funktionen \texttt{np.min(v)} und \texttt{np.max(v)} liefern das Minimum und das Maximum eines Vektors \texttt{v}.
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Eine mögliche Lösung ist unten gezeigt.
 	Die Eigengesichter sind in Abbildung~\ref{fig:eigenfaces} dargestellt.
 	\begin{lstlisting}[style=python]
@@ -202,7 +202,7 @@ Wir ignorieren diesen Fall.
 		wi = (vi - a) / (b - a)
 		return w
 	\end{lstlisting}
-\end{losung*}
+\end{losung}
 
 \begin{figure}[ht]
 	\centering

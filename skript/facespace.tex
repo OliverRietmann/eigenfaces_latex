@@ -56,7 +56,7 @@ Um diesen Durchschnitt von Vektoren geometrisch besser zu verstehen, schauen wir
 		\item Zeichnen Sie alle Vektoren $\vec{a}_1,\vec{a}_2,\vec{a}_3$ und $\vec{b}_1,\vec{b}_2,\vec{b}_3$, sowie $\vec{m}$ in ein Koordinatensystem.
 	\end{enumerate}
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	\phantom{text}
 	\begin{enumerate}[label=(\alph*)]
 		\item Wie im skalaren Fall ist der Durchschnitt definiert als die Summe geteilt durch dir Anzahl der Summanden, also
@@ -101,14 +101,13 @@ Um diesen Durchschnitt von Vektoren geometrisch besser zu verstehen, schauen wir
 			\end{pmatrix}.
 		\end{equation*}
 		\item Die Skizze ist in Abbildung~\ref{fig:meanddiff_simple} dargestellt.
-		\begin{figure}[ht]
-			\centering
+			\begin{center}
 			\includegraphics[width=0.5\textwidth]{images/facespace/meandiff_simple}
-			\caption{Durchschnitt $\vec{m}$ der Vektoren $\vec{b}_1,\vec{b}_2,\vec{b}_3$ sowie deren Translationen $\vec{a}_1,\vec{a}_2,\vec{a}_3$ um $-\vec{m}$.}
+			\captionof{figure}{Durchschnitt $\vec{m}$ der Vektoren $\vec{b}_1,\vec{b}_2,\vec{b}_3$ sowie deren Translationen $\vec{a}_1,\vec{a}_2,\vec{a}_3$ um $-\vec{m}$.}
 			\label{fig:meanddiff_simple}
-		\end{figure}
+			\end{center}
 	\end{enumerate}
-\end{losung*}
+\end{losung}
 Das Durchschnittsgesicht lässt sich wieder als Bild ausgeben.
 Aber wie sieht so ein Durchschnittsgesicht aus?
 Das werden wir in folgender Übung herausfinden.
@@ -119,7 +118,7 @@ Das werden wir in folgender Übung herausfinden.
 	Sie können die ihre Lösung überprüfen indem Sie das Skript \texttt{meanface\_test.py} laufen lassen.
 	\textit{Hinweis:} Die Python Funktionen \texttt{len(...) und sum(...)} können nützlich sein.
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Hier ist eine mögliche Lösung und das davon mit \texttt{meanface\_test.py} generierte Durchschnittsgesicht.\\[0.5cm]
 	\begin{minipage}{0.45\textwidth}
 \begin{lstlisting}[style=python]
@@ -134,7 +133,7 @@ def meanface(b_list):
 	\begin{minipage}{0.2\textwidth}\vspace{-1cm}
 		\centering\includegraphics[width=0.6\textwidth]{images/facespace/meanface}
 	\end{minipage}
-\end{losung*}
+\end{losung}
 Nachdem wir nun das Durchschnittsgesicht gebildet haben, berechnen wir nun die \textit{Differenzgesichter} $\vec a_1,\ldots,\vec a_K$.
 Diese sind definiert als
 \begin{equation*}
@@ -151,13 +150,13 @@ Die eben eingeführten Begriffe sind links in Abbildung~\ref{fig:meandiff} stark
 	Nennen Sie einen Unterschied und eine Gemeinsamkeit der vereinfachten Darstellung links in Abbildung~\ref{fig:meandiff} zu unserer tatsächlichen Situation mit Bildern von Gesichtern.
 	Gehen Sie davon aus, dass unsere Bilder eine Auflösung von $M=180$ und $N=144$ haben, wie im letzten Kapitel.
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Als Vektoren aufgefasst sind die Gesichter Punkte im $\mathbb R^{M\cdot N}$.
 	Für $M=180$ und $N=144$ wären das Punkte im $\mathbb R^{25'920}$ und nicht im $\mathbb R^2$ wie in der Abbildung.
 	Anders ausgedrückt zeigt die Abbildung den Spezialfall $M\cdot N=2$.
 	Das entspricht Bilder die nur aus zwei Pixeln bestehen.
 	Andererseits wird in der Abbildung korrekt gezeigt, dass die Komponenten der Gesichts-Vektoren $\vec b_k$ nur Werte zwischen 0 und 1 annehmen.
 	Zudem sind die Differenzgesichter richtigerweise genau als Verschiebung der Gesichts-Vektoren um $-\vec m$ dargestellt.
-\end{losung*}
+\end{losung}
 Die Eigengesichter werden nun aus den Differenzgesichtern konstruiert.
 Dies wird im nächsten Kapitel behandelt.

@@ -15,6 +15,7 @@
 \usepackage[colorlinks=true,linkcolor=blue]{hyperref}
 \usepackage{listings}
 \usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
 \usepackage{ngerman}
 \usepackage{subcaption}
 \usepackage{tcolorbox}
@@ -22,20 +23,18 @@
 \usepackage{xcolor}
 %\usepackage[inline]{showlabels}
 
+\tcbuselibrary{breakable}
+
 \definecolor{shade}{gray}{.5}
 
 \renewcommand*{\thesection}{\arabic{section}}
 \renewcommand{\thesubfigure}{\roman{subfigure}}
 
-\theoremstyle{definition}
-\newtheorem{aufgabe}{Aufgabe}
-\numberwithin{aufgabe}{section}
-
-\theoremstyle{definition}
-\newtheorem*{losung*}{Lösung}
-
 %\theoremstyle{definition}
-%\newtheorem*{beispiel*}{Beispiel}
+%\newtheorem{aufgabe}{Aufgabe}
+%\numberwithin{aufgabe}{section}
+%\theoremstyle{definition}
+%\newtheorem*{losung}{Lösung}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -83,6 +82,68 @@
 	includerangemarker=false
 }
 
+\newcounter{taskcounter}
+\numberwithin{taskcounter}{section}
+
+\newenvironment{aufgabe}{%
+	\refstepcounter{taskcounter}
+	\mdfsetup{%
+		frametitle={%
+			\tikz[baseline=(current bounding box.east),outer sep=0pt]
+			\node[anchor=east,rectangle,fill=blue!20]
+			{\strut Aufgabe~\thetaskcounter};
+		}
+	}
+	\mdfsetup{%
+		innertopmargin=5pt,linecolor=blue!20,%
+		linewidth=2pt,topline=true,roundcorner=5pt,%
+		frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+	}
+	\begin{mdframed}[]\relax
+}{%
+	\end{mdframed}
+}
+
+\newenvironment{losung}{%
+	\mdfsetup{%
+		frametitle={%
+			\tikz[baseline=(current bounding box.east),outer sep=0pt]
+			\node[anchor=east,rectangle,fill=green!20]
+			{\strut Lösung};
+		}
+	}
+	\mdfsetup{%
+		innertopmargin=5pt,linecolor=green!20,%
+		linewidth=2pt,topline=true,roundcorner=5pt,%
+		frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+	}
+	\begin{mdframed}[]\relax
+}{%
+	\end{mdframed}
+}
+
+%\newtcolorbox{mybox}[3][]
+%{
+%	colframe = #2!25,
+%	colback  = #2!10,
+%	coltitle = #2!20!black,  
+%	title    = {#3},
+%	#1,
+%}
+%\newcounter{taskcounter}
+%\numberwithin{taskcounter}{section}
+%\newenvironment{aufgabe}{%
+%	\refstepcounter{taskcounter}
+%	\begin{mybox}{blue}{Aufgabe~\thetaskcounter}\relax
+%	}{%
+%	\end{mybox}
+%}
+%\newenvironment{losung}{%
+%	\begin{mybox}{red}{Lösung}\relax
+%	}{%
+%	\end{mybox}
+%}
+
 %\pagestyle{empty}
 \makeatletter\@addtoreset{section}{part}\makeatother%
 
@@ -103,11 +164,11 @@
 	\vfill
 	\end{center}
 	{\bfseries Inhalt\par}
-	{In dieser Arbeit wird die Technik der \textit{Eigengesichter} (engl. \textit{eigenfaces}) erklärt. Hierbei handelt es sich um eine eine rudimentäre Methode zur Gesichtserkennung, welche durch Computer automatisiert werden kann. Unter Gesichtserkennung versteht man klassischerweise das (automatisierte) identifizieren einer Person auf einem Foto. Aber auch damit verwandte Aufgaben werden hier besprochen.
+	{In dieser Arbeit wird die Technik der \textit{Eigengesichter} (engl. \textit{eigenfaces}) erklärt. Hierbei handelt es sich um eine rudimentäre Methode zur Gesichtserkennung, welche durch Computer automatisiert werden kann. Unter Gesichtserkennung versteht man klassischerweise das (automatisierte) identifizieren einer Person auf einem Foto. Aber auch damit verwandte Aufgaben werden hier besprochen.
 	Diese Arbeit führt die Leser durch eine Anleitung zur Implementierung eines solchen Programms in Python. Der Fokus liegt dabei auf der zugrundeliegenden Mathematik dieses Verfahrens. Die dazu verwendeten Unterrichtsmethoden sollen zudem aus didaktischer Sicht beleuchtet werden.\par}
 	\vspace{0.5cm}
 	{\bfseries Zielpublikum\par}
-	{Fortgeschrittene gymnasiale Mittelschüler mit Schwerpunkt Mathematik und Studenten einer mathematischen/technischer Fachrichtung.\par}
+	{Fortgeschrittene gymnasiale MittelschülerInnen mit Schwerpunkt Mathematik und StudentInnen einer mathematischen/technischer Fachrichtung.\par}
 	\vspace{0.5cm}
 	{\bfseries Voraussetzungen\par}
 	{Vertrautheit mit den Grundbegriffen der linearen Algebra (Vektoren, Matrizen, Basis, Linearkombination, Unterräume von $\mathbb R^n$).

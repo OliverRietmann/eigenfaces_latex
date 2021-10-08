@@ -45,13 +45,13 @@ Diese sind in Abbildung~\ref{fig:coef} gezeigt.
 	Beschreiben Sie die Unterschiede in der Verteilung der Koeffizienten.
 	Welche Rückschlüsse kann man dadurch ziehen?
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Die Koeffizienten der Eigengesichter fallen schnell ab.
 	Dem rechten Bild kann man entnehmen, dass ungefähr die ersten 2000 Eigengesichter fast den ganzen Beitrag zur Linearkombination leisten.
 	Die Koeffizienten der restlichen Eigengesichter ist fast Null.
 	Bei der Basis der Differenzgesichter ist keine solche Struktur zu erkennen.
 	Es ist nicht auszumachen, ob und welche Differenzgesichter besonders stark vertreten sind.
-\end{losung*}
+\end{losung}
 Was wir hier in Abbildung~\ref{fig:coef} beobachtet haben ist kein Einzelfall.
 Obwohl wir nur das Beispiel der Mona Lisa betrachtet haben, würden andere Gesichter ähnlich verteilte Koeffizienten liefern.
 Die Lösung der vorherigen Aufgabe ist zugleich die Grundidee der Bildkompression mittels Eigengesichter.
@@ -72,7 +72,7 @@ Wie man die Koeffizienten $c_1,\ldots,c_{\tilde K}$ berechnet, haben wir im letz
 	Testen Sie ihre Lösung indem Sie das Skript \texttt{compress.py} laufen lassen, welches die rekonstruierten Bilder ausgibt.
 	\textit{Hinweis:} Verwenden Sie in ihrem Code die Funktion \texttt{compute\_coefficients(p, m, u\_list)} aus Aufgabe~\ref{aufg:compute_coefficients}.
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Die Lösung könnte zum Beispiel so aussehen.
 \begin{lstlisting}[style=python]
 import numpy as np
@@ -85,7 +85,7 @@ def compress(p, m, u_list, K_tilde):
 	return a
 \end{lstlisting}
 Die durch \texttt{compress.py} generierten Bilder sind in Abbildung~\ref{fig:compression} gezeigt.
-\end{losung*}
+\end{losung}
 \begin{figure}[ht]
 	\centering
 	\begin{tabular}{cccc}
@@ -121,9 +121,9 @@ Doch die Eigengesichter sind eine Basis eben dieses Unterraumes.
 	Könnte man für die Bildkompression anstelle der Eigengesichter auch die Differenzgesichter $\vec{a}_1,\ldots,\vec{a}_K$ nehmen?
 	\textit{Hinweis}: Betrachten Sie Abbildung~\ref{fig:coef}.
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Nein, bei den Differenzgesichter ist nicht klar, welche Vektoren weggelassen werden können.
 	Selbst wenn für ein konkretes Bild einige wenige ausreichen würden, so gibt es keine Möglichkeit zu bestimmen, welche das sind.
 	Zudem sind diese Vektoren nicht orthonormal.
 	Daher ist die Berechnung der Koeffizienten nur mittels Skalarprodukt nicht möglich.
-\end{losung*}
+\end{losung}

@@ -77,7 +77,7 @@ Das besagte Mass der Distanz zwischen den Gesichtern $\vec p$ und $\vec q$ defin
 	Erklären Sie in Worten.
 	\textit{Hinweis:} Rufen Sie sich die Konstruktion der Eigengesichter und die Diskussion am Ende von Kapitel~\ref{sec:facespace} in Erinnerung.
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Die Eigengesichter fangen gewisse Gesichtszüge ein.
 	Die Funktion $D\left(\vec p,\vec q\right)$ vergleicht, wie fest sich $\vec p$ und $\vec q$ in eben diesen Gesichtszügen unterscheiden.
 	Dabei werden die ersten Eigengesichter am stärksten gewichtet, da ihre Koeffizienten typischerweise am grössten sind (Abbildung~\ref{fig:coef}).
@@ -85,7 +85,7 @@ Das besagte Mass der Distanz zwischen den Gesichtern $\vec p$ und $\vec q$ defin
 	Die Bilder nur Pixel für Pixel zu vergleichen macht keinen Sinn, denn kein Pixel kann alleine eine Information über ein Gesicht tragen.
 	Anders gesagt können sich zwei Bilder in jedem Pixel stark unterscheiden und dennoch die selbe Person zeigen.
 	Mit Gesichtszügen ist dies kaum möglich.
-\end{losung*}
+\end{losung}
 Sei nun ein Bild $\vec p\in\mathbb R^{M\cdot N}$ gegeben, das nicht notwendigerweise in der Datenbank enthalten ist.
 Das Bild soll zudem eine der 8 Personen aus Tabelle~\ref{tab:classes} zeigen.
 Jedoch wissen wir nicht welche.
@@ -103,7 +103,7 @@ Wir werden versuchen das mit folgendem Verfahren zu erraten.
 	Testen Sie ihre Implementation indem Sie das Skript \texttt{recognition.py} ausführen.
 	\textit{Hinweis:} Verwenden sie die Funktion \texttt{compute\_coefficients(...)} aus Aufgabe~\ref{aufg:compute_coefficients}.
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Die Lösung könnte zum Beispiel so aussehen.
 \begin{lstlisting}[style=python]
 def distance(p, q, m, u_list):
@@ -113,7 +113,7 @@ def distance(p, q, m, u_list):
 	return np.dot(d, d)
 \end{lstlisting}
 Der Output von \texttt{recognition.py} ist in Tabelle~\ref{tab:recognition} gelistet.
-\end{losung*}
+\end{losung}
 \begin{table}[ht]
 	\centering
 	\begin{tabular}{|l|c|c|}

@@ -46,7 +46,7 @@ Was das genau bedeutet, wollen wir zuerst im $\mathbb R^3$ veranschaulichen.
 		Berechnen Sie die Koeffizienten $c_1$ und $c_2$ in Termen von $\vec v_1,\vec v_2$ und $\vec p$.
 	\end{enumerate}
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	\phantom{text}
 	\begin{enumerate}[label=(\alph*)]
 		\item Die Vektoren sind orthonormal. Wir berechnen das Skalarprodukt
@@ -106,7 +106,7 @@ Was das genau bedeutet, wollen wir zuerst im $\mathbb R^3$ veranschaulichen.
 			c_2=-\frac{2}{\sqrt{2}}.
 		\end{equation*}
 	\end{enumerate}
-\end{losung*}
+\end{losung}
 
 Was wir in der vorherigen Teilaufgabe berechnet haben, funktioniert auch in höheren Dimensionen.
 Seien $\vec v,\vec w\in\mathbb R^n$, wobei möglicherweise $n>3$.
@@ -136,7 +136,7 @@ Letzteres geht mit einer Projektion wie oben beschrieben.
 	Berechnen Sie die Koeffizienten $c_1,\ldots,c_K$ der Projektion von $\vec p-\vec m$ auf die Eigengesichter.
 	Geben Sie die Koeffizienten in Termen von $\vec p, \vec m$ und den Eigengesichtern an.
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Wir verfahren analog zu Aufgabe~\ref{aufg:projection_3d}, nur das wir jetzt nicht $\vec{p}$, sondern $\vec p-\vec m$ projizieren müssen.
 	Das heisst, wir teilen diesen Vektor auf in eine noch unbekannte Linearkombination der Eigengesichter und einen dazu orthogonalen Teil $\vec{n}$, also
 	\begin{equation*}
@@ -155,7 +155,7 @@ Letzteres geht mit einer Projektion wie oben beschrieben.
 		\vec u_k\cdot\left(\vec p-\vec m\right)=c_k,
 	\end{equation*}
 	für alle $k\in\{1,\ldots,K\}$.
-\end{losung*}
+\end{losung}
 
 Hat man die Koeffizienten der Linearkombination berechnet, so kann die Projektion der Mona Lisa wieder als Linearkombination der Eigengesichter und des Durchschnittsgesichtes darstellen
 \begin{equation*}
@@ -168,7 +168,7 @@ Hat man die Koeffizienten der Linearkombination berechnet, so kann die Projektio
 	Um Ihre Lösung zu testen können Sie das Python Skript \texttt{basis\_expansion.py} laufen lassen, welches die Projektion der Mona Lisa mit den von Ihnen berechneten Koeffizienten darstellt.
 	\textit{Hinweis:} Mit \texttt{np.dot(v,w)} lässt sich das Skalarprodukt zweier Vektoren \texttt{v} und \texttt{w} berechnen.
 \end{aufgabe}
-\begin{losung*}
+\begin{losung}
 	Die Lösung könnte zum Beispiel so aussehen.\\[0.5cm]
 	\begin{minipage}{0.65\textwidth}
 \begin{lstlisting}[style=python]
@@ -186,7 +186,7 @@ def compute_coefficients(p, m, u_list):
 		\centering Rekonstruktion:\\[0.5cm]
 		\includegraphics[width=0.4\textwidth]{images/eigenfaces/mona_lisa_eigen_approx}
 	\end{minipage}
-\end{losung*}
+\end{losung}
 
 Anscheinend sieht die Projektion fast gleich aus wie das Bild selber.
 Etwas informell ist das in in Abbildung~\ref{fig:eigen_basis} dargestellt.
