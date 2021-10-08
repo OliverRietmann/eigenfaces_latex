@@ -10,22 +10,20 @@
 		(Aufgabe~\ref{aufg:hmmc})
 	\end{enumerate}
 \end{tcolorbox}
-Seien nun $M,N\in\mathbb N$ fix.
-Wir haben im letzten Kapitel gesehen, wie man schwarz-weiss Bilder der Auflösung $M\times N$ als Vektoren in $\mathbb R^{M\cdot N}$ verstehen kann.
-Die Bilder müssen dafür nicht unbedingt ein Gesicht zeigen.
-Die Pixel können sogar völlig zufällige Graustufen aufweisen, so dass auf dem Bild nichts sinnvolles zu erkennen ist.
-Dies führt uns zu folgender Beobachtung:
-Nur die wenigsten Vektoren in $\mathbb R^{M\cdot N}$ entsprechen einem Gesicht.
-Wir wollen uns näher mit dieser Beobachtung befassen.
+Wir haben im letzten Kapitel gesehen, dass man Bilder der Auflösung $M\times N$ als Vektoren der Länge $M\cdot N$ auffassen kann.
+Diese Vektoren können wir wiederum als Punkte in einem Raum der Dimension $M\cdot N$ auffassen.
+In diesem Kapitel werden wir diese Sichtweise ausarbeiten.
 
-Sei $K\in\mathbb N$ die Anzahl aller Bilder von allen Personen unserer Datenbank.
+Sei $K$ die Anzahl aller Bilder unserer Datenbank.
 Jedes Bild soll dabei die Auflösung $M\times N$ haben.
-Wir betrachten alle Bilder der Datenbank als Vektoren $\vec b_1,\ldots,\vec b_K\in\mathbb R^{M\cdot N}$.
-Diese Darstellung erlaubt uns, das \textit{Durchschnittsgesicht}, wir nennen es $\vec m\in\mathbb R^{M\cdot N}$, zu definieren
+Weiter seien $\vec b_1,\ldots,\vec b_K$ die Vektoren dieser Bilder.
+Diese Darstellung erlaubt uns, das \textit{Durchschnittsgesicht}, wir nennen es $\vec m$, zu definieren
 \begin{equation*}
 	\vec m=\frac{1}{K}\left(\vec b_1+\ldots+\vec b_K\right).
 \end{equation*}
-Um diesen Durchschnitt von Vektoren geometrisch besser zu verstehen, schauen wir das im $\mathbb R^2$ an.
+Dies ist einfach die Summe der Vektoren dividiert durch deren Anzahl.
+Wegen dieser Analogie zum arithmetischen Mittel, nennen wir dies das Durchschnittsgesicht.
+Um diesen Durchschnitt von Vektoren geometrisch besser zu verstehen, schauen wir das zuerst in der Ebene an.
 \begin{aufgabe} \label{aufg:meandiff_simple}
 	Betrachten Sie die folgenden drei Vektoren
 	\begin{equation*}
@@ -57,7 +55,6 @@ Um diesen Durchschnitt von Vektoren geometrisch besser zu verstehen, schauen wir
 	\end{enumerate}
 \end{aufgabe}
 \begin{losung}
-	\phantom{text}
 	\begin{enumerate}[label=(\alph*)]
 		\item Wie im skalaren Fall ist der Durchschnitt definiert als die Summe geteilt durch dir Anzahl der Summanden, also
 		\begin{equation*}
@@ -108,8 +105,12 @@ Um diesen Durchschnitt von Vektoren geometrisch besser zu verstehen, schauen wir
 			\end{center}
 	\end{enumerate}
 \end{losung}
-Das Durchschnittsgesicht lässt sich wieder als Bild ausgeben.
-Aber wie sieht so ein Durchschnittsgesicht aus?
+Nun wollen wir das Durchschnittsgesicht
+\begin{equation*}
+	\vec m=\frac{1}{K}\left(\vec b_1+\ldots+\vec b_K\right)
+\end{equation*}
+der Bilder aus der Datenbank berechnen und wieder als Bild ausgeben.
+Wie sieht so ein Durchschnittsgesicht aus?
 Das werden wir in folgender Übung herausfinden.
 \begin{aufgabe} \label{aufg:meanface}
 	Ergänzen Sie im File \texttt{eigenfaces.py} die Funktion \texttt{meanface(b\_list)}.
@@ -134,12 +135,16 @@ def meanface(b_list):
 		\centering\includegraphics[width=0.6\textwidth]{images/facespace/meanface}
 	\end{minipage}
 \end{losung}
-Nachdem wir nun das Durchschnittsgesicht gebildet haben, berechnen wir nun die \textit{Differenzgesichter} $\vec a_1,\ldots,\vec a_K$.
+Mit dem Durchschnittsgesicht könne wir die sogenannten \textit{Differenzgesichter} $\vec a_1,\ldots,\vec a_K$ bilden.
 Diese sind definiert als
 \begin{equation*}
-	\vec a_k=\vec b_k-\vec m,\quad k\in\left\{1,\ldots,K\right\}.
+	\vec a_k=\vec b_k-\vec m,\quad k=1,\ldots,K.
 \end{equation*}
-Die eben eingeführten Begriffe sind links in Abbildung~\ref{fig:meandiff} stark vereinfacht visualisiert.
+Die eben eingeführten Begriffe sind in Abbildung~\ref{fig:meandiff} für Vektoren mit zwei Komponenten visualisiert.
+Die Quintessenz ist, dass sich diese Vektoren (und damit die Bilder) als Punkte in einem Raum der Dimension $M\cdot N$ auffassen lassen.
+Die Bilder der Datenbank bilden dann eine \glqq{}Punktewolke\grqq{} in diesem Raum.
+Durch Subtraktion von $\vec m$ wir diese Punktewolke um den Ursprung zentriert.
+Das Resultat dieser Subtraktion (oder Verschiebung) sind die Differenzgesichter.
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.5\textwidth]{images/facespace/meandiff}
@@ -147,7 +152,7 @@ Die eben eingeführten Begriffe sind links in Abbildung~\ref{fig:meandiff} stark
 	\label{fig:meandiff}
 \end{figure}
 \begin{aufgabe} \label{aufg:hmmc}
-	Nennen Sie einen Unterschied und eine Gemeinsamkeit der vereinfachten Darstellung links in Abbildung~\ref{fig:meandiff} zu unserer tatsächlichen Situation mit Bildern von Gesichtern.
+	Nennen Sie einen Unterschied und eine Gemeinsamkeit der vereinfachten Darstellung in Abbildung~\ref{fig:meandiff} zu unserer tatsächlichen Situation mit Bildern von Gesichtern.
 	Gehen Sie davon aus, dass unsere Bilder eine Auflösung von $M=180$ und $N=144$ haben, wie im letzten Kapitel.
 \end{aufgabe}
 \begin{losung}
@@ -160,3 +165,26 @@ Die eben eingeführten Begriffe sind links in Abbildung~\ref{fig:meandiff} stark
 \end{losung}
 Die Eigengesichter werden nun aus den Differenzgesichtern konstruiert.
 Dies wird im nächsten Kapitel behandelt.
+%In diesem Kapitel wollen wir diese Punktewolke so verschieben, dass sie um den Ursprung zentriert ist.
+%Dazu müssen wir den Durchschnitt (arithmetisches Mittel) dieser Punkte berechnen.
+%
+%Seien nun $M,N\in\mathbb N$ fix.
+%Wir haben im letzten Kapitel gesehen, wie man schwarz-weiss Bilder der Auflösung $M\times N$ als Vektoren in $\mathbb R^{M\cdot N}$ verstehen kann.
+%Nun werden wir diese Vektoren als Punkte in einem $M\cdot N$-dimensionalen auffassen.
+%Die Bilder der Datenbank bilden dann eine \glqq{}Punktewolke\grqq{} in diesem Raum.
+%Wir werden diese Punktewolke nun um den Ursprung zentrieren.
+%Dazu benötigen wir das Konzept eines Durchschnitts von Vektoren, welches wir in den 
+%
+%Die Bilder müssen dafür nicht unbedingt ein Gesicht zeigen.
+%Die Pixel können sogar völlig zufällige Graustufen aufweisen, so dass auf dem Bild nichts sinnvolles zu erkennen ist.
+%Dies führt uns zu folgender Beobachtung:
+%Nur die wenigsten Vektoren in $\mathbb R^{M\cdot N}$ entsprechen einem Gesicht.
+%Wir wollen uns näher mit dieser Beobachtung befassen.
+%
+%Sei $K\in\mathbb N$ die Anzahl aller Bilder von allen Personen unserer Datenbank.
+%Jedes Bild soll dabei die Auflösung $M\times N$ haben.
+%Wir betrachten alle Bilder der Datenbank als Vektoren $\vec b_1,\ldots,\vec b_K\in\mathbb R^{M\cdot N}$.
+%Diese Darstellung erlaubt uns, das \textit{Durchschnittsgesicht}, wir nennen es $\vec m\in\mathbb R^{M\cdot N}$, zu definieren
+%\begin{equation*}
+%	\vec m=\frac{1}{K}\left(\vec b_1+\ldots+\vec b_K\right).
+%\end{equation*}
