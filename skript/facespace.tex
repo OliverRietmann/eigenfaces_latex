@@ -2,10 +2,10 @@
 \begin{tcolorbox}
 	\centerline{\textbf{Lernziele Kapitel~\ref{sec:facespace}}}
 	\begin{enumerate}[leftmargin=*,label=\thesection.\arabic*]
-		\item \label{item:meandiff_simple} Die Lernenden verstehen den Durchschnitt einer Familie von Vektoren sowie die Translation von Vektoren geometrisch.\\
-		(Aufgabe~\ref{aufg:meandiff_simple})
-		\item \label{item:meanface} Die Lernenden können die Addition von Vektoren und deren Multiplikation mit einem Skalar in Python ausführen.\\
-		(Aufgabe~\ref{aufg:meanface})
+		\item \label{item:meandiff_simple} Die Lernenden können den Durchschnitt einer Familie von Vektoren von Hand berechnen (für konkrete Zahlenbeispiele).\\
+		(Aufgaben~\ref{aufg:meandiff_simple} und~\ref{aufg:meandiff_simple_1})
+		\item \label{item:meanface} Die Lernenden können die Addition und Subtraktion von Vektoren und deren Multiplikation mit einem Skalar in Python ausführen.\\
+		(Aufgaben~\ref{aufg:meanface} und~\ref{aufg:diffface})
 		\item \label{item:hmmc} Die Lernenden können die Begriffe Durchschnittsgesicht und Differenzgesicht erklären.\\
 		(Aufgabe~\ref{aufg:hmmc})
 	\end{enumerate}
@@ -23,7 +23,12 @@ Diese Darstellung erlaubt uns, das \textit{Durchschnittsgesicht}, wir nennen es 
 \end{equation*}
 Dies ist einfach die Summe der Vektoren dividiert durch deren Anzahl.
 Wegen dieser Analogie zum arithmetischen Mittel, nennen wir dies das Durchschnittsgesicht.
-Um diesen Durchschnitt von Vektoren geometrisch besser zu verstehen, schauen wir das zuerst in der Ebene an.
+Damit können wir die sogenannten \textit{Differenzgesichter} $\vec a_1,\ldots,\vec a_K$ bilden.
+Diese sind definiert als als die Verschiebung der Gesichter aus der Datenbank um $-\vec{m}$, also
+\begin{equation*}
+	\vec a_k=\vec b_k-\vec m,\quad k=1,\ldots,K.
+\end{equation*}
+Um den Durchschnitt und die Verschiebung von Vektoren geometrisch besser zu verstehen, schauen wir das zuerst in der Ebene an.
 \begin{aufgabe} \label{aufg:meandiff_simple}
 	Betrachten Sie die folgenden drei Vektoren
 	\begin{equation*}
@@ -44,8 +49,8 @@ Um diesen Durchschnitt von Vektoren geometrisch besser zu verstehen, schauen wir
 		\end{pmatrix}.
 	\end{equation*}
 	\begin{enumerate}[label=(\alph*)]
-		\item Berechnen Sie den Durchschnitt $\vec{m}$ der Vektoren $\vec{b}_1,\vec{b}_1,\vec{b}_1$.
-		\item Berechnen Sie die um $-\vec{m}$ verschobenen Vektoren
+		\item Berechnen Sie den Durchschnitt $\vec{m}$ der Vektoren $\vec{b}_1,\vec{b}_2,\vec{b}_3$.
+		\item \label{item:difference_faces} Berechnen Sie die um $-\vec{m}$ verschobenen Vektoren
 		\begin{equation*}
 			\vec{a}_1=\vec{b}_1-\vec{m},\quad
 			\vec{a}_2=\vec{b}_2-\vec{m},\quad
@@ -105,6 +110,96 @@ Um diesen Durchschnitt von Vektoren geometrisch besser zu verstehen, schauen wir
 			\end{center}
 	\end{enumerate}
 \end{losung}
+\newpage
+\begin{aufgabe} \label{aufg:meandiff_simple_1}
+	Betrachten Sie die Vektoren
+	\begin{equation*}
+		\vec{b}_1=
+		\begin{pmatrix}
+			-2 \\
+			-1 \\
+			1
+		\end{pmatrix},\qquad
+		\vec{b}_2=
+		\begin{pmatrix}
+			4 \\
+			-1 \\
+			1
+		\end{pmatrix}.
+	\end{equation*}
+	\begin{enumerate}[label=(\alph*)]
+		\item Berechnen Sie den Durchschnitt $\vec{m}$ der Vektoren $\vec{b}_1$ und $\vec{b}_2$.
+		\item Berechnen Sie die um $-\vec{m}$ verschobenen Vektoren
+		\begin{equation*}
+			\vec{a}_1=\vec{b}_1-\vec{m}
+			\qquad\text{und}\qquad
+			\vec{a}_2=\vec{b}_2-\vec{m}.
+		\end{equation*}
+		\item Was ist der Durchschnitt der Vektoren $\vec a_1$ und $\vec a_2$? Was ist der Durchschnitt der Vektoren $\vec a_1,\vec a_2,\vec a_3$ aus Teilaufgabe~\ref{aufg:meandiff_simple}~\ref{item:difference_faces}?
+	\end{enumerate}
+\end{aufgabe}
+\begin{losung}
+	\begin{enumerate}[label=(\alph*)]
+		\item Wir berechnen die Summe der beiden Vektoren und dividieren durch deren Anzahl
+		\begin{equation*}
+			\vec{m}=\frac{1}{2}\left(\vec{b}_1+\vec{b}_2\right)
+			=\frac{1}{2}\left(
+			\begin{pmatrix}
+				-2 \\
+				-1 \\
+				1
+			\end{pmatrix}+
+			\begin{pmatrix}
+				4 \\
+				-1 \\
+				1
+			\end{pmatrix}
+			\right)
+			=
+			\begin{pmatrix}
+				1 \\
+				-1 \\
+				1
+			\end{pmatrix}.
+		\end{equation*}
+		\item Für die um $-\vec{m}$ verschobenen Vektoren erhalten wir folglich
+		\begin{equation*}
+			\vec{a}_1=
+			\begin{pmatrix}
+				-3 \\
+				0 \\
+				0
+			\end{pmatrix},\qquad
+			\vec{a}_2=
+			\begin{pmatrix}
+				3 \\
+				0 \\
+				0
+			\end{pmatrix}.
+		\end{equation*}
+		\item Der Durchschnitt der verschobenen Vektoren ist
+		\begin{equation*}
+			\frac{1}{2}\left(\vec{a}_1+\vec{a}_2\right)=
+			\frac{1}{2}\left(\begin{pmatrix}
+				-3 \\
+				0 \\
+				0
+			\end{pmatrix}+
+			\begin{pmatrix}
+				3 \\
+				0 \\
+				0
+			\end{pmatrix}\right)=
+			\begin{pmatrix}
+				0 \\
+				0 \\
+				0
+			\end{pmatrix}.
+		\end{equation*}
+		Wenn man eine Familie von Vektoren um ihren Durchschnitt verschiebt, erhält haben die resultierenden Vektoren immer den Nullvektor als Durchschnitt.
+		Folglicht gilt das auch für die Vektoren aus Teilaufgabe~\ref{aufg:meandiff_simple}~\ref{item:difference_faces}.
+	\end{enumerate}
+\end{losung}
 Nun wollen wir das Durchschnittsgesicht
 \begin{equation*}
 	\vec m=\frac{1}{K}\left(\vec b_1+\ldots+\vec b_K\right)
@@ -135,11 +230,29 @@ def meanface(b_list):
 		\centering\includegraphics[width=0.6\textwidth]{images/facespace/meanface}
 	\end{minipage}
 \end{losung}
-Mit dem Durchschnittsgesicht könne wir die sogenannten \textit{Differenzgesichter} $\vec a_1,\ldots,\vec a_K$ bilden.
-Diese sind definiert als
+Nun berechnen wir die \textit{Differenzgesichter} $\vec a_1,\ldots,\vec a_K$, also die Gesichter der Datenbank, welche um $-\vec{m}$ verschoben wurden
 \begin{equation*}
 	\vec a_k=\vec b_k-\vec m,\quad k=1,\ldots,K.
 \end{equation*}
+Diese berechnen wir nun in Python.
+\begin{aufgabe} \label{aufg:diffface}
+	Ergänzen Sie im File \texttt{eigenfaces.py} die Funktion \texttt{diffface(b\_list)}.
+	Dabei ist \texttt{b\_list} die Liste der Länge $K$ der Vektoren $\vec b_1,\ldots,\vec b_K$.
+	Der Rückgabewert soll eine Liste der Länge $K$ sein, welche die Differenzgesichter $\vec a_1,\ldots,\vec a_K$ gemäss obiger Formel enthält.
+	Sie können die ihre Lösung überprüfen indem Sie das Skript \texttt{diffface\_test.py} laufen lassen.
+	\textit{Hinweis:} Verwenden Sie die Funktion \texttt{meanface(...)} aus der vorherigen Aufgabe.
+\end{aufgabe}
+\begin{losung}
+	Eine korrekte Lösung könnte so aussehen.
+\begin{lstlisting}[style=python]
+def diffface(b_list):
+	a_list = copy.deepcopy(b_list)
+	m = meanface(b_list)
+	for k in len(b_list):
+		a_list[k] = b_list[k] - m
+	return a_list
+\end{lstlisting}
+\end{losung}
 Die eben eingeführten Begriffe sind in Abbildung~\ref{fig:meandiff} für Vektoren mit zwei Komponenten visualisiert.
 Die Quintessenz ist, dass sich diese Vektoren (und damit die Bilder) als Punkte in einem Raum der Dimension $M\cdot N$ auffassen lassen.
 Die Bilder der Datenbank bilden dann eine \glqq{}Punktewolke\grqq{} in diesem Raum.
