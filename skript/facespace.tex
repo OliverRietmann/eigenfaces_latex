@@ -7,7 +7,7 @@
 		\item \label{item:meanface} Die Lernenden können die Addition und Subtraktion von Vektoren und deren Multiplikation mit einem Skalar in Python ausführen.\\
 		(Aufgaben~\ref{aufg:meanface} und~\ref{aufg:diffface})
 		\item \label{item:hmmc} Die Lernenden können die Begriffe Durchschnittsgesicht und Differenzgesicht erklären.\\
-		(Aufgabe~\ref{aufg:hmmc})
+		(Aufgaben~\ref{aufg:difffaces_images} und~\ref{aufg:hmmc})
 	\end{enumerate}
 \end{tcolorbox}
 Wir haben im letzten Kapitel gesehen, dass man Bilder der Auflösung $M\times N$ als Vektoren der Länge $M\cdot N$ auffassen kann.
@@ -103,14 +103,20 @@ Um den Durchschnitt und die Verschiebung von Vektoren geometrisch besser zu vers
 			\end{pmatrix}.
 		\end{equation*}
 		\item Die Skizze ist in Abbildung~\ref{fig:meanddiff_simple} dargestellt.
+			Gezeichnet sind die Vektoren aufgefasst als Punkte, also
+			\begin{equation*}
+				\vec{m}=\overrightarrow{OM},\qquad
+				\vec{a}_k=\overrightarrow{OA_k},\qquad
+				\vec{b}_k=\overrightarrow{OB_k},\qquad
+				k=1,2,3.
+			\end{equation*}
 			\begin{center}
 			\includegraphics[width=0.5\textwidth]{images/facespace/meandiff_simple}
-			\captionof{figure}{Durchschnitt $\vec{m}$ der Vektoren $\vec{b}_1,\vec{b}_2,\vec{b}_3$ sowie deren Translationen $\vec{a}_1,\vec{a}_2,\vec{a}_3$ um $-\vec{m}$.}
+			\captionof{figure}{Durchschnitt $\vec{m}$ der Vektoren $\vec{b}_1,\vec{b}_2,\vec{b}_3$ sowie deren Translationen $\vec{a}_1,\vec{a}_2,\vec{a}_3$ um $-\vec{m}$, alle aufgefasst als Punkte in der Ebene.}
 			\label{fig:meanddiff_simple}
 			\end{center}
 	\end{enumerate}
 \end{losung}
-\newpage
 \begin{aufgabe} \label{aufg:meandiff_simple_1}
 	Betrachten Sie die Vektoren
 	\begin{equation*}
@@ -255,15 +261,33 @@ def diffface(b_list):
 \end{losung}
 Die eben eingeführten Begriffe sind in Abbildung~\ref{fig:meandiff} für Vektoren mit zwei Komponenten visualisiert.
 Die Quintessenz ist, dass sich diese Vektoren (und damit die Bilder) als Punkte in einem Raum der Dimension $M\cdot N$ auffassen lassen.
+Wir bezeichnen diese Punkte mit Grossbuchstaben, also ($O$ bezeichnet hier den Ursprung)
+\begin{equation*}
+	\vec{m}=\overrightarrow{OM},\qquad
+	\vec{a}_k=\overrightarrow{OA_k},\qquad
+	\vec{b}_k=\overrightarrow{OB_k},\qquad
+	k=1,\ldots,K.
+\end{equation*}
 Die Bilder der Datenbank bilden dann eine \glqq{}Punktewolke\grqq{} in diesem Raum.
 Durch Subtraktion von $\vec m$ wir diese Punktewolke um den Ursprung zentriert.
 Das Resultat dieser Subtraktion (oder Verschiebung) sind die Differenzgesichter.
+Das ist in Abbildung~\ref{fig:meandiff} gezeigt.
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.5\textwidth]{images/facespace/meandiff}
 	\caption{Die Gesichter werden um den Ursprung zentriert indem man das Durchschnittsgesicht subtrahiert.}
 	\label{fig:meandiff}
 \end{figure}
+\begin{aufgabe} \label{aufg:difffaces_images}
+	Wir haben in Aufgabe~\ref{aufg:meanface} das Durchschnittsgesicht wieder als Bild dargestellt.
+	Könnte man das auch mit den Differenzgesichtern machen?
+	Begründen Sie.
+\end{aufgabe}
+\begin{losung}
+	Nein, die Differenzgesichter lassen sich nicht wieder als Bilder darstellen, weil die Einträge dieser Vektoren nicht zwischen 0 und 1 liegen.
+	Dies sieht man zum Beispiel in Abbildung~\ref{fig:meandiff}.
+	Man kann also diesen Vektor-Einträgen keine Graustufe zuordnen.
+\end{losung}
 \begin{aufgabe} \label{aufg:hmmc}
 	Nennen Sie einen Unterschied und eine Gemeinsamkeit der vereinfachten Darstellung in Abbildung~\ref{fig:meandiff} zu unserer tatsächlichen Situation mit Bildern von Gesichtern.
 	Gehen Sie davon aus, dass unsere Bilder eine Auflösung von $M=180$ und $N=144$ haben, wie im letzten Kapitel.

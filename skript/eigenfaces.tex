@@ -10,10 +10,14 @@
 		(Aufgabe~\ref{aufg:scaling_theory} und~\ref{aufg:scaling_code})
 	\end{enumerate}
 \end{tcolorbox}
-Die Eigengesichter werden nun aus den Differenzgesichtern konstruiert.
-Wir werden zuerst nur eine bildliche Konstruktion angeben.
-Dazu treffen wir folgende Annahme: Die Anzahl der Bilder $K$ sei kleiner ist als die Anzahl der Pixel $M\cdot N$ der einzelnen Bilder.
-Nun stelle man sich die Differenzgesichter als eine \glqq{}Wolke\grqq{} von Punkten vor, wie rechts in Abbildung~\ref{fig:meandiff}.
+Die Eigengesichter werden nun aus den Differenzgesichtern $\vec a_1,\ldots,\vec a_K$ konstruiert.
+Um sich das Bildlich vorzustellen, betrachten wir diese Vektoren als Punkte $A_1,\ldots A_K$, wobei
+\begin{equation*}
+	\vec{a}_k=\overrightarrow{OA_k},\qquad k=1,\ldots,K.
+\end{equation*}
+Wie lesen also $\vec{a}_k$ als Vektor vom Ursprung $O$ zum Punkt $A_k$.
+Nun stelle man sich die Differenzgesichter als die \glqq{}Wolke\grqq{} von Punkten $A_1,\ldots A_K$ vor, wie links in Abbildung~\ref{fig:construction}.
+Ausgehend davon konstruieren wir die Eigengesichter.
 \begin{enumerate}[leftmargin=2cm, label=Schritt \arabic*]
 	\item Entlang einer gewissen Richtung weist diese Wolke die grösste Streuung auf.
 	Entlang dieser grössten Streuung wählen wir einen Vektor $\vec u_1$ der Länge 1.
@@ -26,7 +30,7 @@ Nun stelle man sich die Differenzgesichter als eine \glqq{}Wolke\grqq{} von Punk
 Die Vektoren $\vec u_1,\ldots,\vec u_K$ heissen \textit{Eigengesichter}.
 Die genaue Berechnung dieser Vektoren ist nicht so einfach und ist darum schon implementiert.
 Man kann das ganze so auffassen: Mit diesem Verfahren \glqq{}lernt\grqq{} man die Eigengesichter aus der Datenbank.
-Das Ganze ist links in Abbildung~\ref{fig:meandiff} stark vereinfacht visualisiert.
+Das Ganze ist links in Abbildung~\ref{fig:construction} stark vereinfacht visualisiert.
 \begin{figure}[ht]
 	\centering
 	\begin{tabular}{lr}
@@ -39,13 +43,13 @@ Das Ganze ist links in Abbildung~\ref{fig:meandiff} stark vereinfacht visualisie
 Wir werden nun das erste Eigengesicht $\vec{u}_1$ berechnen.
 Dazu müssen wir zuerst verstehen was es bedeutet, einen Vektor \glqq{}entlang der grössten Streuung\grqq{} zu finden.
 Die erste Hauptachse wird wie folgt bestimmt:
-Sie ist diejenige Gerade, welche die Summe der Abstandsquadrate zu den $\vec{a}_1,\ldots,\vec{a}_K$ minimiert.
-Dies ist rechts in Abbildung~\ref{fig:meandiff} gezeigt.
-Um die Eigengesichter zu berechnen, müssen wir zuerst den Abstand eines Punktes von einer Geraden berechnen können.
+Sie ist diejenige Gerade, welche die Summe der Abstandsquadrate zu den Punkten $A_1,\ldots,A_K$ minimiert.
+Dies ist rechts in Abbildung~\ref{fig:construction} gezeigt.
+Um die Eigengesichter zu berechnen, müssen wir also den Abstand eines Punktes von einer Geraden berechnen können.
 \begin{aufgabe} \label{aufg:distance_simple}
 	\phantom{text}\\
 	\begin{minipage}{0.55\textwidth}
-		Berechnen Sie den Abstand des Punktes $\vec{a}$ von der Geraden durch Null in Richtung $\vec{u}$, wobei
+		Berechnen Sie den Abstand des Punktes $A$ von der Geraden durch Null in Richtung $\vec{u}$, wobei $\vec{a}=\overrightarrow{OA}$ und
 		\begin{align*}
 			\vec{a}=
 			\begin{pmatrix}
@@ -65,7 +69,8 @@ Um die Eigengesichter zu berechnen, müssen wir zuerst den Abstand eines Punktes
 	\end{minipage}
 \end{aufgabe}
 \begin{losung}
-	Der Abstand des Lotfusspunktes von $\vec{a}$ zum Ursprung ist $\vec{a}\cdot\vec{u}=2$.
+	Der Lotfusspunkt $L$ bezeichnet den Punkt auf der Geraden, welcher $A$ am nächsten liegt.
+	Der Abstand von $L$ zum Ursprung ist $\vec{a}\cdot\vec{u}=2$.
 	Dabei haben wir verwendet, dass $\vec{u}$ Länge 1 hat.
 	Die gesuchte Distanz (blaue gestrichelte Linie im Bild) bezeichnen wir mit $d$.
 	Nach dem Satz von Pythagoras gilt dann
@@ -76,7 +81,7 @@ Um die Eigengesichter zu berechnen, müssen wir zuerst den Abstand eines Punktes
 	\begin{equation*}
 		d^2=\lVert\vec{a}\rVert^2-\left(\vec{a}\cdot\vec{u}\right)^2=5-4=1.
 	\end{equation*}
-	Der Abstand von $\vec{a}$ zu Geraden ist also $d=1$.
+	Der Abstand von $A$ zu Geraden ist also $d=1$.
 \end{losung}
 Was wir in Aufgabe~\ref{aufg:distance_simple} berechnet haben, funktioniert auch in höheren Dimensionen.
 Seien $\vec v,\vec w\in\mathbb R^n$, wobei möglicherweise $n>3$.
@@ -89,11 +94,11 @@ Der Abstand eines Punktes zu einer Geraden berechnet sich dann nach der selben F
 \begin{aufgabe} \label{aufg:distance_complex}
 	Sei $\vec{u}\in\mathbb R^{M\cdot N}$ ein Vektor der Länge~1.
 	Dieser definiert die Gerade durch Null in Richtung $\vec{u}$.
-	Finden Sie eine Formel für die Summe der Abstandsquadrate aller Differenzgesichter $\vec{a}_1,\ldots,\vec{a}_K$ zu dieser Geraden.
+	Finden Sie eine Formel für die Summe der Abstandsquadrate aller Differenzgesichter $A_1,\ldots,A_K$ zu dieser Geraden.
 	Dies ist rechts in Abbildung~\ref{fig:construction} dargestellt.
 \end{aufgabe}
 \begin{losung}
-	Wir konzentrieren uns zuerst auf ein beliebiges Differenzgesicht $\vec{a}_k$, wobei $k\in\left\{1,\ldots,K\right\}$.
+	Wir konzentrieren uns zuerst auf ein beliebiges Differenzgesicht $\vec{a}_k=\overrightarrow{OA_k}$, wobei $1\leq k\leq K$.
 	Dessen Abstand zur Geraden bezeichnen wir mit $d_k$.
 	Analog zu Aufgabe~\ref{aufg:distance_simple} gilt
 	\begin{equation*}
@@ -114,9 +119,8 @@ Dies ist nicht so einfach und ist daher bereits implementiert.
 
 Die Eigengesichter wollen wir nun visualisieren, indem wir sie wieder als Bilder darstellen.
 Doch da gibt es noch ein Problem.
-Die Komponenten der Eigengesichter liegen nicht notwendigerweise in $\left[0,1\right]$.
-Damit man sie als Bilder darstellen kann, müssen wir deren Komponenten zuerst auf geeignete Weise nach $\left[0,1\right]$ abbilden.
-Das geht wie folgt:
+Die Komponenten der Eigengesichter liegen nicht notwendigerweise in $\left[0,1\right]$ und können daher nicht als Graustufen interpretiert werden.
+Damit man sie als Bilder darstellen kann, müssen wir deren Komponenten zuerst wie folgt nach $\left[0,1\right]$ abbilden.
 Sei $\vec v\in\mathbb R^{M\cdot N}$ irgend ein Vektor, dessen Komponenten nicht notwendigerweise in $\left[0,1\right]$ liegen.
 Sei $\min\left(\vec v\right)$ das Minimum und $\max\left(\vec v\right)$ das Maximum aller Komponenten von $\vec v$.
 Wir betrachten nun den Vektor
@@ -151,7 +155,7 @@ Wir ignorieren diesen Fall.
 		\end{equation*}
 		dessen Komponenten nicht alle in $\left[0,1\right]$ liegen.
 		Berechnen Sie daraus den Vektor $\vec w$ gemäss obigem Verfahren.
-		\item Begründen Sie, warum dieses Verfahren immer einen Vektor mit Komponenten in $\left[0,1\right]$ liefert, auch für einen allgemeinen Vektor $\vec v$ (dessen Komponenten nicht alle gleich sind).
+		\item Begründen Sie, warum dieses Verfahren immer einen Vektor mit Komponenten in $\left[0,1\right]$ liefert, auch für einen allgemeinen Vektor $\vec v$.
 	\end{enumerate}
 \end{aufgabe}
 \begin{losung}
@@ -191,17 +195,17 @@ Wir ignorieren diesen Fall.
 \begin{losung}
 	Eine mögliche Lösung ist unten gezeigt.
 	Die Eigengesichter sind in Abbildung~\ref{fig:eigenfaces} dargestellt.
-	\begin{lstlisting}[style=python]
-		import numpy as np
-		
-		def interpolate(v):
-		w = np.zeros_like(v)
-		a = np.min(v)
-		b = np.max(v)
-		for vi, wi in zip(v, w):
+\begin{lstlisting}[style=python]
+import numpy as np
+
+def interpolate(v):
+	w = np.zeros_like(v)
+	a = np.min(v)
+	b = np.max(v)
+	for vi, wi in zip(v, w):
 		wi = (vi - a) / (b - a)
-		return w
-	\end{lstlisting}
+	return w
+\end{lstlisting}
 \end{losung}
 
 \begin{figure}[ht]
