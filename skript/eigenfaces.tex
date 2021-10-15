@@ -2,8 +2,8 @@
 \begin{tcolorbox}
 	\centerline{\textbf{Lernziele Kapitel~\ref{sec:facespace}}}
 	\begin{enumerate}[leftmargin=*,label=\thesection.\arabic*]
-		\item \label{item:distance} Die Lernenden können den Abstand eines Punktes von einer Gerade in höheren Dimensionen berechnen.\\
-		(Aufgaben~\ref{aufg:distance_simple} und~\ref{aufg:distance_complex})
+		\item \label{item:distance} Die Lernenden können den Abstand eines Punktes von einer Gerade in auch höheren Dimensionen berechnen.\\
+		(Aufgaben~\ref{aufg:distance_simple},~\ref{aufg:distance_simple_1} und~\ref{aufg:distance_complex})
 %		\item \label{item:eigenfaces} Die Lernenden verstehen die Konstruktion der Eigengesichter geometrisch.\\
 %		(Aufgaben~\ref{aufg:distance_simple} und~\ref{aufg:distance_complex})
 		\item \label{item:scaling} Die Lernenden können das Minimum und das Maximum der Koeffizienten eines Vektors von Hand und in Python berechnen.\\
@@ -47,7 +47,6 @@ Sie ist diejenige Gerade, welche die Summe der Abstandsquadrate zu den Punkten $
 Dies ist rechts in Abbildung~\ref{fig:construction} gezeigt.
 Um die Eigengesichter zu berechnen, müssen wir also den Abstand eines Punktes von einer Geraden berechnen können.
 \begin{aufgabe} \label{aufg:distance_simple}
-	\phantom{text}\\
 	\begin{minipage}{0.55\textwidth}
 		Berechnen Sie den Abstand des Punktes $A$ von der Geraden durch Null in Richtung $\vec{u}$, wobei $\vec{a}=\overrightarrow{OA}$ und
 		\begin{align*}
@@ -84,15 +83,63 @@ Um die Eigengesichter zu berechnen, müssen wir also den Abstand eines Punktes v
 	Der Abstand von $A$ zu Geraden ist also $d=1$.
 \end{losung}
 Was wir in Aufgabe~\ref{aufg:distance_simple} berechnet haben, funktioniert auch in höheren Dimensionen.
-Seien $\vec v,\vec w\in\mathbb R^n$, wobei möglicherweise $n>3$.
-Das Skalarprodukt dieser Vektoren ist dann definiert als
+Seien $\vec v$ und $\vec w$ zwei Vektoren mit $M\cdot N$ Komponenten, also
+\begin{equation*}
+	\vec v=
+	\begin{pmatrix}
+		v_1 \\ v_2 \\ \vdots \\ v_{M\cdot N}
+	\end{pmatrix},\qquad
+	\vec w=
+	\begin{pmatrix}
+		w_1 \\ w_2 \\ \vdots \\ w_{M\cdot N}
+	\end{pmatrix}.
+\end{equation*}
+Deren Skalarprodukt ist dann definiert als
 \begin{equation*}
 	\vec v\cdot\vec w=v_1w_1+\ldots+v_nw_n.
 \end{equation*}
 Ganz analog ist auch das Quadrat Länge eines Vektors gegeben durch $\lVert\vec v\rVert^2=\vec v\cdot\vec v$.
 Der Abstand eines Punktes zu einer Geraden berechnet sich dann nach der selben Formel wie in der Lösung von Aufgabe~\ref{aufg:distance_simple}.
+Das probieren wir zuerst für $M\cdot N=4$.
+\begin{aufgabe} \label{aufg:distance_simple_1}
+	Berechnen Sie den Abstand des Punktes $A$ von der Geraden durch Null in Richtung $\vec{u}$, wobei $\vec{a}=\overrightarrow{OA}$ und
+	\begin{align*}
+		\vec{a}=
+		\begin{pmatrix}
+			3 \\ -3 \\ 0 \\ 2
+		\end{pmatrix},\quad
+		\vec{u}=\frac{1}{2}
+		\begin{pmatrix}
+			1 \\ -1 \\ 1 \\ 1
+		\end{pmatrix}.
+	\end{align*}
+	\textit{Hinweis}: Der Vektor $\vec{u}$ hat Länge~1.
+\end{aufgabe}
+\begin{losung}
+	Obwohl wir es mit vierdimensionalen Vektoren zu tun haben, spielt sich das Problem noch immer in einer Ebene ab, nämlich der Ebene, die von $\vec a$ und $\vec u$ aufgespannt wird.
+	Wir verfahren daher gleich wie in Aufgabe~\ref{aufg:distance_simple}.
+	Der Abstand zum Lotfusspunkt $L$ ist gegeben durch
+	\begin{equation*}
+		\vec{a}\cdot\vec{u}=\tfrac{1}{2}\cdot 3+\left(-\tfrac{1}{2}\right)\cdot\left(-3\right)+\tfrac{1}{2}\cdot 0+\tfrac{1}{2}\cdot 2=4.
+	\end{equation*}
+	Dabei haben wir verwendet, dass $\vec{u}$ Länge 1 hat.
+	Das Quadrat der Länge des Vektors $\vec a$ ist gegeben durch
+	\begin{equation*}
+		\lVert\vec{a}\rVert^2=\vec{a}\cdot\vec{a}=3^2+\left(-3\right)^2+0^2+2^2=22.
+	\end{equation*}
+	Die gesuchte Distanz bezeichnen wir mit $d$.
+	Nach dem Satz von Pythagoras gilt dann
+	\begin{equation*}
+		d^2+\left(\vec{a}\cdot\vec{u}\right)^2=\lVert\vec{a}\rVert^2.
+	\end{equation*}
+	Durch umformen erhalten wir
+	\begin{equation*}
+		d^2=\lVert\vec{a}\rVert^2-\left(\vec{a}\cdot\vec{u}\right)^2=22-16=6.
+	\end{equation*}
+	Der Abstand von $A$ zu Geraden ist also $d=6$.
+\end{losung}
 \begin{aufgabe} \label{aufg:distance_complex}
-	Sei $\vec{u}\in\mathbb R^{M\cdot N}$ ein Vektor der Länge~1.
+	Sei $\vec{u}$ ein Vektor mit $M\cdot N$ Komponenten und Länge~1.
 	Dieser definiert die Gerade durch Null in Richtung $\vec{u}$.
 	Finden Sie eine Formel für die Summe der Abstandsquadrate aller Differenzgesichter $A_1,\ldots,A_K$ zu dieser Geraden.
 	Dies ist rechts in Abbildung~\ref{fig:construction} dargestellt.
@@ -136,13 +183,12 @@ Wir betrachten nun den Vektor
 dessen Komponenten sich aus denen von $\vec v$ wie folgt zusammensetzen
 \begin{equation*}
 	w_i=\frac{v_i-\min\left(\vec v\right)}{\max\left(\vec v\right)-\min\left(\vec v\right)},
+	\qquad i=1,\ldots,M\cdot N.
 \end{equation*}
-für alle $i\in\left\{1,\ldots,M\cdot N\right\}$.
 Die Komponenten des Vektors $\vec w$ liegen dann alle in $\left[0,1\right]$.
 Falls alle Komponenten von $\vec v$ gleich sind, ist $\min\left(\vec v\right)=\max\left(\vec v\right)$ und wir haben eine Division durch Null.
 Wir ignorieren diesen Fall.
 \begin{aufgabe} \label{aufg:scaling_theory}
-	\phantom{text}
 	\begin{enumerate}[label=(\alph*)]
 		\item Betrachten Sie den Vektor
 		\begin{equation*}
@@ -159,7 +205,6 @@ Wir ignorieren diesen Fall.
 	\end{enumerate}
 \end{aufgabe}
 \begin{losung}
-	\phantom{text}
 	\begin{enumerate}[label=(\alph*)]
 		\item In obigem Beispiel ist $\min\left(\vec v\right)=-2$ und $\max\left(\vec v\right)=4$.
 		Daraus ergibt sich für alle $i\in\left\{1,2,3\right\}$

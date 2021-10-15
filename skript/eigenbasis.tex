@@ -35,9 +35,9 @@ Was das genau bedeutet, wollen wir zuerst im $\mathbb R^3$ veranschaulichen.
 		\end{pmatrix}.
 	\end{equation*}
 	\begin{enumerate}[label=(\alph*)]
-		\item Sind die Vektoren $\vec v_1$ und $\vec v_2$ sind orthonormal? Begründen Sie.
+		\item Sind die Vektoren $\vec v_1$ und $\vec v_2$ orthonormal? Begründen Sie.
 		\item Die Vektoren $\vec v_1$ und $\vec v_2$ spannen eine Ebene durch den Nullpunkt auf.
-		Berechnen Sie den Punkt $\vec a$, welcher der orthogonalen Projektion von $\vec p$ auf diese Ebene entspricht.
+		Berechnen Sie den Vektor $\vec a$, welcher der orthogonalen Projektion von $\vec p$ auf diese Ebene entspricht.
 		Dazu können Sie zum Beispiel eine Zerlegung $\vec p=\vec a+\vec n$ wie in Abbildung~\ref{fig:projection} machen.
 		\item Dann kann man $\vec a$ als Linearkombination vom $\vec v_1$ und $\vec v_2$ darstellen, also
 		\begin{equation*}
@@ -47,14 +47,12 @@ Was das genau bedeutet, wollen wir zuerst im $\mathbb R^3$ veranschaulichen.
 	\end{enumerate}
 \end{aufgabe}
 \begin{losung}
-	\phantom{text}
 	\begin{enumerate}[label=(\alph*)]
-		\item Die Vektoren sind orthonormal. Wir berechnen das Skalarprodukt
+		\item Die Vektoren sind orthogonal, denn ihr Skalarprodukt ist Null
 		\begin{equation*}
 			\vec v_1\cdot\vec v_2= \frac{1}{\sqrt{3}}\cdot\frac{1}{\sqrt{2}}\cdot\left(1\cdot\left(-1\right)+1\cdot 1+1\cdot 0\right)=0.
 		\end{equation*}
-		Die beiden Vektoren sind also orthogonal.
-		Es bleibt zu zeigen, dass sie beide Länge 1 haben. In der Tat gilt
+		Sie sind sogar orthonormal, denn sie haben auch Länge 1, weil
 		\begin{equation*}
 			\vec v_1\cdot\vec v_1=\frac{1}{3}\left(1^2+1^2+1^2\right)=1
 		\end{equation*}
@@ -109,32 +107,32 @@ Was das genau bedeutet, wollen wir zuerst im $\mathbb R^3$ veranschaulichen.
 \end{losung}
 
 Was wir in der vorherigen Teilaufgabe berechnet haben, funktioniert auch in höheren Dimensionen.
-Seien $\vec v,\vec w\in\mathbb R^n$, wobei möglicherweise $n>3$.
-Wir sagen, die beiden Vektoren sind orthogonal, wenn $\vec v\cdot\vec w=0$.
+Die Vektoren $\vec v,\vec w$ und $\vec p$ sollen nun jeweils $M\cdot N$ Komponenten haben.
+Wir sagen, die zwei Vektoren sind orthogonal, wenn $\vec v\cdot\vec w=0$.
 Falls sie zusätzlich Länge 1 haben, also $\vec v\cdot\vec v=1$ und $\vec w\cdot\vec w=1$, dann heissen sie orthonormal.
-Eine Familie $\vec v_1,\ldots,\vec v_K\in\mathbb R^n$ heisst orthonormal, wenn die Vektoren alle paarweise orthonormal sind.
+Eine Familie $\vec v_1,\ldots,\vec v_K$ heisst orthonormal, wenn die Vektoren alle paarweise orthonormal sind.
 Sie spannen dann einen $K$-dimensionalen Raum auf.
-Wir können wie in der Aufgabe die Projektion eines Vektors $\vec p\in\mathbb R^n$ auf diesen Raum berechnen, nämlich
+Wir können wie in Aufgabe~\ref{aufg:projection_3d} die Projektion des Vektors $\vec p$ auf diesen Raum berechnen, nämlich
 \begin{equation*}
-	c_1\vec v_1+\ldots+c_n\vec v_n,
+	c_1\vec v_1+\ldots+c_K\vec v_K,
 \end{equation*}
 wobei die Koeffizienten gegeben sind durch
 \begin{equation*}
-	c_i=\vec v_i\cdot p
+	c_k=\vec v_k\cdot\vec p,\qquad k=1,\ldots,K.
 \end{equation*}
-für alle $i\in\left\{1,\ldots,n\right\}$.
-
 Nun betrachten wir wieder die Eigengesichter $\vec u_1,\ldots,\vec u_K$.
 Gemäss der Konstruktion aus dem letzten Kapitel sind diese orthonormal.
 Wir betrachten zudem die Mona Lisa von Leonardo da Vinci, ein Bild das nicht in unserer Datenbank ist.
-Den entsprechenden Vektor nennen wir $\vec p\in\mathbb R^{M\cdot N}$.
-Um dieses Bild in den Raum der Differenzgesichter zu verschieben, müssen wir noch das Durchschnittsgesicht $\vec m$ subtrahieren.
-Das entstehende Differenzgesicht kann dann näherungsweise als Linearkombination der Basis $\vec a_1,\ldots,\vec a_K$ oder auch der Basis der Eigengesichter $\vec u_1,\ldots,\vec u_K$ dargestellt werden.
-Letzteres geht mit einer Projektion wie oben beschrieben.
+Den entsprechenden Vektor nennen wir $\vec p$.
+Um dieses Bild in den Raum zu verschieben, der von den Differenzgesichtern (oder von den Eigengesichtern) aufgespannt wird, müssen wir noch das Durchschnittsgesicht $\vec m$ subtrahieren.
+Das entstehende Differenzgesicht kann dann näherungsweise als Linearkombination der Differenzgesichter $\vec a_1,\ldots,\vec a_K$ oder auch der Eigengesichter $\vec u_1,\ldots,\vec u_K$ dargestellt werden (diese spannen den selben Raum auf).
+Nur näherungsweise deswegen, weil wir lediglich eine Projektion auf den Raum der Differenzgesichter (oder Eigengesichter) berechnen.
+Das Differenzgesicht des neuen Gesichtes liegt aber nicht notwendigerweise in diesem Raum.
+Diese Projektion berechnet sich wie oben beschrieben.
 \begin{aufgabe} \label{aufg:projection}
-	Sei $\vec p\in\mathbb R^{M\cdot N}$ das Bild der Mona Lisa und $\vec u_1,\ldots,\vec u_K\in\mathbb R^{M\cdot N}$ die Eigengesichter.
+	Sei $\vec p$ das Bild der Mona Lisa und $\vec u_1,\ldots,\vec u_K$ die Eigengesichter.
 	Berechnen Sie die Koeffizienten $c_1,\ldots,c_K$ der Projektion von $\vec p-\vec m$ auf die Eigengesichter.
-	Geben Sie die Koeffizienten in Termen von $\vec p, \vec m$ und den Eigengesichtern an.
+	Geben Sie die Koeffizienten in Termen von $\vec p,\vec m$ und den Eigengesichtern an.
 \end{aufgabe}
 \begin{losung}
 	Wir verfahren analog zu Aufgabe~\ref{aufg:projection_3d}, nur das wir jetzt nicht $\vec{p}$, sondern $\vec p-\vec m$ projizieren müssen.
@@ -162,7 +160,7 @@ Hat man die Koeffizienten der Linearkombination berechnet, so kann die Projektio
 	\vec m+c_1\vec u_1+c_2\vec u_2+\ldots+c_Ku_K.
 \end{equation*}
 \begin{aufgabe} \label{aufg:compute_coefficients}
-	Seien \texttt{p} und \texttt{m} Vektoren der Länge $M\cdot N$, wobei \texttt{p} ein Gesicht zeigt (z.B. das der Mona Lisa) und \texttt{m} das Durchschnittsgesicht ist.
+	Seien \texttt{p} und \texttt{m} Vektoren mit $M\cdot N$ Komponenten, wobei \texttt{p} ein Gesicht zeigt (z.B. das der Mona Lisa) und \texttt{m} das Durchschnittsgesicht ist.
 	Sei zudem \texttt{u\_list} die Liste der Eigengesichter.
 	Ergänzen Sie die Funktion \texttt{compute\_coefficients(p, m, u\_list)}, welche die Liste der Koeffizienten der Linearkombination aus Abbildung~\ref{fig:eigen_basis} zurück gibt.
 	Um Ihre Lösung zu testen können Sie das Python Skript \texttt{basis\_expansion.py} laufen lassen, welches die Projektion der Mona Lisa mit den von Ihnen berechneten Koeffizienten darstellt.
@@ -177,8 +175,8 @@ import numpy as np
 def compute_coefficients(p, m, u_list):
 	K = len(u_list)
 	c_list = np.empty((K,))
-	for c, u in zip(c_list, u_list):
-		c = np.dot(u, p - m)
+	for k in range(K):
+		c[k] = np.dot(u[k], p - m)
 	return c_list
 \end{lstlisting}
 	\end{minipage}\hfill
@@ -202,4 +200,4 @@ Etwas informell ist das in in Abbildung~\ref{fig:eigen_basis} dargestellt.
 \end{figure}
 Dieses Phänomen bedeutet, dass die Mona Lisa ganz oder in sehr guter Näherung im Raum liegt, er durch die Eigengesichter aufgespannt wird.
 In Abbildung~\ref{fig:projection} würde das einem $\vec p$ entsprechen, dass mit der Ebene einen verschwindend kleinen Winkel einschliesst, also fast in der Ebene liegt.
-Mit dieser Beobachtung wollen wir und im nächsten Kapitel genauer auseinandersetzen.
+Mit dieser Beobachtung wollen wir uns im nächsten Kapitel genauer auseinandersetzen.
