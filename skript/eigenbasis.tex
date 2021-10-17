@@ -2,10 +2,8 @@
 \begin{tcolorbox}
 	\centerline{\textbf{Lernziele Kapitel~\ref{sec:eigenbasis}}}
 	\begin{enumerate}[leftmargin=*,label=\thesection.\arabic*]
-		\item \label{item:projection_3d} Die Lernenden können die Eigenschaften \glqq{}orthogonal\grqq{} und \glqq{}orthonormal\grqq{} in $\mathbb R^n$ anwenden.\\
-		(Aufgaben~\ref{aufg:projection_3d} und~\ref{aufg:projection})
 		\item \label{item:projection} Die Lernenden können die Projektion eines Vektors auf einen Unterraum berechnen, wenn eine orthonormale Basis dieses Unterraumes gegeben ist.\\
-		(Aufgabe~\ref{aufg:projection})
+		(Aufgaben~\ref{aufg:projection_3d} und~\ref{aufg:projection})
 		\item \label{item:compute_coefficients} Die Lernenden können das Skalarprodukt von Vektoren in Python berechnen.\\
 		(Aufgabe~\ref{aufg:compute_coefficients})
 	\end{enumerate}
@@ -14,7 +12,7 @@ In diesem Unterkapitel wollen wir allgemeine Bilder als Linearkombination der Ei
 Man kann zeigen, dass alle Bilder der Datenbank exakt als Linearkombination der Eigengesichter geschrieben werden können.
 Neue Bilder können im Allgemeinen mit so einer Linearkombination nur angenähert werden.
 Die beste Näherung ist gerade die Projektion des neuen Bildes auf den Raum, der durch die Eigengesichter aufgespannt wird.
-Was das genau bedeutet, wollen wir zuerst im $\mathbb R^3$ veranschaulichen.
+Was das genau bedeutet, wollen wir zuerst im drei Dimensionen veranschaulichen.
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.5\textwidth]{images/projection}
@@ -188,16 +186,16 @@ def compute_coefficients(p, m, u_list):
 
 Anscheinend sieht die Projektion fast gleich aus wie das Bild selber.
 Etwas informell ist das in in Abbildung~\ref{fig:eigen_basis} dargestellt.
+Dieses Phänomen bedeutet, dass das Differenzgesicht der Mona Lisa ganz oder in sehr guter Näherung im Raum liegt, er durch die Eigengesichter aufgespannt wird.
+%In Abbildung~\ref{fig:projection} würde das einem Vektor $\vec p-\vec m$ entsprechen, der mit der Ebene einen verschwindend kleinen Winkel einschliesst, also fast in der Ebene liegt.
+Mit dieser Beobachtung wollen wir uns im nächsten Kapitel genauer auseinandersetzen.
 \begin{figure}[ht]
 	\centering
-	\begin{tabular}{m{1.8cm} c c c c c m{2cm} c c c m{2cm} c c}
-		\includegraphics[width=0.1\textwidth]{images/eigenfaces/mona_lisa_eigen_approx} &
-		$=$ & $\vec m$ & $+$ & $c_1$ & $\cdot$ & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface00}
-		& $+$ & $c_2$ & $\cdot$ & \includegraphics[width=0.1\textwidth]{images/eigenfaces/eigenface01} & $+$ & $\cdots$
+	\begin{tabular}{m{1.3cm} c c m{1.3cm} c c m{1.3cm} c c m{1.3cm} c c}
+		\includegraphics[width=0.08\textwidth]{images/eigenfaces/mona_lisa_eigen_approx} &
+		$=$ & $0.17\ldots$ & \includegraphics[width=0.08\textwidth]{images/facespace/meanface} & $+$ & $0.22\ldots$ & \includegraphics[width=0.08\textwidth]{images/eigenfaces/eigenface00}
+		& $+$ & $0.10\ldots$ & \includegraphics[width=0.08\textwidth]{images/eigenfaces/eigenface01} & $+$ & $\cdots$
 	\end{tabular}
-	\caption{Projektion der Mona Lisa auf die Eigengesichter.}
+	\caption{Die Projektion der Mona Lisa auf die Eigengesichter entspricht einer Überlagerung (Linearkombination) der Eigengesichter und des Durchschnittsgesichtes. Die Vorfaktoren sind nur symbolisch und entsprechen nicht den echten Werten.}
 	\label{fig:eigen_basis}
 \end{figure}
-Dieses Phänomen bedeutet, dass die Mona Lisa ganz oder in sehr guter Näherung im Raum liegt, er durch die Eigengesichter aufgespannt wird.
-In Abbildung~\ref{fig:projection} würde das einem $\vec p$ entsprechen, dass mit der Ebene einen verschwindend kleinen Winkel einschliesst, also fast in der Ebene liegt.
-Mit dieser Beobachtung wollen wir uns im nächsten Kapitel genauer auseinandersetzen.

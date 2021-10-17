@@ -86,14 +86,14 @@ Das besagte Mass der Distanz zwischen den Gesichtern $\vec p$ und $\vec q$ defin
 	Anders gesagt können sich zwei Bilder in jedem Pixel stark unterscheiden und dennoch die selbe Person zeigen.
 	Mit Gesichtszügen ist dies kaum möglich.
 \end{losung}
-Sei nun ein Bild $\vec p\in\mathbb R^{M\cdot N}$ gegeben, das nicht notwendigerweise in der Datenbank enthalten ist.
+Sei nun ein Bild $\vec p$ gegeben, das nicht notwendigerweise in der Datenbank enthalten ist.
 Das Bild soll zudem eine der 8 Personen aus Tabelle~\ref{tab:classes} zeigen.
 Jedoch wissen wir nicht welche.
 Wir werden versuchen das mit folgendem Verfahren zu erraten.
 \begin{enumerate}[leftmargin=3cm, label=Schritt \arabic*:]
-	\item Seien $\vec q_1,\ldots,\vec q_{80}\in\mathbb R^{M\cdot N}$ die Bilder der Datenbank.
-	Wir berechnen die Distanz $D\left(\vec p,\vec q_i\right)$ für alle $i\in\left\{1,\ldots,80\right\}$.
-	\item Eines dieser Bilder wird die kleinste Distanz zu $\vec p$ haben, sagen wir das ist $\vec q_j$ für ein bestimmtes $j\in\left\{1,\ldots,80\right\}$.
+	\item Seien $\vec q_1,\ldots,\vec q_{80}$ die Bilder der Datenbank.
+	Wir berechnen die Distanz $D\left(\vec p,\vec q_i\right)$ für $i=1,\ldots,80$.
+	\item Eines dieser Bilder wird die kleinste Distanz zu $\vec p$ haben, sagen wir das ist $\vec q_j$ für ein bestimmtes $1\leq j\leq 80$.
 	\item Wir schauen in der Datenbank nach, welche Person auf dem Bild $\vec q_j$ gezeigt ist. Da $\vec p$ ähnlich aussieht, zeigt es wohl die selbe Person und wir klassifizieren $\vec p$ entsprechend.
 \end{enumerate}
 \begin{aufgabe} \label{aufg:quantification_code}
