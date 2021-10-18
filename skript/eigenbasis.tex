@@ -160,23 +160,15 @@ Hat man die Koeffizienten der Linearkombination berechnet, so kann die Projektio
 \begin{aufgabe} \label{aufg:compute_coefficients}
 	Seien \texttt{p} und \texttt{m} Vektoren mit $M\cdot N$ Komponenten, wobei \texttt{p} ein Gesicht zeigt (z.B. das der Mona Lisa) und \texttt{m} das Durchschnittsgesicht ist.
 	Sei zudem \texttt{u\_list} die Liste der Eigengesichter.
-	Ergänzen Sie die Funktion \texttt{compute\_coefficients(p, m, u\_list)}, welche die Liste der Koeffizienten der Linearkombination aus Abbildung~\ref{fig:eigen_basis} zurück gibt.
-	Um Ihre Lösung zu testen können Sie das Python Skript \texttt{basis\_expansion.py} laufen lassen, welches die Projektion der Mona Lisa mit den von Ihnen berechneten Koeffizienten darstellt.
+	Ergänzen Sie im Skript \texttt{chapter5.py} die Funktion \texttt{compute\_coefficients(p, m, u\_list)}, welche die Liste der Koeffizienten der Linearkombination aus Abbildung~\ref{fig:eigen_basis} zurück gibt.
+	Um Ihre Lösung zu testen können Sie das Python Skript \texttt{chapter5.py} laufen lassen, welches die Projektion der Mona Lisa mit den von Ihnen berechneten Koeffizienten darstellt.
+	Dazu müssen Sie auf der Kommandozeile den Pfad zum File \texttt{eigenfaces.dat} übergeben.
 	\textit{Hinweis:} Mit \texttt{np.dot(v,w)} lässt sich das Skalarprodukt zweier Vektoren \texttt{v} und \texttt{w} berechnen.
 \end{aufgabe}
 \begin{losung}
 	Die Lösung könnte zum Beispiel so aussehen.\\[0.5cm]
 	\begin{minipage}{0.65\textwidth}
-\begin{lstlisting}[style=python]
-import numpy as np
-
-def compute_coefficients(p, m, u_list):
-	K = len(u_list)
-	c_list = np.empty((K,))
-	for k in range(K):
-		c[k] = np.dot(u[k], p - m)
-	return c_list
-\end{lstlisting}
+\lstinputlisting[firstline=3,lastline=8,style=python]{solution/chapter5.py}
 	\end{minipage}\hfill
 	\begin{minipage}{0.35\textwidth}\vspace{-1cm}
 		\centering Rekonstruktion:\\[0.5cm]

@@ -214,20 +214,17 @@ der Bilder aus der Datenbank berechnen und wieder als Bild ausgeben.
 Wie sieht so ein Durchschnittsgesicht aus?
 Das werden wir in folgender Übung herausfinden.
 \begin{aufgabe} \label{aufg:meanface}
-	Ergänzen Sie im File \texttt{eigenfaces.py} die Funktion \texttt{meanface(b\_list)}.
+	Ergänzen Sie im File \texttt{chapter3.py} die Funktion \texttt{meanface(b\_list)}.
 	Dabei ist \texttt{b\_list} die Liste der Länge $K$ der Vektoren $\vec b_1,\ldots,\vec b_K$.
 	Der Rückgabewert soll das Durchschnittsgesicht $\vec m$ sein.
-	Sie können die ihre Lösung überprüfen indem Sie das Skript \texttt{meanface\_test.py} laufen lassen.
+	Sie können die ihre Lösung überprüfen indem Sie das Skript \texttt{chapter3.py} laufen lassen.
+	Dabei müssen Sie auf der Kommandozeile den Pfad zur Datenbank übergeben.
 	\textit{Hinweis:} Die Python Funktionen \texttt{len(...) und sum(...)} können nützlich sein.
 \end{aufgabe}
 \begin{losung}
-	Hier ist eine mögliche Lösung und das davon mit \texttt{meanface\_test.py} generierte Durchschnittsgesicht.\\[0.5cm]
+	Hier ist eine mögliche Lösung und das davon mit \texttt{chapter3.py} generierte Durchschnittsgesicht.\\[0.5cm]
 	\begin{minipage}{0.45\textwidth}
-\begin{lstlisting}[style=python]
-def meanface(b_list):
-	K = len(b_list)
-	return sum(b_list) / K
-\end{lstlisting}
+\lstinputlisting[firstline=3,lastline=5,style=python]{solution/chapter3.py}
 	\end{minipage}\hfill
 	\begin{minipage}{0.3\textwidth}\vspace{-1cm}
 		\centering\hfill Durchschnittsgesicht:
@@ -242,22 +239,16 @@ Nun berechnen wir die \textit{Differenzgesichter} $\vec a_1,\ldots,\vec a_K$, al
 \end{equation*}
 Diese berechnen wir nun in Python.
 \begin{aufgabe} \label{aufg:diffface}
-	Ergänzen Sie im File \texttt{eigenfaces.py} die Funktion \texttt{diffface(b\_list)}.
+	Ergänzen Sie im File \texttt{chapter3.py} die Funktion \texttt{diffface(b\_list)}.
 	Dabei ist \texttt{b\_list} die Liste der Länge $K$ der Vektoren $\vec b_1,\ldots,\vec b_K$.
 	Der Rückgabewert soll eine Liste der Länge $K$ sein, welche die Differenzgesichter $\vec a_1,\ldots,\vec a_K$ gemäss obiger Formel enthält.
-	Sie können die ihre Lösung überprüfen indem Sie das Skript \texttt{diffface\_test.py} laufen lassen.
+	Sie können die ihre Lösung überprüfen indem Sie das Skript \texttt{chapter3.py} laufen lassen.
+	Dabei müssen Sie auf der Kommandozeile den Pfad zur Datenbank übergeben.
 	\textit{Hinweis:} Verwenden Sie die Funktion \texttt{meanface(...)} aus der vorherigen Aufgabe.
 \end{aufgabe}
 \begin{losung}
 	Eine korrekte Lösung könnte so aussehen.
-\begin{lstlisting}[style=python]
-def diffface(b_list):
-	a_list = copy.deepcopy(b_list)
-	m = meanface(b_list)
-	for k in len(b_list):
-		a_list[k] = b_list[k] - m
-	return a_list
-\end{lstlisting}
+\lstinputlisting[firstline=7,lastline=13,style=python]{solution/chapter3.py}
 \end{losung}
 Die eben eingeführten Begriffe sind in Abbildung~\ref{fig:meandiff} für Vektoren mit zwei Komponenten visualisiert.
 Die Quintessenz ist, dass sich diese Vektoren (und damit die Bilder) als Punkte in einem Raum der Dimension $M\cdot N$ auffassen lassen.

@@ -159,41 +159,23 @@ Für diesen Schritt ist es egal ob das Bild ein Gesicht zeigt oder etwas anderes
 	\end{enumerate}
 \end{losung}
 In unserem Python Code ist die Funktion, welche eine $M\times N$ Matrix auf diese Weise in einen Vektor der Länge $M\cdot N$ überführt, bereits implementiert.
-Sie befindet sich im File \texttt{eigenfaces.py} und heisst \texttt{matrix\_to\_vector}.
+Sie befindet sich im File \texttt{chapter2.py} und heisst \texttt{matrix\_to\_vector}.
 Wir betrachten diese nun etwas genauer, um die Manipulation von Matrizen und Vektoren in Python zu lernen.
-\begin{lstlisting}[style=python]
-import numpy as np
-
-def matrix_to_vector(P, M, N):
-	v = np.zeros(M * N)
-	for m in range(M):
-		for n in range(N):
-			v[n + N * m] = P[m, n]
-	return v
-\end{lstlisting}
+\lstinputlisting[firstline=12,lastline=17,style=python]{solution/chapter2.py}
 Das Argument \texttt{P} ist eine \texttt{M} mal \texttt{N} Matrix und besteht aus den Einträgen $p_{mn}$ wie oben.
 Auf die Einträge von Vektoren und Matrizen kann über die eckigen Klammern $[\ldots]$ zugegriffen werden.
 Wir brauchen aber auch die Umkehrung dieser Operation.
 Das ist der Zweck folgender Übung.
 \begin{aufgabe} \label{aufg:vectormatrix_code}
-	Ergänzen Sie im File \texttt{eigenfaces.py} die Funktion \texttt{vector\_to\_matrix(v, M, N)}.
+	Ergänzen Sie im File \texttt{chapter2.py} die Funktion \texttt{vector\_to\_matrix(v, M, N)}.
 	Dabei ist \texttt{v} ein Vektor der Länge $\texttt{M}\cdot\texttt{N}$ wie oben.
 	Die Funktion soll die zu \texttt{v} gehörende Matrix zurück geben.
-	Sie können die ihre Lösung überprüfen indem Sie das Skript \texttt{vector\_to\_matrix\_test.py} laufen lassen.
+	Sie können die ihre Lösung überprüfen indem Sie das Skript \texttt{chapter2.py} laufen lassen.
 \end{aufgabe}
 \begin{losung}
-	Bei einer richtigen Lösung sollte das Skript \texttt{vector\_to\_matrix\_test.py} das Foto aus Abbildung~\ref{fig:image_to_vector} generieren.
+	Bei einer richtigen Lösung sollte das Skript \texttt{chapter2.py} das Foto aus Abbildung~\ref{fig:image_to_vector} generieren.
 	Die Lösung könnte zum Beispiel so aussehen:
-\begin{lstlisting}[style=python]
-import numpy as np
-
-def vector_to_matrix(v, M, N):
-	P = np.zeros((M, N))
-	for m in range(M):
-		for n in range(N):
-			P[m, n] = v[n + N * m]
-	return P
-\end{lstlisting}
+\lstinputlisting[firstline=4,lastline=9,style=python]{solution/chapter2.py}
 \end{losung}
 Man kann gewisse Effekte in einem Bild erzeugen, indem man den zugehörigen Vektor manipuliert und anschliessend wieder als Bild darstellt.
 Zum Beispiel kann man das Negativ eines gegebenen schwarz-weiss Bildes generieren.
@@ -211,21 +193,15 @@ Dazu nimmt man den Vektor $\vec p$ der Länge $M\cdot N$, welcher dieses Bild da
 Der Vektor auf der rechten Seite entspricht dem Negativ des ursprünglichen Bildes.
 Wie dieses Bild genau aussieht, sehen wir in der nächsten Aufgabe.
 \begin{aufgabe} \label{aufg:negative}
-	Ergänzen Sie im Skript \texttt{negative.py} die Funktion \texttt{get\_negative.py}.
+	Ergänzen Sie im Skript \texttt{chapter2.py} die Funktion \texttt{get\_negative.py}.
 	Diese soll zu einem gegeben Vektor \texttt{p} mit Einträgen zwischen 0 und 1 den Vektor des entsprechenden Negativs zurückgeben, wie oben beschrieben.
-	Lassen Sie das Skript \texttt{negative.py} laufen um das entsprechende Bild auszugeben und um Ihre Lösung zu überprüfen.
+	Lassen Sie das Skript \texttt{chapter2.py} laufen um das entsprechende Bild auszugeben und um Ihre Lösung zu überprüfen.
 \end{aufgabe}
 \begin{losung}
 	Links ist eine mögliche Implementierung gezeigt.
 	Rechts ist ein Bild und dessen Negativ.\\[0.5cm]
 	\begin{minipage}{0.45\textwidth}
-\begin{lstlisting}[style=python]
-def get_negative(p):
-	MN = len(p)
-	for i in range(MN):
-		p[i] = 1.0 - p[i]
-	return p
-\end{lstlisting}
+\lstinputlisting[firstline=19,lastline=23,style=python]{solution/chapter2.py}
 	\end{minipage}\hfill
 	\begin{minipage}{0.25\textwidth}\vspace{-1cm}
 		\centering\includegraphics[width=0.6\textwidth]{images/vectormatrix/Diane_Kruger}

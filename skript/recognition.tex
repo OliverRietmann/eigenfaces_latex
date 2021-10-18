@@ -97,40 +97,35 @@ Wir werden versuchen das mit folgendem Verfahren zu erraten.
 	\item Wir schauen in der Datenbank nach, welche Person auf dem Bild $\vec q_j$ gezeigt ist. Da $\vec p$ ähnlich aussieht, zeigt es wohl die selbe Person und wir klassifizieren $\vec p$ entsprechend.
 \end{enumerate}
 \begin{aufgabe} \label{aufg:quantification_code}
-	Ergänzen sie die Funktion \texttt{distance(p, q, m, u\_list)} welche die Distanz $D\left(\vec p,\vec q\right)$ zweier Bilder zurück gibt.
+	Ergänzen Sie im Skript \texttt{chapter7.py} die Funktion \texttt{distance(p, q, m, u\_list)} welche die Distanz $D\left(\vec p,\vec q\right)$ zweier Bilder zurück gibt.
 	Dabei ist \texttt{m} das Durchschnittsgesicht und \texttt{u\_list} enthält die Liste der Eigengesichter.
 	Die Variablen \texttt{p} und \texttt{q} enthalten die Vektoren $\vec p$ und $\vec q$.
-	Testen Sie ihre Implementation indem Sie das Skript \texttt{recognition.py} ausführen.
+	Testen Sie ihre Implementation indem Sie das Skript \texttt{chapter7.py} ausführen.
+	Dazu müssen Sie in der Kommandozeile den Pfad zur reduzierten Datenbank angeben.
 	\textit{Hinweis:} Verwenden sie die Funktion \texttt{compute\_coefficients(...)} aus Aufgabe~\ref{aufg:compute_coefficients}.
 \end{aufgabe}
 \begin{losung}
 	Die Lösung könnte zum Beispiel so aussehen.
-\begin{lstlisting}[style=python]
-def distance(p, q, m, u_list):
-	cp = compute_coefficients(p, m, u_list)
-	cq = compute_coefficients(q, m, u_list)
-	d = (cp - cq)
-	return np.dot(d, d)
-\end{lstlisting}
-Der Output von \texttt{recognition.py} ist in Tabelle~\ref{tab:recognition} gelistet.
+\lstinputlisting[firstline=5,lastline=9,style=python]{solution/chapter7.py}
+	Der Output von \texttt{recognition.py} ist in Tabelle~\ref{tab:recognition} gelistet.
 \end{losung}
 \begin{table}[ht]
 	\centering
 	\begin{tabular}{|l|c|c|}
 		\hline
 		\textbf{Klasse} & \textbf{Anzahl Testbilder} & \textbf{davon richtig klassifiziert} \\ \hline
-		Daniel Radcliffe & 3 & 1 \\ \hline
-		Emma Stone & 3 & 3 \\ \hline
-		Emma Watson & 3 & 1 \\ \hline
+		Daniel Radcliffe & 3 & 2 \\ \hline
+		Emma Stone & 3 & 2 \\ \hline
+		Emma Watson & 3 & 2 \\ \hline
 		Eva Green & 3 & 2 \\ \hline
 		Jennifer Lawrence & 3 & 3 \\ \hline
-		Orlando Bloom & 3 & 1 \\ \hline
+		Orlando Bloom & 3 & 2 \\ \hline
 		Pierce Brosnan & 3 & 1 \\ \hline
 		Tom Cruise & 3 & 2 \\ \hline
 	\end{tabular}
 	\caption{Resultate der Gesichtserkennung.}
 	\label{tab:recognition}
 \end{table}
-Aus Tabelle~\ref{tab:recognition} ist zu entnehmen, dass von den insgesamt $3\cdot8=24$ Testbildern $14$ richtig klassifiziert wurden.
-Dies entspricht einer Erfolgsquote von $\frac{14}{24}=0.58333\ldots$, also knapp $60\%$.
+Aus Tabelle~\ref{tab:recognition} ist zu entnehmen, dass von den insgesamt $3\cdot8=24$ Testbildern $16$ richtig klassifiziert wurden.
+Dies entspricht einer Erfolgsquote von $\frac{16}{24}=\frac{2}{3}$, also etwa $66\%$.
 Zum Vergleich: Würde man die Testbilder einfach zufällig den Klassen zuordnen, so wäre die erwartete Erfolgsquote $\frac{1}{8}=0.125$, also $12.5\%$.
