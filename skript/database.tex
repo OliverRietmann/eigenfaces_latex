@@ -1,5 +1,12 @@
 \section{Datenbank einrichten} \label{sec:database}
-Unter folgendem Link \textcolor{green}{(Link zur Datenbank folgt)} kann die Datenbank heruntergeladen werden, mit der die Bilder im Lernskript generiert wurden.
+Bitte laden Sie nun die Datenbank herunter (mit dem Link aus der Einleitung) und entpacken Sie diese.
+Wir nennen das entstehende Verzeichnis \texttt{datenbank}.
+Laden Sie ebenfalls die Python-Codes herunter.
+Fürhren Sie als erstes das Python-Skript \texttt{save\_eigenfaces.py} über die Kommandozeile (Linux, MacOS) oder über \href{https://ipython.org/install.html}{IPython} (Windows) aus und übergeben Sie dabei den Pfad zur Datenbank und einen Namen für das resultierende File (z.B. \texttt{eigenfaces.dat}), also
+\begin{center}
+	\texttt{python3 save\_eigenfaces.py datenbank eigenfaces.dat}
+\end{center}
+Dies generiert ein File \texttt{eigenfaces.dat} welches wir später brauchen um die Aufgaben zu lösen.
 Damit lassen sich alle nachfolgenden Kapitel bearbeiten.
 Alternativ kann man eine eigene Datenbank erstellen und stattdessen diese für die Bearbeitung des Lernskriptes verwenden.
 Dieses Kapitel ist eine Anleitung dazu.
@@ -37,3 +44,4 @@ Dazu verwenden wir ein Bildbearbeitungsprogramm.
 	\item Der vorherige Punkt sollte so bewerkstelligt werden, dass das Gesicht möglichst das ganze Bild ausfüllt.
 	\item Alle Bilder müssen in ein schwarz-weiss Bild konvertiert werden.
 \end{itemize}
+Führen Sie dann die Schritte zu Beginn dieses Kapitels für diese Datenbank aus.
