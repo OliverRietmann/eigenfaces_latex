@@ -1,4 +1,4 @@
-\documentclass[10pt,aspectratio=169]{beamer}
+\documentclass[10pt,aspectratio=169,usenames,dvipsnames,handout]{beamer}
 
 % https://de.overleaf.com/latex/templates/metropolis-beamer-theme/qzyvdhrntfmr
 \usetheme[progressbar=frametitle]{metropolis}
@@ -10,19 +10,24 @@
 \usepackage{pgfplots}
 \usepgfplotslibrary{dateplot}
 
+\usepackage{tikz}
+
 \usepackage{xspace}
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
 \usepackage{array}
+\usepackage{listings}
 \usepackage{ngerman}
 
-\title{Eigengesichter}
-\subtitle{Mentorierte Arbeit in Fachdidaktik Mathematik}
+\title{Eigenfaces}
+\subtitle{Tag über Mathematik und Unterricht, Bellinzona}
 % \date{\today}
 \date{}
 \author{Oliver Rietmann}
 \institute{ETH Zürich}
 % \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+
+\input{pythonstyle}
 
 \begin{document}
 	
@@ -30,28 +35,196 @@
 
 %\section[Format und Ziele]{Format und Ziele}
 
-\begin{frame}[fragile]{Form und Inhalt} 	
+\begin{frame}[fragile]{Form and Structure} 	
+\begin{columns}[T,onlytextwidth]
+	\column{\textwidth}
+	\metroset{block=fill}
+	\begin{block}{What?}
+		Manual for implementing a program for \textcolor{blue}{image compression} and
+		\textcolor{blue}{face recoginition} in \texttt{Python}.
+	\end{block}
+	\vspace{0.2cm}\pause
+	\begin{block}{Who?}
+		Single person or group work for a whole \textcolor{blue}{school class}.
+	\end{block}
+	\vspace{0.2cm}\pause
+	\begin{block}{How?}
+		\textcolor{blue}{Text} with theoretical and practical \textcolor{blue}{exercises}, including \textcolor{blue}{solutions}.
+		Template codes are provided and will be extended by the students.
+	\end{block}
+	\begin{center}
+		\textbf{Core question:} \textcolor{blue}{How can a computer recognize faces?}
+	\end{center}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Goals} 	
 	\begin{columns}[T,onlytextwidth]
 		\column{\textwidth}
 		\metroset{block=fill}
-		\begin{block}{Was?}
-			Anleitung zur Implementierung eines Programms zur \textcolor{blue}{Gesichtserkennung} und \textcolor{blue}{Bildkomprimierung} in Python.
+		\begin{block}{Goals for the Students}
+			\begin{itemize}
+				\item Generalize vector geometry from $\mathbb R^3$ to $\mathbb R^n$.
+				\item Learn how to code in \texttt{Python}.
+			\end{itemize}
 		\end{block}
 		\vspace{0.2cm}\pause
-		\begin{block}{Wer?}
-			Eine \textcolor{blue}{Schulklasse} oder eine einzelne Person.
+		\begin{block}{Goals for the Audience}
+			\begin{itemize}
+				\item Explain to another teacher what eigenfaces are.
+				\item Name one application of eigenfaces.
+				\item Get to know an application of linear algebra accessible for students.
+				\item Have fun and look at a lot of pictures.
+			\end{itemize}
 		\end{block}
-		\vspace{0.2cm}\pause
-		\begin{block}{Wie?}
-			Anleitung als \textcolor{blue}{Fliesstext} mit Programmier- und Theorieaufgaben sowie Lösungen.
-			Zudem werden \textcolor{blue}{Python Codes} zur Verfügung gestellt (Templates).
-		\end{block}
-	\end{columns}	
+	\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Bilder als Vektoren}
+\begin{frame}{Training Set}
+	\centering
+	\textbf{The code learns how to classify from given \textcolor{blue}{training images}.}\\
+	\vspace*{0.5cm}
+	\begin{tabular}{l m{1.5cm} m{1.5cm} m{1.5cm} m{1.5cm} c}
+		\textbf{Class} & \textbf{Image 1} & \textbf{Image 2} & \textbf{Image 3} & \textbf{Image 4} & $\cdots$ \\ \hline
+		Adam Sandler & \includegraphics[width=0.09\textwidth]{images/intro/class0_0} &
+		\includegraphics[width=0.09\textwidth]{images/intro/class0_1} & \includegraphics[width=0.09\textwidth]{images/intro/class0_2} & \includegraphics[width=0.09\textwidth]{images/intro/class0_3} & $\cdots$ \\ \hline
+		Emma Watson & \includegraphics[width=0.09\textwidth]{images/intro/class1_0} &
+		\includegraphics[width=0.09\textwidth]{images/intro/class1_1} & \includegraphics[width=0.09\textwidth]{images/intro/class1_2} & \includegraphics[width=0.09\textwidth]{images/intro/class1_3} & $\cdots$ \\ \hline
+		Natalie Portman & \includegraphics[width=0.09\textwidth]{images/intro/class2_0} & \includegraphics[width=0.09\textwidth]{images/intro/class2_1} & \includegraphics[width=0.09\textwidth]{images/intro/class2_2} & \includegraphics[width=0.09\textwidth]{images/intro/class2_3} & $\cdots$ \\ \hline
+		$\qquad\qquad\vdots$ & $\qquad\vdots$ & $\qquad\vdots$ & $\qquad\vdots$ & $\qquad\vdots$ & $\ddots$ \\
+	\end{tabular}
+\end{frame}
+
+\begin{frame}{Training Set}
+	\centering
+	\textbf{The code learns how to classify from given \textcolor{blue}{training images}.}\\
+	\vspace*{0.5cm}
+	\begin{tabular}{l m{1.5cm} m{1.5cm} m{1.5cm} m{1.5cm} c}
+		\textbf{Class} & \textbf{Image 1} & \textbf{Image 2} & \textbf{Image 3} & \textbf{Image 4} & $\cdots$ \\ \hline
+		male & \includegraphics[width=0.09\textwidth]{images/recognition/Daniel_Radcliffe} &
+		\includegraphics[width=0.09\textwidth]{images/recognition/Tom_Cruise} & \includegraphics[width=0.09\textwidth]{images/recognition/Orlando_Bloom} & \includegraphics[width=0.09\textwidth]{images/recognition/Pierce_Brosnan} & $\cdots$ \\ \hline
+		female & \includegraphics[width=0.09\textwidth]{images/recognition/Eva_Green} &
+		\includegraphics[width=0.09\textwidth]{images/recognition/Emma_Stone} & \includegraphics[width=0.09\textwidth]{images/recognition/Jennifer_Lawrence} & \includegraphics[width=0.09\textwidth]{images/recognition/Emma_Watson} & $\cdots$ \\ \hline
+	\end{tabular}
+\end{frame}
+
+\begin{frame}[fragile]{Image as Matrix}
+\begin{minipage}{0.48\textwidth}
+	\begin{columns}[T,onlytextwidth]
+		\column{\textwidth}
+		\metroset{block=fill}
+		\begin{block}{Representation of Grayscale Images}
+			Map pixels to values between 0 (black) and 1 (white)
+			and represent as $\textcolor{blue}{M}\times\textcolor{green}{N}$
+			matrix with entries $p_{ij}\in\left[0,1\right]$.
+		\end{block}
+		\vspace{0.2cm}\pause
+		\begin{block}{Example}
+			Which image on the right is represented by the following matrix?
+			\begin{equation*}
+				\begin{pmatrix}
+					1 & \frac{1}{4} \\
+					\frac{1}{2} & 0 \\
+					0 & \frac{3}{4} \\
+				\end{pmatrix}
+			\end{equation*}
+		\end{block}
+	\end{columns}
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+	\begin{tabular}{m{2cm} m{0.5cm} c}
+		\includegraphics[width=0.3\textwidth]{images/vectormatrix/ImageToVector} &
+		$\longleftrightarrow$ &
+		$\begin{pmatrix}
+			\textcolor{violet}{p_{11}} & \textcolor{orange}{p_{12}} & \cdots & \textcolor{olive}{p_{1N}} \\
+			\textcolor{violet}{\vdots} & \textcolor{orange}{\vdots} & \ddots & \textcolor{olive}{\vdots} \\
+			\textcolor{violet}{p_{M1}} & \textcolor{orange}{p_{M2}} & \cdots &  \textcolor{olive}{p_{MN}} \\
+		\end{pmatrix}$
+	\end{tabular}\\[1cm]
+	\definecolor{onefourth}{rgb}{0.25, 0.25, 0.25}
+	\definecolor{onehalf}{rgb}{0.5, 0.5, 0.5}
+	\definecolor{threefourth}{rgb}{0.75, 0.75, 0.75}
+	\scalebox{0.75}{%
+		\begin{tikzpicture}
+			\draw[step=1cm,white,very thin] (0,0) grid (2,3);
+			\fill[white] (0,0) rectangle (1,1);
+			\fill[onefourth] (1,0) rectangle (2,1);
+			\fill[onehalf] (0,1) rectangle (1,2);
+			\fill[white] (1,1) rectangle (2,2);
+			\fill[black] (0,2) rectangle (1,3);
+			\fill[threefourth] (1,2) rectangle (2,3);
+		\end{tikzpicture}
+		\qquad\qquad
+		\begin{tikzpicture}
+			\draw[step=1cm,white,very thin] (0,0) grid (2,3);
+			\fill[black] (0,0) rectangle (1,1);
+			\fill[threefourth] (1,0) rectangle (2,1);
+			\fill[onehalf] (0,1) rectangle (1,2);
+			\fill[black] (1,1) rectangle (2,2);
+			\fill[white] (0,2) rectangle (1,3);
+			\fill[onefourth] (1,2) rectangle (2,3);
+		\end{tikzpicture}
+		\qquad\qquad
+		\begin{tikzpicture}
+			\draw[step=1cm,white,very thin] (0,0) grid (2,3);
+			\fill[black] (0,0) rectangle (1,1);
+			\fill[onefourth] (1,0) rectangle (2,1);
+			\fill[onehalf] (0,1) rectangle (1,2);
+			\fill[black] (1,1) rectangle (2,2);
+			\fill[white] (0,2) rectangle (1,3);
+			\fill[threefourth] (1,2) rectangle (2,3);
+		\end{tikzpicture}
+	}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]{Images as Vectors}
+\begin{center}
+	%Images of resoplution $\textcolor{blue}{M}\times\textcolor{green}{N}$ can be seen as vectors $\vec{p}\in\left[0,1\right]^{\textcolor{blue}{M}\cdot\textcolor{green}{N}}$.\\[1cm]
+	\begin{tabular}{m{2.5cm} m{1cm} c m{1cm} c}
+	\includegraphics[width=0.15\textwidth]{images/vectormatrix/ImageToVector} &
+	$\longleftrightarrow$ &
+	$\begin{pmatrix}
+		\textcolor{violet}{p_{11}} & \textcolor{orange}{p_{12}} & \cdots & \textcolor{olive}{p_{1N}} \\
+		\textcolor{violet}{\vdots} & \textcolor{orange}{\vdots} & \ddots & \textcolor{olive}{\vdots} \\
+		\textcolor{violet}{p_{M1}} & \textcolor{orange}{p_{M2}} & \cdots &  \textcolor{olive}{p_{MN}} \\
+	\end{pmatrix}$ &
+	$\longleftrightarrow$ &
+	$\tiny{\begin{pmatrix}
+		\textcolor{violet}{p_{11}} \\
+		\textcolor{violet}{\vdots} \\
+		\textcolor{violet}{p_{M1}} \\
+		\textcolor{orange}{p_{12}} \\
+		\textcolor{orange}{\vdots} \\
+		\textcolor{orange}{p_{M2}} \\
+		\vdots \\
+		\textcolor{olive}{p_{1N}} \\
+		\textcolor{olive}{\vdots} \\
+		\textcolor{olive}{p_{MN}} \\
+	\end{pmatrix}}$
+\end{tabular}
+\begin{columns}[T,onlytextwidth]
+	\column{\textwidth}
+	\metroset{block=fill}
+	\begin{block}{Compute the nagative of an image $\vec{p}$}
+		\begin{minipage}{0.45\textwidth}
+			\hspace{1cm}
+			\lstinputlisting[firstline=19,lastline=23,style=python]{solution/chapter2.py}
+		\end{minipage}\hfill
+		\begin{minipage}{0.2\textwidth}
+			\centering\includegraphics[width=0.6\textwidth]{images/vectormatrix/Diane_Kruger}
+		\end{minipage}
+		\begin{minipage}{0.2\textwidth}
+			\centering\includegraphics[width=0.6\textwidth]{images/vectormatrix/Diane_Kruger_negative}
+		\end{minipage}
+	\end{block}
+\end{columns}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Mean Face and Difference Faces}
 	\begin{center}
-		Bilder der Auflösung $\textcolor{blue}{M}\times\textcolor{green}{N}$ können als Vektoren in $\left[0,1\right]^{\textcolor{blue}{M}\cdot\textcolor{green}{N}}$ aufgefasst werden.
+		We can center the \textcolor{ForestGreen}{training images} around the origin by subtracting the \textcolor{red}{mean face}.
 	\end{center}
 	\begin{minipage}{0.45\textwidth}
 		\begin{tabular}{m{2.0cm} m{0.5cm} c}
@@ -78,27 +251,34 @@
 	\end{minipage}
 \end{frame}
 
-\begin{frame}[fragile]{Eigengesichter}
+\begin{frame}[fragile]{Eigenfaces}
 	\begin{center}
-		Eine \textcolor{blue}{\textbf{Hauptkomponentenanalyse}} mittels \textcolor{blue}{\textbf{Singulärwertzerlegung}} liefert die \textcolor{blue}{\textbf{Eigengesichter}}.
+		\textcolor{blue}{\textbf{Principal component analysis}} using singular value decomposition yields \textcolor{blue}{\textbf{eigenfaces}}.
 	\end{center}
-	\begin{tabular}{c}
-		\includegraphics[width=0.45\textwidth]{images/facespace/principal_components}
-	\end{tabular}
+	\begin{minipage}{0.4\textwidth}
+		\begin{tabular}{c}
+			\includegraphics[width=\textwidth]{images/facespace/principal_components}
+		\end{tabular}
+	\end{minipage}\hfill
 	\pause
-	\begin{tabular}{cccccccc}
-		\includegraphics[width=0.095\textwidth]{images/eigenfaces/eigenface00} & \includegraphics[width=0.095\textwidth]{images/eigenfaces/eigenface01} &
-		\includegraphics[width=0.095\textwidth]{images/eigenfaces/eigenface02} & \includegraphics[width=0.095\textwidth]{images/eigenfaces/eigenface03} \\
-		\includegraphics[width=0.095\textwidth]{images/eigenfaces/eigenface04} &
-		\includegraphics[width=0.095\textwidth]{images/eigenfaces/eigenface05} & \includegraphics[width=0.095\textwidth]{images/eigenfaces/eigenface06} &
-		\includegraphics[width=0.095\textwidth]{images/eigenfaces/eigenface07} \\ \includegraphics[width=0.095\textwidth]{images/eigenfaces/eigenface08} &
-		\includegraphics[width=0.095\textwidth]{images/eigenfaces/eigenface09} & \includegraphics[width=0.095\textwidth]{images/eigenfaces/eigenface10} &
-		\includegraphics[width=0.095\textwidth]{images/eigenfaces/eigenface11}
-	\end{tabular}
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		Eigenfaces as images: $\vec{p}_k=\sigma_k\,\vec{u}_k+\vec{m}$ \\[0.5cm]
+		\begin{tabular}{cccccccc}
+			\includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface00} & \includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface01} &
+			\includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface02} & \includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface03} \\
+			\includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface04} &
+			\includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface05} & \includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface06} &
+			\includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface07} \\ \includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface08} &
+			\includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface09} & \includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface10} &
+			\includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface11}
+		\end{tabular}
+	\end{minipage}
 \end{frame}
 
-\begin{frame}[fragile]{Konzeptwandel $\mathbb R^3\longrightarrow\mathbb R^{M\cdot N}$ (Projektion auf die Eigengesichter)}
-	Gesichter als Überlagerung des Durchschnittsgesichtes und der Eigengeichter:\\[0.5cm]
+\begin{frame}[fragile]{Transition $\mathbb R^3\longrightarrow\mathbb R^{M\cdot N}$ (projection onto eigenfaces)}
+	New face image as supersposition of mean face and eigenfaces:
+	$\quad\textcolor{blue}{c_k=\vec{u}_k\cdot\left(\vec{p}-\vec{m}\right)}$\\[0.5cm]
 	\begin{tabular}{m{1.3cm} c m{1.3cm} c m{1.3cm} c m{1.3cm} c m{1.3cm} c}
 		$\quad\ \ \vec p$ & & $\quad\ \ \vec m$ & & $\quad\ \ \vec u_1$ & & $\quad\ \ \vec u_2$ & & $\quad\ \ \vec u_2$ & \\
 		\includegraphics[width=0.1\textwidth]{images/eigenfaces/mona_lisa_eigen_approx} &
@@ -110,11 +290,11 @@
 		\begin{columns}[T,onlytextwidth]
 			\column{\textwidth}
 			\metroset{block=fill}
-			\begin{block}{Aufbauen auf \textcolor{blue}{\textbf{Vorwissen}} im $\mathbb R^3$}
+			\begin{block}{Use prior knowledge in $\mathbb R^3$}
 				\begin{itemize}
-					\item Linearkombination
-					\item Skalarprodukt
-					\item Orthogonalität
+					\item linear combination
+					\item scalar product
+					\item orthogonality
 				\end{itemize}
 			\end{block}
 		\end{columns}
@@ -124,21 +304,58 @@
 	\end{minipage}
 \end{frame}
 
-\begin{frame}[fragile]{Problem-basiertes Lernen (Bildkompression)}
+\begin{frame}[fragile]{Eigenfaces vs. Test Images}
+	\begin{columns}[T,onlytextwidth]
+		\column{\textwidth}
+		\metroset{block=fill}
+		\begin{minipage}{0.45\textwidth}
+			\begin{block}{Observation}
+				This can be done with any other (sufficiently large) set of images!
+			\end{block}
+			\vspace{0.2cm}
+			\begin{block}{Question}
+				Then what distinguishes the eigenfaces?
+			\end{block}
+			\vspace{0.2cm}
+			Expansion w.r.t. the \textcolor{ForestGreen}{training images}:
+		\end{minipage}\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{images/facespace/meandiff}
+		\end{minipage}\\
+		\vspace{0.5cm}
+		\begin{tabular}{m{1.3cm} c m{1.3cm} c m{1.3cm} c m{1.3cm} c m{1.3cm} c}
+			\includegraphics[width=0.1\textwidth]{images/eigenfaces/mona_lisa_naive_approx} &
+			$=\ c_1$ & \includegraphics[width=0.1\textwidth]{images/intro/class0_0} & $+\ c_2$ & \includegraphics[width=0.1\textwidth]{images/intro/class1_0}
+			& $+\ c_3$ & \includegraphics[width=0.1\textwidth]{images/intro/class2_0} & $+\ c_4$ & \includegraphics[width=0.1\textwidth]{images/intro/class0_3} & $+\ \cdots$
+		\end{tabular}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Image Compression}
 	\begin{minipage}{0.65\textwidth}
 		\begin{columns}[T,onlytextwidth]
 			\column{\textwidth}
 			\metroset{block=fill}
-			Absolutbeträge der \textcolor{blue}{\textbf{Koeffizienten}} $\lvert c_k\rvert$ der Linearkombination bezüglich der Differenz- und Eigengesichter:
+			\begin{center}
+			Absolute values $\lvert c_k\rvert$ of the \textcolor{blue}{\textbf{coefficients}} of the linear combination w.r.t. the training images and eigenfaces.\\[0.2cm]
 			\begin{tabular}{cc}
 				\centering
 				\includegraphics[width=0.45\textwidth]{images/eigenfaces/naive_coef} &
 				\includegraphics[width=0.45\textwidth]{images/eigenfaces/eigen_coef} \\
-				\phantom{text}Differenzgesichter & \phantom{text}Eigengesichter
+				\phantom{text}training images & \phantom{text}eigenfaces
 			\end{tabular}
-			\begin{block}{Einstiegsfrage zur \textcolor{blue}{\textbf{kognitiven Aktivierung}}:}
-				Was sind die Unterschiede und welche Bedeutung haben sie?
+			\begin{minipage}{0.45\textwidth}
+			\begin{block}{Question 1}
+				What are the differences?
 			\end{block}
+			\end{minipage}\hfill
+			\begin{minipage}{0.45\textwidth}
+				\begin{block}{Question 2}
+					Are the eigenfaces better?
+				\end{block}
+			\end{minipage}
+			\end{center}
 		\end{columns}
 	\end{minipage}\hfill
 	\pause
@@ -150,43 +367,137 @@
 			\includegraphics[width=0.3\textwidth]{images/compression/chair_200} & 200 \pause \\
 			\includegraphics[width=0.3\textwidth]{images/compression/mona_lisa_2000} &
 			\includegraphics[width=0.3\textwidth]{images/compression/chair_2000} & 2000 \pause \\ \includegraphics[width=0.3\textwidth]{images/compression/mona_lisa} &
-			\includegraphics[width=0.3\textwidth]{images/compression/chair} & Original
+			\includegraphics[width=0.3\textwidth]{images/compression/chair} & original
 		\end{tabular}
 	\end{minipage}
 \end{frame}
 
-\begin{frame}[fragile]{Zusammenfassung}
-	Die Eigengesichter ...\\
-	\vspace{0.5cm} \pause
-	\begin{enumerate}[1.] \setlength\itemsep{0.5cm}
-		\item ... bauen auf der \textcolor{blue}{Vektorgeometrie im $\mathbb R^3$} auf. \pause
-		\item ... können Begriffe der linearen Algebra in höheren Dimensionen \textcolor{blue}{visualisieren}. \pause
-		\item ... können als \textcolor{blue}{Backbox} zur Verfügung gestellt werden. \pause
-		\item ... erlauben die Auseinandersetzung mit der \textcolor{blue}{linearen Algebra in höheren Dimensionen}.
-	\end{enumerate}
+\begin{frame}[fragile]{Image Recognition}
+	\begin{minipage}{0.65\textwidth}
+		\begin{columns}[T,onlytextwidth]
+			\column{\textwidth}
+			\metroset{block=fill}
+			\begin{center}
+				\begin{block}{Literature}
+					Turk, Pentland, \textit{Face Recognition Using Eigenfaces}, 1991
+				\end{block}
+				\begin{block}{Task}
+					For a given image $\vec{p}$, decide if it shows a face.
+				\end{block}
+				\begin{block}{Idea}
+					If $\vec{p}-\vec{m}$ lies almost in the subspace spanned by the first $K\approx 2000$ eigenfaces, then it is probably a face.
+				\end{block}
+				\vspace{0.2cm}
+				\includegraphics[width=0.6\textwidth]{images/projection2}
+			\end{center}
+		\end{columns}
+	\end{minipage}\hfill
+	\begin{minipage}{0.3\textwidth}
+		\begin{tabular}{m{1.0cm} m{1.0cm} c}
+			\includegraphics[width=0.3\textwidth]{images/compression/mona_lisa_20} &
+			\includegraphics[width=0.3\textwidth]{images/compression/chair_20} & 20 \pause \\
+			\includegraphics[width=0.3\textwidth]{images/compression/mona_lisa_200} &
+			\includegraphics[width=0.3\textwidth]{images/compression/chair_200} & 200 \pause \\
+			\includegraphics[width=0.3\textwidth]{images/compression/mona_lisa_2000} &
+			\includegraphics[width=0.3\textwidth]{images/compression/chair_2000} & 2000 \pause \\ \includegraphics[width=0.3\textwidth]{images/compression/mona_lisa} &
+			\includegraphics[width=0.3\textwidth]{images/compression/chair} & original
+		\end{tabular}
+	\end{minipage}
 \end{frame}
 
-\begin{frame}[fragile]{Konzeptwandel $\mathbb R^3\longrightarrow\mathbb R^{M\cdot N}$ (Abstand Punkt-Gerade)}
+\begin{frame}[fragile]{Gender Recoginition}
+	\begin{columns}[T,onlytextwidth]
+		\column{\textwidth}
+		\metroset{block=fill}
+		\begin{minipage}{0.48\textwidth}
+			\begin{block}{Task}
+				Given an image of a face (any person), determine the gender of the person.
+			\end{block}
+			\begin{block}{Structure}
+				This is a binary classification problem.
+			\end{block}
+			\begin{block}{Approach}
+				Use a \textcolor{blue}{separating hyperplane}: Male faces on one side and female faces on the other side.
+			\end{block}
+		\end{minipage}\hfill
+		\begin{minipage}{0.48\textwidth}
+			\includegraphics[width=\textwidth]{images/binary_classification/separating_plane_annotated}
+		\end{minipage}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Gender Recoginition}
+	\begin{columns}[T,onlytextwidth]
+		\column{\textwidth}
+		\metroset{block=fill}
+		\begin{minipage}{0.48\textwidth}
+			\begin{block}{Step 1}
+				Compute $\vec{n}\in\mathbb R^{\textcolor{red}{M\cdot N}}$ and $b$, such that
+				\begin{equation*}
+					\left\{\vec{x}\ \lvert\ \vec{x}\cdot\vec{n}+b=0\right\}
+				\end{equation*}
+				optimally separates the genders on the training images.
+			\end{block}
+			\begin{block}{Step 2}
+				Given a new image $\vec{p}$, check on which side of the plain it is.
+			\end{block}
+		\end{minipage}\hfill
+		\begin{minipage}{0.48\textwidth}
+			\includegraphics[width=\textwidth]{images/binary_classification/separating_plane_annotated}
+		\end{minipage}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Gender Recoginition}
+	\begin{columns}[T,onlytextwidth]
+		\column{\textwidth}
+		\metroset{block=fill}
+		\begin{minipage}{0.48\textwidth}
+			\begin{block}{Problem}
+				Normal $\vec{n}\in\mathbb R^{\textcolor{red}{M\cdot N}}$ has too may parameters to optimize for.
+				Recall: $M=180,N=144$
+			\end{block}
+			\begin{block}{Solution}
+				Represent each image by its coefficient vector
+				\begin{equation*}
+					\vec{c}=\left(c_1,\ldots,c_K\right)^T
+				\end{equation*}
+				w.r.t. the first $K\approx 2000$ eigenfaces.
+			\end{block}
+		\end{minipage}\hfill
+		\begin{minipage}{0.48\textwidth}
+			\includegraphics[width=\textwidth]{images/binary_classification/separating_plane_annotated}
+		\end{minipage}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Didactical Aspects}
+	\begin{center}
+		\huge{Didactical Aspects:\\ Some Examples}
+	\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Transition $\mathbb R^3\longrightarrow\mathbb R^{M\cdot N}$ (Distance Point-Line)}
 	\begin{minipage}{0.45\textwidth}
 		\begin{columns}[T,onlytextwidth]
 			\column{\textwidth}
 			\metroset{block=fill}
-			\begin{block}{Abstand Punkt-Gerade im $\mathbb R^2$}
+			\begin{block}{Distance Point-Line in $\mathbb R^2$}
 				\begin{itemize}
-					\item Zeichnung (siehe rechts)
-					\item konkrete Zahlen
+					\item draw picture
+					\item concrete Numbers
 				\end{itemize}
 			\end{block}
-			\begin{block}{Abstand Punkt-Gerade im $\mathbb R^4$}
+			\begin{block}{Distance Point-Line in $\mathbb R^4$}
 				\begin{itemize}
-					\item \textcolor{red}{keine Zeichnung möglich}
-					\item konkrete Zahlen
+					\item \textcolor{red}{no picture}
+					\item concrete numbers
 				\end{itemize}
 			\end{block}
-			\begin{block}{Abstand Punkt-Gerade im $\mathbb R^{M\cdot N}$}
+			\begin{block}{Distance Point-Line in $\mathbb R^{M\cdot N}$}
 				\begin{itemize}
-					\item \textcolor{red}{keine Zeichnung möglich}
-					\item \textcolor{red}{keine Zahlen, nur Variablen}
+					\item \textcolor{red}{picture impossible}
+					\item \textcolor{red}{variables instead of numbers}
 				\end{itemize}
 			\end{block}
 		\end{columns}
@@ -196,39 +507,39 @@
 	\end{minipage}
 \end{frame}
 
-\begin{frame}[fragile]{Gruppenarbeit (Erstellen der Datenbank)}
+\begin{frame}[fragile]{Group work (Setting up the training images)}
 	\begin{columns}[T,onlytextwidth]
 		\column{\textwidth}
 		\metroset{block=fill}
-		\begin{block}{Positive Interdependenz}
-			Je mehr Bilder die Datenbank zu Verfügung hat, desto mächtiger werden die Anwendungen.
+		\begin{block}{Positive Interdependence}
+			The more training images, the better the result.
 		\end{block}
-		\begin{block}{Individuelle Verantwortlichkeit}
-			Wenn jemand fehlerhafte Bilder beisteuert, wird das gesamte Programm nicht funktionieren.
+		\begin{block}{Individual Accountability}
+			If somebody provides wrong image files, the whole program won't work.
 		\end{block}
-		\begin{block}{Förderliche Interaktionen}
-			Erst wenn alle fertig sind, kann man abschliessen.
-			Wer fertig ist, sollte den Anderen helfen.
+		\begin{block}{Promotive Interaction}
+			The database is ready only when everyone is done.
+			Hence faster students should help the slower students.
 		\end{block}
-		\begin{block}{Kooperative Arbeitstechniken}
-			Zusammenarbeit ist nur zwingend erforderlich, wenn die Bilder zusammengetragen werden.
+		\begin{block}{Foster Interpersonal Skills}
+			Collaboration is only necessary when the results are assembled.
 		\end{block}
-		\begin{block}{Reflexive Prozesse}
-			Bilder zuschneiden hilft, ein Bild als eine $M\times N$ \glqq{}Matrix\grqq{} von Pixeln zu verstehen.
+		\begin{block}{Group Processing}
+			Cutting pictures to the right resolution helps to see pictures as $M\times N$ Matrix of pixels.
 		\end{block}
 	\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Selbsterklärung (Bilder als Vektoren)}
+\begin{frame}[fragile]{Self-Explanation (Images as Vectors)}
 	\begin{minipage}{0.6\textwidth}
 		\begin{columns}[T,onlytextwidth]
 			\column{\textwidth}
 			\metroset{block=fill}
-			\begin{block}{Aufgabe}
-				Nennen Sie einen Unterschied und eine Gemeinsamkeit der vereinfachten Darstellung rechts zu unserer Situation (Auflösung $M=180$ und $N=144$).
+			\begin{block}{Question}
+				Name two differences and one similarity of the simplified picture on the right and the real situation (i.e. resolution $M=180$ and $N=144$).
 			\end{block}
-			\begin{block}{Aufgabe}
-				Kann man die Differenzgesichter wieder als Bilder darstellen?
+			\begin{block}{Question}
+				Can the difference-faces (\textcolor{blue}{blue}) be rendered to images?
 			\end{block}
 		\end{columns}
 	\end{minipage}\hfill
@@ -237,26 +548,37 @@
 	\end{minipage}
 \end{frame}
 
-\begin{frame}[fragile]{Weitere Didaktische Aspekte}
+\begin{frame}[fragile]{Further Didactical Aspects}
 	\begin{columns}[T,onlytextwidth]
 		\column{\textwidth}
 		\metroset{block=fill}
 		\begin{block}{Scaffolding}
 			\begin{itemize}
-				\item Berechnung der Eigengesichter mit SVD zu schwierig $\rightarrow$ \textcolor{blue}{Eigengesichter als Blackbox}.
-				\item Einlesen/Abspeichern von Bildern hat nichts mit Mathematik zu tun $\rightarrow$ \textcolor{blue}{Code-Templates}.
+				\item Computing eigenfaces by SVD is too advanced $\rightarrow$ \textcolor{blue}{eigenfaces as blackbox}.
+				\item Loading and saving images has nothing to do with mathematics $\rightarrow$ \textcolor{blue}{code-templates}.
 			\end{itemize}
 		\end{block}
-		\begin{block}{Interleaved practive}
+		\begin{block}{Interleaved practice}
 			\begin{itemize}
-				\item \textcolor{blue}{blocked}: Zuerst ganze Theorie herleiten, dann nur noch programmieren
-				\item \textcolor{blue}{interleaved}: Abwechslungsweise Theorie und programmieren.
+				\item \textcolor{blue}{blocked}: Develop whole theory first, then write code.
+				\item \textcolor{blue}{interleaved}: Alternate between theory and programming.
 			\end{itemize}
 		\end{block}
 		\begin{block}{Holistic mental model confrontation}
-			Verlgleiche vereinfachte Darstellungen in \textcolor{blue}{3} Dimensionen mit \textcolor{blue}{$N\cdot M$} Dimensionen.
+			Compare simplified pictures in \textcolor{blue}{3} dimensions with \textcolor{blue}{$N\cdot M$} dimensions.
 		\end{block}
 	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Summary}
+	Eigenfaces ...\\
+	\vspace{0.5cm} \pause
+	\begin{enumerate}[1.] \setlength\itemsep{0.5cm}
+		\item ... build on \textcolor{blue}{vector geometry in $\mathbb R^3$}. \pause
+		\item ... can \textcolor{blue}{visualize} linear algebra in higher dimensions. \pause
+		\item ... can be used as \textcolor{blue}{blackbox}. \pause
+		\item ... allow to explore \textcolor{blue}{linear alebra in higher dimensions}.
+	\end{enumerate}
 \end{frame}
 	
 \end{document}
