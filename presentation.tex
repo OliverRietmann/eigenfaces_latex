@@ -1,4 +1,4 @@
-\documentclass[10pt,aspectratio=169,usenames,dvipsnames,handout]{beamer}
+\documentclass[10pt,aspectratio=169,usenames,dvipsnames]{beamer} % handout
 
 % https://de.overleaf.com/latex/templates/metropolis-beamer-theme/qzyvdhrntfmr
 \usetheme[progressbar=frametitle]{metropolis}
@@ -43,15 +43,16 @@
 		Manual for implementing a program for \textcolor{blue}{image compression} and
 		\textcolor{blue}{face recoginition} in \texttt{Python}.
 	\end{block}
-	\vspace{0.2cm}\pause
+	\vspace{0.2cm}
 	\begin{block}{Who?}
 		Single person or group work for a whole \textcolor{blue}{school class}.
 	\end{block}
-	\vspace{0.2cm}\pause
+	\vspace{0.2cm}
 	\begin{block}{How?}
 		\textcolor{blue}{Text} with theoretical and practical \textcolor{blue}{exercises}, including \textcolor{blue}{solutions}.
 		Template codes are provided and will be extended by the students.
 	\end{block}
+	\pause
 	\begin{center}
 		\textbf{Core question:} \textcolor{blue}{How can a computer recognize faces?}
 	\end{center}
@@ -118,7 +119,25 @@
 			and represent as $\textcolor{blue}{M}\times\textcolor{green}{N}$
 			matrix with entries $p_{ij}\in\left[0,1\right]$.
 		\end{block}
-		\vspace{0.2cm}\pause
+	\end{columns}
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+	\vspace{0.5cm}
+	\begin{tabular}{m{2cm} m{0.5cm} c}
+	\includegraphics[width=0.3\textwidth]{images/vectormatrix/ImageToVector} &
+	$\longleftrightarrow$ &
+	$\begin{pmatrix}
+		\textcolor{violet}{p_{11}} & \textcolor{orange}{p_{12}} & \cdots & \textcolor{olive}{p_{1N}} \\
+		\textcolor{violet}{\vdots} & \textcolor{orange}{\vdots} & \ddots & \textcolor{olive}{\vdots} \\
+		\textcolor{violet}{p_{M1}} & \textcolor{orange}{p_{M2}} & \cdots &  \textcolor{olive}{p_{MN}} \\
+	\end{pmatrix}$
+\end{tabular}\\[0.5cm]
+\pause
+\end{minipage}
+\begin{minipage}{0.48\textwidth}
+	\begin{columns}[T,onlytextwidth]
+	\column{\textwidth}
+	\metroset{block=fill}
 		\begin{block}{Example}
 			Which image on the right is represented by the following matrix?
 			\begin{equation*}
@@ -132,15 +151,6 @@
 	\end{columns}
 \end{minipage}\hfill
 \begin{minipage}{0.48\textwidth}
-	\begin{tabular}{m{2cm} m{0.5cm} c}
-		\includegraphics[width=0.3\textwidth]{images/vectormatrix/ImageToVector} &
-		$\longleftrightarrow$ &
-		$\begin{pmatrix}
-			\textcolor{violet}{p_{11}} & \textcolor{orange}{p_{12}} & \cdots & \textcolor{olive}{p_{1N}} \\
-			\textcolor{violet}{\vdots} & \textcolor{orange}{\vdots} & \ddots & \textcolor{olive}{\vdots} \\
-			\textcolor{violet}{p_{M1}} & \textcolor{orange}{p_{M2}} & \cdots &  \textcolor{olive}{p_{MN}} \\
-		\end{pmatrix}$
-	\end{tabular}\\[1cm]
 	\definecolor{onefourth}{rgb}{0.25, 0.25, 0.25}
 	\definecolor{onehalf}{rgb}{0.5, 0.5, 0.5}
 	\definecolor{threefourth}{rgb}{0.75, 0.75, 0.75}
@@ -206,11 +216,12 @@
 \begin{columns}[T,onlytextwidth]
 	\column{\textwidth}
 	\metroset{block=fill}
-	\begin{block}{Compute the nagative of an image $\vec{p}$}
+	\begin{block}{Question: What is the following code doing to the image $\vec{p}$?}
 		\begin{minipage}{0.45\textwidth}
 			\hspace{1cm}
 			\lstinputlisting[firstline=19,lastline=23,style=python]{solution/chapter2.py}
 		\end{minipage}\hfill
+		\pause
 		\begin{minipage}{0.2\textwidth}
 			\centering\includegraphics[width=0.6\textwidth]{images/vectormatrix/Diane_Kruger}
 		\end{minipage}
@@ -260,10 +271,10 @@
 			\includegraphics[width=\textwidth]{images/facespace/principal_components}
 		\end{tabular}
 	\end{minipage}\hfill
-	\pause
 	\begin{minipage}{0.45\textwidth}
 		\centering
 		Eigenfaces as images: $\vec{p}_k=\sigma_k\,\vec{u}_k+\vec{m}$ \\[0.5cm]
+		\pause
 		\begin{tabular}{cccccccc}
 			\includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface00} & \includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface01} &
 			\includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface02} & \includegraphics[width=0.18\textwidth]{images/eigenfaces/eigenface03} \\
@@ -345,11 +356,13 @@
 				\includegraphics[width=0.45\textwidth]{images/eigenfaces/eigen_coef} \\
 				\phantom{text}training images & \phantom{text}eigenfaces
 			\end{tabular}
+			\pause
 			\begin{minipage}{0.45\textwidth}
 			\begin{block}{Question 1}
 				What are the differences?
 			\end{block}
 			\end{minipage}\hfill
+			\pause
 			\begin{minipage}{0.45\textwidth}
 				\begin{block}{Question 2}
 					Are the eigenfaces better?
@@ -395,11 +408,11 @@
 	\begin{minipage}{0.3\textwidth}
 		\begin{tabular}{m{1.0cm} m{1.0cm} c}
 			\includegraphics[width=0.3\textwidth]{images/compression/mona_lisa_20} &
-			\includegraphics[width=0.3\textwidth]{images/compression/chair_20} & 20 \pause \\
+			\includegraphics[width=0.3\textwidth]{images/compression/chair_20} & 20 \\
 			\includegraphics[width=0.3\textwidth]{images/compression/mona_lisa_200} &
-			\includegraphics[width=0.3\textwidth]{images/compression/chair_200} & 200 \pause \\
+			\includegraphics[width=0.3\textwidth]{images/compression/chair_200} & 200 \\
 			\includegraphics[width=0.3\textwidth]{images/compression/mona_lisa_2000} &
-			\includegraphics[width=0.3\textwidth]{images/compression/chair_2000} & 2000 \pause \\ \includegraphics[width=0.3\textwidth]{images/compression/mona_lisa} &
+			\includegraphics[width=0.3\textwidth]{images/compression/chair_2000} & 2000 \\ \includegraphics[width=0.3\textwidth]{images/compression/mona_lisa} &
 			\includegraphics[width=0.3\textwidth]{images/compression/chair} & original
 		\end{tabular}
 	\end{minipage}
@@ -416,6 +429,7 @@
 			\begin{block}{Structure}
 				This is a binary classification problem.
 			\end{block}
+			\pause
 			\begin{block}{Approach}
 				Use a \textcolor{blue}{separating hyperplane}: Male faces on one side and female faces on the other side.
 			\end{block}
