@@ -160,7 +160,7 @@ Für diesen Schritt ist es egal ob das Bild ein Gesicht zeigt oder etwas anderes
 In unserem Python Code ist die Funktion, welche eine $M\times N$ Matrix auf diese Weise in einen Vektor der Länge $M\cdot N$ überführt, bereits implementiert.
 Sie befindet sich im File \texttt{chapter2.py} und heisst \texttt{matrix\_to\_vector}.
 Wir betrachten diese nun etwas genauer, um die Manipulation von Matrizen und Vektoren in Python zu lernen.
-\lstinputlisting[firstline=12,lastline=17,style=python]{solution/chapter2.py}
+\inputminted[frame=single,framesep=5pt,firstline=12,lastline=17]{python}{codes/solution/chapter2.py}
 Das Argument \texttt{P} ist eine \texttt{M} mal \texttt{N} Matrix und besteht aus den Einträgen $p_{mn}$ wie oben.
 Auf die Einträge von Vektoren und Matrizen kann über die eckigen Klammern $[\ldots]$ zugegriffen werden.
 Wir brauchen aber auch die Umkehrung dieser Operation.
@@ -174,7 +174,7 @@ Das ist der Zweck folgender Übung.
 \begin{losung}
 	Bei einer richtigen Lösung sollte das Skript \texttt{chapter2.py} das Foto aus Abbildung~\ref{fig:image_to_vector} generieren.
 	Die Lösung könnte zum Beispiel so aussehen:
-\lstinputlisting[firstline=4,lastline=9,style=python]{solution/chapter2.py}
+\inputminted[frame=single,framesep=5pt,firstline=4,lastline=9]{python}{codes/solution/chapter2.py}
 \end{losung}
 Man kann gewisse Effekte in einem Bild erzeugen, indem man den zugehörigen Vektor manipuliert und anschliessend wieder als Bild darstellt.
 Zum Beispiel kann man das Negativ eines gegebenen schwarz-weiss Bildes generieren.
@@ -200,7 +200,7 @@ Wie dieses Bild genau aussieht, sehen wir in der nächsten Aufgabe.
 	Links ist eine mögliche Implementierung gezeigt.
 	Rechts ist ein Bild und dessen Negativ.\\[0.5cm]
 	\begin{minipage}{0.45\textwidth}
-\lstinputlisting[firstline=19,lastline=23,style=python]{solution/chapter2.py}
+\inputminted[frame=single,framesep=5pt,firstline=19,lastline=23]{python}{codes/solution/chapter2.py}
 	\end{minipage}\hfill
 	\begin{minipage}{0.25\textwidth}\vspace{-1cm}
 		\centering\includegraphics[width=0.6\textwidth]{images/vectormatrix/Diane_Kruger}
